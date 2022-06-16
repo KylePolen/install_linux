@@ -1,0 +1,63 @@
+##################################################
+##################Puget Branding##################
+##################################################
+clear
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
+gsettings set com.canonical.Unity.Launcher favorites "['application://org.gnome.Nautilus.desktop', 'application://firefox.desktop', 'application://libreoffice-writer.desktop', 'application://libreoffice-calc.desktop', 'application://libreoffice-impress.desktop', 'application://org.gnome.Software.desktop', 'application://unity-control-center.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
+sudo cp ~/Desktop/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+sudo chown user /usr/share/backgrounds/Puget_Systems.png
+sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid=");' ~/.mozilla/firefox/*.default-release/prefs.js
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid=");' ~/.mozilla/firefox/*.default/prefs.js
+
+clear
+echo "Change root password."
+echo "The default is rootpass, take care when entering this"
+echo
+sleep 2s
+sudo passwd root
+
+##################################################
+#############Installing Video Drivers#############
+##################################################
+clear
+echo "Preparing to install Nvidia Drivers"
+echo
+sleep 2s
+sudo add-apt-repository -y ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-driver-455 -y
+
+
+##################################################
+#################Running Updates##################
+##################################################
+clear
+echo "Updating Operating System"
+sudo apt remove ubuntu-web-launchers -y
+sudo apt install ubuntu-restricted-extras -y	
+sudo apt update
+sudo apt dist-upgrade -y
+sudo apt dist-upgrade linux-generic -y
+sudo apt dist-upgrade linux-generic-hwe-18.04 -y
+sudo apt install net-tools dkms build-essential apt-utils gparted gedit gdebi mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
+sudo apt update
+sudo apt dist-upgrade -y
+sudo apt autoremove -y
+
+##################################################
+################Disable 64bit BAR#################
+##################################################
+clear
+echo "Disabling 64bit BAR Support" 
+echo
+sleep 2s
+sudo ./bootutil64e -NIC=1 -64d
+sudo ./bootutil64e -NIC=2 -64d
+sudo ./bootutil64e -NIC=3 -64d
+sleep 10s
+
+sudo shutdown -r now
+

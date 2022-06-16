@@ -1,0 +1,65 @@
+##################################################
+##################Puget Branding##################
+##################################################
+clear
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+sudo cp /home/user/Desktop/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid=");' ~/.mozilla/firefox/*.default-default/prefs.js
+
+##################################################
+#################Running Updates##################
+##################################################
+clear
+echo "Updating Operating System"
+sudo yum install dnf -y
+sudo dnf check-update -y
+sudo dnf update -y
+sudo dnf install epel-release -y
+sudo dnf groupinstall "Development Tools" -y
+sudo dnf install libglvnd-devel -y
+sudo dnf install elfutils-libelf-devel -y
+sudo dnf install dkms -y
+sudo dnf install gparted -y
+sudo dnf install gedit -y
+sudo dnf install git -y
+sudo dnf check
+sudo dnf check-update
+sudo dnf update -y
+sudo dnf autoremove -y
+
+##################################################
+#############Installing Video Drivers#############
+##################################################
+clear
+echo "Please choose a Display Driver"
+echo
+echo "1. AMD"
+echo "2. Nvidia"
+echo "3. Intel"
+echo "4. None"
+read n
+case $n in
+    1) clear
+echo "No Drivers needed"
+echo
+sleep 2s;;
+    2) clear
+echo "Preparing to install Nvidia Drivers"
+echo
+sleep 2s
+sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
+sudo dnf update -y
+sudo dnf install nvidia-detect -y
+sudo dnf install kmod-nvidia -y;;
+    3) clear
+echo "No Drivers needed"
+echo
+sleep 2s;;
+    4) echo "No Drivers needed";;
+    *) invalid option;;
+esac
+
+sudo shutdown -r now

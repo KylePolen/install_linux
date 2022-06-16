@@ -1,0 +1,130 @@
+clear
+mv ~/Desktop/install/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+
+clear
+echo "Change root password."
+echo "The default is rootpass, take care when entering this"
+echo
+sleep 2s
+passwd root
+
+clear
+echo "Updating Operating System"
+apt-get install dkms build-essential apt-utils -y
+apt-get update
+apt-get dist-upgrade -y
+
+clear
+echo "Updating Homepage"
+echo
+sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid=");' ~/.mozilla/firefox/*.default-release/prefs.js
+sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid=");' ~/.mozilla/firefox/*.default/prefs.js
+sleep 2s
+
+clear
+echo "Installing GParted"
+echo
+apt-get -y install gparted
+sleep 2s
+
+clear
+echo "Installing mesa-utils"
+echo
+apt-get -y install mesa-utils
+sleep 2s
+
+clear
+echo "Installing Git"
+echo
+apt-get -y install git
+sleep 2s
+
+clear
+echo "Please choose a Display Driver"
+echo
+echo "1. AMD"
+echo "2. Nvidia"
+echo "3. Nvidia with CUDA 10.1 for 18.04"
+echo "4. Nvidia with CUDA 10.1 for 16.04"
+echo "5. Nvidia with CUDA 10.1 for 14.04"
+echo "6. None"
+read n
+case $n in
+    1) clear
+echo "No Drivers needed"
+echo
+sleep 2s;;
+#apt-get -y install linux-headers-`uname -r`
+#sleep 2s
+#apt-get -y install fglrx-updates;;
+    2) clear
+echo "Preparing to install Nvidia Drivers"
+echo
+sleep 2s
+add-apt-repository -y ppa:graphics-drivers/ppa
+apt-get update
+apt-get -y install nvidia-driver-430
+apt-get -y install nvidia-430;;
+    3) clear
+echo "Preparing to install Nvidia Drivers with CUDA 10.1 for 18.04"
+echo
+sleep 2s
+dpkg -i /home/user/Desktop/install/stuff/cuda-repo-ubuntu1804_10.1.105-1_amd64.deb
+apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+apt-get update
+apt-get install cuda -y
+mv ~/Desktop/install/stuff/cuda.sh /etc/profile.d/cuda.sh
+mv ~/Desktop/install/stuff/cuda.conf /etc/ld.so.conf.d/cuda.conf
+ldconfig
+sed -i '/unsupported GNU version/ s/^/\/\//' /usr/local/cuda-10.0/include/host_config.h
+rsync -av /usr/local/cuda/samples  ~
+cd ~/samples
+make -j4
+ls ~/samples/bin/x86_64/linux/release/
+sleep 20s;;
+    4) clear
+echo "Preparing to install Nvidia Drivers with CUDA 10.1 for 16.04"
+echo
+sleep 2s
+dpkg -i /home/user/Desktop/install/stuff/cuda-repo-ubuntu1604_10.1.105-1_amd64.deb
+apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+apt-get update
+apt-get install cuda -y
+mv ~/Desktop/install/stuff/cuda.sh /etc/profile.d/cuda.sh
+mv ~/Desktop/install/stuff/cuda.conf /etc/ld.so.conf.d/cuda.conf
+ldconfig
+sed -i '/unsupported GNU version/ s/^/\/\//' /usr/local/cuda-10.0/include/host_config.h
+rsync -av /usr/local/cuda/samples  ~
+cd ~/samples
+make -j4
+ls ~/samples/bin/x86_64/linux/release/
+sleep 20s;;
+    5) clear
+echo "Preparing to install Nvidia Drivers with CUDA 10.1 for 14.04"
+echo
+sleep 2s
+dpkg -i /home/user/Desktop/install/stuff/cuda-repo-ubuntu1404_10.1.105-1_amd64.deb
+apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/7fa2af80.pub
+apt-get update
+apt-get install cuda -y
+mv ~/Desktop/install/stuff/cuda.sh /etc/profile.d/cuda.sh
+mv ~/Desktop/install/stuff/cuda.conf /etc/ld.so.conf.d/cuda.conf
+ldconfig
+sed -i '/unsupported GNU version/ s/^/\/\//' /usr/local/cuda-10.0/include/host_config.h
+rsync -av /usr/local/cuda/samples  ~
+cd ~/samples
+make -j4
+ls ~/samples/bin/x86_64/linux/release/
+sleep 20s;;
+    6) echo "No Driver Required";;
+    *) invalid option;;
+esac
+
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+sleep 2s
+gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
+sleep 2s
+gsettings set com.canonical.Unity.Launcher favorites "['application://org.gnome.Nautilus.desktop', 'application://firefox.desktop', 'application://libreoffice-writer.desktop', 'application://libreoffice-calc.desktop', 'application://libreoffice-impress.desktop', 'application://org.gnome.Software.desktop', 'application://unity-control-center.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
+apt-get clean
+apt-get autoclean
+shutdown -r now

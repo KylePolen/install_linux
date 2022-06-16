@@ -1,0 +1,74 @@
+##################################################
+##################Puget Branding##################
+##################################################
+clear
+gsettings set org.cinnamon.desktop.background picture-uri file:///usr/share/backgrounds/puget/Puget_Systems.png
+gsettings set org.cinnamon.desktop.screensaver picture-uri file:///usr/share/backgrounds/puget/Puget_Systems.png
+gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
+sudo mkdir -p /usr/share/backgrounds/puget/
+sudo chmod 777 /usr/share/backgrounds/puget/
+sudo cp ~/Desktop/install/stuff/Puget_Systems.png /usr/share/backgrounds/puget/Puget_Systems.png
+sudo chmod 777 /usr/share/backgrounds/puget/Puget_Systems.png
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid=");' ~/.mozilla/firefox/*.default-release/prefs.js
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid=");' ~/.mozilla/firefox/*.default/prefs.js
+clear
+echo "Change root password."
+echo "The default is rootpass, take care when entering this"
+echo
+sleep 2s
+sudo passwd root
+
+##################################################
+#############Installing Video Drivers#############
+##################################################
+clear
+echo "Please choose a Display Driver"
+echo
+echo "1. AMD"
+echo "2. Nvidia"
+echo "3. Intel"
+echo "4. None"
+read n
+case $n in
+    1) clear
+echo "No Drivers needed"
+echo
+sleep 2s;;
+    2) clear
+echo "Preparing to install Nvidia Drivers"
+echo
+sleep 2s
+add-apt-repository -y ppa:graphics-drivers/ppa
+apt update
+apt install nvidia-driver-470 -y
+apt install nvidia-settings -y;;
+    3) clear
+echo "No Drivers needed"
+echo
+sleep 2s;;
+    4) echo "No Drivers needed";;
+    *) invalid option;;
+esac
+
+##################################################
+#################Running Updates##################
+##################################################
+clear
+echo "Updating Operating System"
+#sudo apt install ubuntu-restricted-extras -y	
+sudo apt isntall mint-meta-codecs
+sudo apt update
+sudo apt dist-upgrade -y
+sudo apt install build-essential gparted gedit mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
+sudo apt update
+sudo apt dist-upgrade -y
+sudo sh autorun.sh
+sudo apt dist-upgrade linux-generic -y
+sudo apt dist-upgrade linux-generic-hwe-20.04 -y
+sudo sh autorun.sh
+sudo apt autoremove -y
+sudo apt remove ubuntu-web-launchers -y
+sudo apt clean
+sudo apt autoclean
+
+sudo shutdown -r now

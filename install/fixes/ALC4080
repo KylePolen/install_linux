@@ -1,0 +1,1 @@
+pacmd load-module module-alsa-sink sink_name="Headphones" sink_properties=device.description="Headphones Fix" device=hw:Audio,1 control='PCM',1

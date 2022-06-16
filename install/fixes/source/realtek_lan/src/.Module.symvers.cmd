@@ -1,0 +1,1 @@
+cmd_/home/user/Desktop/install/fixes/source/realtek_lan/src/Module.symvers := sed 's/\.ko$$/\.o/' /home/user/Desktop/install/fixes/source/realtek_lan/src/modules.order | scripts/mod/modpost -m -a  -o /home/user/Desktop/install/fixes/source/realtek_lan/src/Module.symvers -e -i Module.symvers   -T -

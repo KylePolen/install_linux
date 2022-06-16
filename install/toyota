@@ -1,0 +1,66 @@
+##################################################
+##################Puget Branding##################
+##################################################
+clear
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
+sudo cp ~/Desktop/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+sudo chown user /usr/share/backgrounds/Puget_Systems.png
+sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
+blank=""
+host=$(hostname)
+orderid="${host/Puget-/$blank}"
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default-release/prefs.js
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default/prefs.js
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/snap/firefox/common/.mozilla/firefox/*.default/prefs.js
+sudo sed -i 's/splash//g' /etc/default/grub
+sudo update-grub
+clear
+#echo "Change root password."
+#echo "The default is rootpass, take care when entering this"
+#echo
+#sleep 2s
+#sudo passwd root
+
+##################################################
+#############Installing Video Drivers#############
+##################################################
+
+sudo add-apt-repository -y ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-driver-510 -y
+
+##################################################
+#################Running Updates##################
+##################################################
+clear
+echo "Updating Operating System"
+#sudo apt install ubuntu-restricted-extras -y	
+sudo apt update
+sudo apt dist-upgrade -y
+sudo apt install net-tools dkms build-essential ssh bolt apt-utils gparted gedit gdebi mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
+
+sudo apt update
+sudo apt dist-upgrade -y
+cd ~/Desktop/install/fixes/source/realtek_lan
+sudo sh autorun.sh
+sudo apt autoremove -y
+
+##################################################
+################Disable 64bit BAR#################
+##################################################
+clear
+echo "Disabling 64bit BAR Support" 
+echo
+sleep 2s
+cd ~/Desktop/install
+sudo ./stuff/bootutil64e -NIC=1 -64d
+sudo ./stuff/bootutil64e -NIC=2 -64d
+sudo ./stuff/bootutil64e -NIC=3 -64d
+sudo ./stuff/bootutil64e -NIC=4 -64d
+sudo ./stuff/bootutil64e -NIC=5 -64d
+sleep 10s
+
+sudo shutdown -r now
+

@@ -1,0 +1,1 @@
+cmd_/home/user/Desktop/install/fixes/source/realtek_lan/src/r8125.mod := { echo  /home/user/Desktop/install/fixes/source/realtek_lan/src/r8125_n.o /home/user/Desktop/install/fixes/source/realtek_lan/src/rtl_eeprom.o /home/user/Desktop/install/fixes/source/realtek_lan/src/rtltool.o;  echo; } > /home/user/Desktop/install/fixes/source/realtek_lan/src/r8125.mod

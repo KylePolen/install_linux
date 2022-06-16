@@ -1,0 +1,86 @@
+##################################################
+##################Puget Branding##################
+##################################################
+clear
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+if ! grep -q 22.04 /etc/os-release; then
+gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
+fi
+gsettings set org.gnome.shell.extensions.ding show-home false
+firefox --headless &
+sleep 10
+pkill -f firefox
+wait
+sudo cp ~/Desktop/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+sudo chown user /usr/share/backgrounds/Puget_Systems.png
+sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
+blank=""
+host=$(hostname)
+orderid="${host/puget-/$blank}"
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default-release/prefs.js
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default/prefs.js
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/snap/firefox/common/.mozilla/firefox/*.default/prefs.js
+sudo sed -i 's/splash//g' /etc/default/grub
+sudo update-grub
+clear
+#echo "Change root password."
+#echo "The default is rootpass, take care when entering this"
+#echo
+#sleep 2s
+#sudo passwd root
+
+##################################################
+#############Installing Video Drivers#############
+##################################################
+if lspci -v | grep -q NVIDIA; then
+sudo add-apt-repository -y ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-driver-510 -y
+fi
+#clear
+#echo "Please choose a Display Driver"
+#echo
+#echo "1. AMD"
+#echo "2. Nvidia"
+#echo "3. Intel"
+#echo "4. None"
+#read n
+#case $n in
+#    1) clear
+#echo "No Drivers needed"
+#echo
+#sleep 2s;;
+#    2) clear
+#echo "Preparing to install Nvidia Drivers"
+#echo
+#sleep 2s
+#sudo add-apt-repository -y ppa:graphics-drivers/ppa
+#sudo apt update
+#sudo apt install nvidia-driver-510 -y;;
+#    3) clear
+#echo "No Drivers needed"
+#echo
+#sleep 2s;;
+#    4) echo "No Drivers needed";;
+#    *) invalid option;;
+#esac
+
+##################################################
+#################Running Updates##################
+##################################################
+clear
+echo "Updating Operating System"
+#sudo apt install ubuntu-restricted-extras -y	
+sudo apt update
+sudo apt dist-upgrade -y
+sudo apt install net-tools dkms build-essential apt-utils ssh gparted bolt gedit gdebi mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
+sudo apt update
+sudo apt dist-upgrade -y
+cd ~/Desktop/install/fixes/source/realtek_lan
+sudo sh ./autorun.sh
+sudo apt autoremove -y
+
+
+sudo shutdown -r now
+

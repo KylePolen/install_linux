@@ -1,0 +1,7 @@
+rm ~/.bash_history
+rm -rf ~/.local/share/Trash/info/* 
+rm -rf ~/.local/share/Trash/files/*
+rm -rf ~/Desktop/*
+rm -rf ~/Downloads/*
+sudo rm -rf /var/crash/*
+rm $0

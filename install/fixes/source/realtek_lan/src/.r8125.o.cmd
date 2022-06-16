@@ -1,0 +1,1 @@
+cmd_/home/user/Desktop/install/fixes/source/realtek_lan/src/r8125.o := ld -m elf_x86_64   -r -o /home/user/Desktop/install/fixes/source/realtek_lan/src/r8125.o /home/user/Desktop/install/fixes/source/realtek_lan/src/r8125_n.o /home/user/Desktop/install/fixes/source/realtek_lan/src/rtl_eeprom.o /home/user/Desktop/install/fixes/source/realtek_lan/src/rtltool.o

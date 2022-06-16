@@ -1,0 +1,1 @@
+cmd_/home/user/Desktop/install/fixes/source/realtek_lan/src/r8125.ko := ld -r -m elf_x86_64 --build-id=sha1  -T scripts/module.lds -o /home/user/Desktop/install/fixes/source/realtek_lan/src/r8125.ko /home/user/Desktop/install/fixes/source/realtek_lan/src/r8125.o /home/user/Desktop/install/fixes/source/realtek_lan/src/r8125.mod.o;  true

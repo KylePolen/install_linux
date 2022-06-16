@@ -1,0 +1,3 @@
+apt-get install mdadm -y
+mdadm --create --verbose /dev/md0 --level=stripe --raid-devices=3 /dev/sdc /dev/sdd /dev/sde
+echo '#UUID=	/raid0	ext4	defaults	0	0' >> /etc/fstab

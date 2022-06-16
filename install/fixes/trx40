@@ -1,0 +1,3 @@
+sudo cp ~/Desktop/install/fixes/source/Realtek-ALC1220-VB-Desktop.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop.conf
+sudo cp ~/Desktop/install/fixes/source/Realtek-ALC1220-VB-Desktop-HiFi.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop-HiFi.conf
+sudo reboot

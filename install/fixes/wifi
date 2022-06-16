@@ -1,0 +1,2 @@
+sudo rm /lib/firmware/iwlwifi-ty-a0-gf-a0.pnvm
+sudo reboot
