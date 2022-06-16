@@ -55,6 +55,7 @@ echo "Disabling 64bit BAR Support"
 echo
 sleep 2s
 cd ~/Desktop/install
+sudo chmod +x bootutil64e
 sudo ./stuff/bootutil64e -NIC=1 -64d
 sudo ./stuff/bootutil64e -NIC=2 -64d
 sudo ./stuff/bootutil64e -NIC=3 -64d
