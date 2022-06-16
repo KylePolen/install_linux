@@ -2,6 +2,8 @@ rm ~/.bash_history
 rm -rf ~/.local/share/Trash/info/* 
 rm -rf ~/.local/share/Trash/files/*
 rm -rf ~/Desktop/*
+rm -rf ~/Desktop/.git
+rm -rf ~/Desktop/.gitattributes
 rm -rf ~/Downloads/*
 sudo rm -rf /var/crash/*
 rm $0
