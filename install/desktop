@@ -8,6 +8,14 @@ orderid="${host/puget-/$blank}"
 wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/Desktop/install/orderdata
 
 ##################################################
+###############Ownership & Privilege##############
+##################################################
+sudo chmod -R +x ~/Desktop/install/*
+sudo chown -R $USER ~/Desktop/install
+sudo chown -R $USER ~/Desktop/.git
+sudo chown -R $USER ~/Desktop/.gitattributes
+
+##################################################
 ##################Puget Branding##################
 ##################################################
 clear
@@ -21,7 +29,7 @@ firefox --headless > /dev/null 2>&1 &
 sleep 5
 pkill -f firefox
 wait
-sudo chmod +x ~/Desktop/install/software/*
+
 sudo cp ~/Desktop/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
 sudo chown user /usr/share/backgrounds/Puget_Systems.png
 sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
