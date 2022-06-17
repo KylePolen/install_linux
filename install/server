@@ -5,12 +5,13 @@ blank=""
 host=$(hostname)
 orderid="${host/puget-/$blank}"
 #orderdata=$(wget -O - 'https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid='$orderid'')
-wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/orderdata
+wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/install/orderdata
 
 ##################################################
 ###############Ownership & Privilege##############
 ##################################################
 sudo chmod -R +x ~/install/install/*
+sudo chown -R $USER ~/install
 sudo chown -R $USER ~/install/install
 sudo chown -R $USER ~/install/.git
 sudo chown -R $USER ~/install/.gitattributes
