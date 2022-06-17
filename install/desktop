@@ -1,9 +1,15 @@
 ##################################################
 #################Define Variables#################
 ##################################################
-#blank=""
-#host=$(hostname)
+blank=""
+host=$(hostname)
+if grep -q '[Pp]uget-' /etc/hostname; then
 orderid="${host/[Pp]uget-/$blank}"
+else
+clear
+echo Could not extract the orderid from the hostname, please enter orderid.
+read orderid
+fi
 wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/install/orderdata
 
 ##################################################
