@@ -7,7 +7,7 @@ if grep -q "puget" $host; then
 orderid="${host/puget-/$blank}"
 elif grep -q "Puget" $host; then
 orderid="${host/Puget-/$blank}"
-else
+else;
 clear
 echo Can't extract order number from hostname, please enter now:
 read orderid
