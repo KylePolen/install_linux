@@ -5,6 +5,7 @@ rm -rf ~/Desktop/*
 rm -rf ~/Desktop/.git
 rm -rf ~/Desktop/.gitattributes
 rm -rf ~/Downloads/*
+sudo chown -R $USER ~/install
 rm -rf ~/install
 sudo rm -rf /var/crash/*
 rm $0
