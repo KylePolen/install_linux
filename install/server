@@ -8,6 +8,7 @@ orderid="${host/puget-/$blank}"
 elif grep -q 'Puget' ~/Desktop/install/orderdata; then
 orderid="${host/Puget-/$blank}"
 else
+clear
 echo Can't extract order number from hostname, please enter now:
 read orderid
 fi
@@ -56,4 +57,3 @@ network:
 EOF'
 sudo netplan generate && sudo netplan apply
 sudo shutdown -r now
-
