@@ -3,9 +3,9 @@
 ##################################################
 blank=""
 host=$(hostname)
-if grep -q 'puget' $host; then
+if grep -q "puget" $host; then
 orderid="${host/puget-/$blank}"
-elif grep -q 'Puget' $host; then
+elif grep -q "Puget" $host; then
 orderid="${host/Puget-/$blank}"
 else
 clear

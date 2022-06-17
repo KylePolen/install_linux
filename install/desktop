@@ -3,9 +3,9 @@
 ##################################################
 blank=""
 host=$(hostname)
-if grep -q 'puget' ~/Desktop/install/orderdata; then
+if grep -q "puget" $host; then
 orderid="${host/puget-/$blank}"
-elif grep -q 'Puget' ~/Desktop/install/orderdata; then
+elif grep -q "Puget" $host; then
 orderid="${host/Puget-/$blank}"
 else
 echo Can't extract order number from hostname, please enter now:
