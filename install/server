@@ -1,9 +1,9 @@
 ##################################################
 #################Define Variables#################
 ##################################################
-blank=""
-host=$(hostname)
-orderid=sed 's/Puget-/""/gI' $host
+#blank=""
+#host=$(hostname)
+#orderid=sed 's/Puget-/""/I' $host
 #if grep -q "puget" $host; then
 #orderid="${host/puget-/$blank}"
 #elif grep -q "Puget" $host; then
@@ -13,9 +13,9 @@ orderid=sed 's/Puget-/""/gI' $host
 #echo Can't extract order number from hostname, please enter now:
 #read orderid
 #fi
-wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/install/orderdata
-echo $orderid
-sleep 500
+#wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/install/orderdata
+#echo $orderid
+#sleep 500
 
 ##################################################
 ###############Ownership & Privilege##############
