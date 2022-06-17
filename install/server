@@ -3,20 +3,19 @@
 ##################################################
 blank=""
 host=$(hostname)
-if echo $host | grep -q puget; then
+orderid=sed 's/Puget-//gI' $host
 #if grep -q "puget" $host; then
-orderid="${host/puget-/$blank}"
-elif echo $host | grep -q Puget; then
+#orderid="${host/puget-/$blank}"
 #elif grep -q "Puget" $host; then
-orderid="${host/Puget-/$blank}"
-else
-clear
-echo Can't extract order number from hostname, please enter now:
-read orderid
-fi
-
-
+#orderid="${host/Puget-/$blank}"
+#else
+#clear
+#echo Can't extract order number from hostname, please enter now:
+#read orderid
+#fi
 wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/install/orderdata
+echo $orderid
+sleep 500
 
 ##################################################
 ###############Ownership & Privilege##############
@@ -52,3 +51,11 @@ cd ~/install/install/fixes/source/realtek_lan
 sudo sh ./autorun.sh
 sudo apt autoremove -y
 
+sudo touch /etc/cloud/cloud-init.disabled
+sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: NetworkManager
+EOF'
+sudo netplan generate && sudo netplan apply
+sudo shutdown -r now
