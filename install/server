@@ -3,9 +3,11 @@
 ##################################################
 blank=""
 host=$(hostname)
-if grep -q "puget" $host; then
+if echo $host | grep -q puget; then
+#if grep -q "puget" $host; then
 orderid="${host/puget-/$blank}"
-elif grep -q "Puget" $host; then
+elif echo $host | grep -q Puget; then
+#elif grep -q "Puget" $host; then
 orderid="${host/Puget-/$blank}"
 else
 clear
@@ -49,11 +51,11 @@ cd ~/install/install/fixes/source/realtek_lan
 sudo sh ./autorun.sh
 sudo apt autoremove -y
 
-#sudo touch /etc/cloud/cloud-init.disabled
-#sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
-#network:
-#  version: 2
-#  renderer: NetworkManager
-#EOF'
-#sudo netplan generate && sudo netplan apply
-#sudo shutdown -r now
+sudo touch /etc/cloud/cloud-init.disabled
+sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: NetworkManager
+EOF'
+sudo netplan generate && sudo netplan apply
+sudo shutdown -r now
