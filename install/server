@@ -54,6 +54,6 @@ sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
 network:
   version: 2
   renderer: NetworkManager
-EOF'
+`EOF'
 sudo netplan generate && sudo netplan apply
 sudo shutdown -r now
