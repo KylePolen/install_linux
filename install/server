@@ -3,7 +3,7 @@
 ##################################################
 blank=""
 host=$(hostname)
-orderid=sed 's/Puget-//gI' $host
+orderid=sed 's/Puget-/""/gI' $host
 #if grep -q "puget" $host; then
 #orderid="${host/puget-/$blank}"
 #elif grep -q "Puget" $host; then
