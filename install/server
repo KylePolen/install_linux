@@ -14,7 +14,8 @@ clear
 echo Can't extract order number from hostname, please enter now:
 read orderid
 fi
-#orderdata=$(wget -O - 'https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid='$orderid'')
+
+
 wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/install/orderdata
 
 ##################################################
