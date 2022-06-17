@@ -3,15 +3,15 @@
 ##################################################
 blank=""
 host=$(hostname)
-#if grep -q 'puget' ~/Desktop/install/orderdata; then
+if grep -q 'puget' $host; then
 orderid="${host/puget-/$blank}"
-#elif grep -q 'Puget' ~/Desktop/install/orderdata; then
-#orderid="${host/Puget-/$blank}"
-#else
-#clear
-#echo Can't extract order number from hostname, please enter now:
-#read orderid
-#fi
+elif grep -q 'Puget' $host; then
+orderid="${host/Puget-/$blank}"
+else
+clear
+echo Can't extract order number from hostname, please enter now:
+read orderid
+fi
 #orderdata=$(wget -O - 'https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid='$orderid'')
 wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/install/orderdata
 
