@@ -10,7 +10,7 @@ clear
 echo Could not extract the orderid from the hostname, please enter orderid: 
 read -p orderid
 fi
-wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/Desktop/install/orderdata
+wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/orderdata
 clear
 
 ##################################################
@@ -65,14 +65,14 @@ fi
 ##################################################
 ###Oracle VirtualBox###
 #######################
-if grep -q '"name":"VirtualBox"' ~/Desktop/install/orderdata; then
+if grep -q '"name":"VirtualBox"' ~/orderdata; then
 sudo apt install virtualbox -y
 clear
 fi
 ###################
 ###Google Chrome###
 ###################
-if grep -q '"name":"Chrome"' ~/Desktop/install/orderdata; then
+if grep -q '"name":"Chrome"' ~/orderdata; then
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
 sudo rm -r google-chrome-stable*
@@ -89,7 +89,7 @@ fi
 ###################
 ###Adober Reader###
 ###################
-if grep -q '"name":"Acrobat Reader"' ~/Desktop/install/orderdata; then
+if grep -q '"name":"Acrobat Reader"' ~/orderdata; then
 sudo dpkg --add-architecture i386
 sudo apt install libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 libgdk-pixbuf-xlib-2.0-0:i386 -y
 wget -P ~/Desktop/install ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
@@ -100,7 +100,7 @@ fi
 #########
 ###VLC###
 #########
-if grep -q '"name":"VLC"' ~/Desktop/install/orderdata; then
+if grep -q '"name":"VLC"' ~/orderdata; then
 sudo apt install vlc -y
 clear
 fi
