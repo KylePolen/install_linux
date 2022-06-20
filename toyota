@@ -43,7 +43,7 @@ sudo apt install net-tools dkms build-essential ssh bolt apt-utils gparted gedit
 
 sudo apt update
 sudo apt dist-upgrade -y
-cd ~/Desktop/install/fixes/source/realtek_lan
+cd ~/install/fixes/source/realtek_lan
 sudo sh autorun.sh
 sudo apt autoremove -y
 
@@ -54,7 +54,7 @@ clear
 echo "Disabling 64bit BAR Support" 
 echo
 sleep 2s
-cd ~/Desktop/install
+cd ~/install
 sudo chmod +x bootutil64e
 sudo ./stuff/bootutil64e -NIC=1 -64d
 sudo ./stuff/bootutil64e -NIC=2 -64d

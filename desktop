@@ -10,16 +10,16 @@ clear
 echo Could not extract the orderid from the hostname, please enter orderid: 
 read -p orderid
 fi
-wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/orderdata
+wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/orderdata
 clear
 
 ##################################################
 ###############Ownership & Privilege##############
 ##################################################
-sudo chmod -R +x ~/Desktop/install/*
-sudo chown -R $USER ~/Desktop/install
-sudo chown -R $USER ~/Desktop/.git
-sudo chown -R $USER ~/Desktop/.gitattributes
+sudo chmod -R +x ~/install/*
+sudo chown -R $USER ~/install
+sudo chown -R $USER ~/install/.git
+sudo chown -R $USER ~/install/.gitattributes
 
 ##################################################
 ##################Puget Branding##################
@@ -36,7 +36,7 @@ sleep 5
 pkill -f firefox
 wait
 
-sudo cp ~/Desktop/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+sudo cp ~/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
 sudo chown user /usr/share/backgrounds/Puget_Systems.png
 sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
 sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default-release/prefs.js
@@ -65,14 +65,14 @@ fi
 ##################################################
 ###Oracle VirtualBox###
 #######################
-if grep -q '"name":"VirtualBox"' ~/orderdata; then
+if grep -q '"name":"VirtualBox"' ~/install/orderdata; then
 sudo apt install virtualbox -y
 clear
 fi
 ###################
 ###Google Chrome###
 ###################
-if grep -q '"name":"Chrome"' ~/orderdata; then
+if grep -q '"name":"Chrome"' ~/install/orderdata; then
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
 sudo rm -r google-chrome-stable*
@@ -89,7 +89,7 @@ fi
 ###################
 ###Adober Reader###
 ###################
-if grep -q '"name":"Acrobat Reader"' ~/orderdata; then
+if grep -q '"name":"Acrobat Reader"' ~/install/orderdata; then
 sudo dpkg --add-architecture i386
 sudo apt install libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 libgdk-pixbuf-xlib-2.0-0:i386 -y
 wget -P ~/Desktop/install ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
@@ -100,7 +100,7 @@ fi
 #########
 ###VLC###
 #########
-if grep -q '"name":"VLC"' ~/orderdata; then
+if grep -q '"name":"VLC"' ~/install/orderdata; then
 sudo apt install vlc -y
 clear
 fi
@@ -116,7 +116,7 @@ sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y
 sudo DEBIAN_FRONTEND=nointeractive apt install net-tools dkms build-essential apt-utils ssh gparted bolt gedit gdebi mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
 sudo apt update
 sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y
-cd ~/Desktop/install/fixes/source/realtek_lan
+cd ~/install/fixes/source/realtek_lan
 sudo sh ./autorun.sh
 sudo apt autoremove -y
 

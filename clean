@@ -2,10 +2,13 @@ rm ~/.bash_history > /dev/null 2>&1
 rm -rf ~/.local/share/Trash/info/* > /dev/null 2>&1
 rm -rf ~/.local/share/Trash/files/* > /dev/null 2>&1
 rm -rf ~/Desktop/* > /dev/null 2>&1
-rm -rf ~/orderdata > /dev/null 2>&1
+rm -rf ~/install/orderdata > /dev/null 2>&1
+rm -rf ~/install/.git > /dev/null 2>&1
 rm -rf ~/Desktop/.git > /dev/null 2>&1
+rm -rf ~/install/.gitattributes > /dev/null 2>&1
 rm -rf ~/Desktop/.gitattributes > /dev/null 2>&1
 rm -rf ~/Downloads/* > /dev/null 2>&1
+rm -rf ~/install > /dev/null 2>&1
 sudo chown -R $USER ~/install
 rm -rf ~/install > /dev/null 2>&1
 sudo rm -rf /var/crash/* > /dev/null 2>&1
