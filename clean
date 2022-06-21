@@ -8,3 +8,4 @@ sudo chown -R $USER ~/install
 rm -rf ~/install > /dev/null 2>&1
 sudo rm -rf /var/crash/* > /dev/null 2>&1
 rm $0 > /dev/null 2>&1
+> ~/.bash_history
