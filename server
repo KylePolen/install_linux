@@ -46,6 +46,9 @@ cd ~/install/fixes/source/realtek_lan
 sudo sh ./autorun.sh
 sudo apt autoremove -y
 
+##################################################
+##################Network Fixes###################
+##################################################
 sudo touch /etc/cloud/cloud-init.disabled
 sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
 network:
@@ -53,4 +56,5 @@ network:
   renderer: NetworkManager
 EOF'
 sudo netplan generate && sudo netplan apply
+
 sudo shutdown -r now

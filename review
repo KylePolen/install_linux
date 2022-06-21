@@ -27,7 +27,7 @@ if test -f /etc/libreoffice/soffice.sh; then
 echo "Libre Office is installed" >> ~/install/reviewdata
 fi
 if test -f /usr/bin/snap/firefox; then
-echo "Mozilla Firefox" >> ~/install/reviewdata
+echo "Mozilla Firefox is installed" >> ~/install/reviewdata
 fi
 if test -f /usr/bin/vlc; then
 echo "Oracle VirtualBox is installed" >> ~/install/reviewdata
@@ -44,4 +44,5 @@ echo ===============================64bit BAR Disabled==========================
 echo =============================================================================== >> ~/install/reviewdata
 sudo ~/install/stuff/bootutil >> ~/install/reviewdata
 fi
+
 less ~/install/reviewdata

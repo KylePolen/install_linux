@@ -120,6 +120,17 @@ cd ~/install/fixes/source/realtek_lan
 sudo sh ./autorun.sh
 sudo apt autoremove -y
 
+##################################################
+################Motherboard Fixes#################
+##################################################
+if grep -q '"name":"AMD Threadripper PRO WRX80 EATX"' ~/install/orderdata; then
+sudo cp ~/install/fixes/source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
+sudo cp ~/install/fixes/source/asus-wrx80-usb-audio.conf /usr/share/pulseaudio/alsa-mixer/profile-sets/asus-wrx80-usb-audio.conf
+fi
+if grep -q '"name":"Gigabyte TRX40 AORUS PRO WIFI (Rev. 1.1)"' ~/install/orderdata; then
+sudo cp ~/install/fixes/source/Realtek-ALC1220-VB-Desktop.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop.conf
+sudo cp ~/install/fixes/source/Realtek-ALC1220-VB-Desktop-HiFi.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop-HiFi.conf
+fi
 
 sudo shutdown -r now
 
