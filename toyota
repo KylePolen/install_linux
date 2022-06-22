@@ -21,6 +21,14 @@ clear
 ln -s ~/install ~/Desktop/install 
 
 ##################################################
+###############Ownership & Privilege##############
+##################################################
+sudo chmod -R +x ~/install/*
+sudo chown -R $USER ~/install
+sudo chown -R $USER ~/install/.git
+sudo chown -R $USER ~/install/.gitattributes
+
+##################################################
 #############Installing Video Drivers#############
 ##################################################
 

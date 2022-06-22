@@ -1,4 +1,6 @@
+if test -f ~/install/reviewdata; then
 rm ~/install/reviewdata
+fi
 
 echo =============================================================================== >> ~/install/reviewdata
 echo ================================User/Host Name================================= >> ~/install/reviewdata

@@ -17,7 +17,6 @@ wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_
 ##################################################
 sudo chmod -R +x ~/install/*
 sudo chown -R $USER ~/install
-sudo chown -R $USER ~/install/install
 sudo chown -R $USER ~/install/.git
 sudo chown -R $USER ~/install/.gitattributes
 
