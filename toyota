@@ -33,7 +33,7 @@ clear
 echo "Updating Operating System"
 sudo DEBIAN_FRONTEND=nointeractive apt update
 sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y
-sudo DEBIAN_FRONTEND=nointeractive apt install net-tools dkms build-essential apt-utils ssh gparted bolt gedit gdebi mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
+sudo DEBIAN_FRONTEND=nointeractive apt install net-tools dkms build-essential finger apt-utils ssh gparted bolt gedit gdebi mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
 
 sudo DEBIAN_FRONTEND=nointeractive apt update
 sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y

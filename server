@@ -37,7 +37,7 @@ clear
 echo "Updating Operating System"	
 sudo apt update
 sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y
-sudo DEBIAN_FRONTEND=nointeractive apt install build-essential bolt network-manager ssh dkms samba cups mdadm net-tools -y
+sudo DEBIAN_FRONTEND=nointeractive apt install build-essential bolt finger network-manager ssh dkms samba cups mdadm net-tools -y
 sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade linux-generic-hwe-20.04 -y
 sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade linux-generic-hwe-22.04 -y
 sudo apt update
