@@ -18,6 +18,8 @@ sudo sed -i 's/splash//g' /etc/default/grub
 sudo update-grub
 clear
 
+ln -s ~/install ~/Desktop/install 
+
 ##################################################
 #############Installing Video Drivers#############
 ##################################################
