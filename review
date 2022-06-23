@@ -34,7 +34,7 @@ fi
 if test -f /etc/libreoffice/soffice.sh; then
 echo "Libre Office is installed" >> ~/install/reviewdata
 fi
-if test -f /usr/bin/snap/firefox; then
+if test -f /snap/bin/firefox; then
 echo "Mozilla Firefox is installed" >> ~/install/reviewdata
 fi
 if test -f /usr/bin/vlc; then
