@@ -7,8 +7,9 @@ if grep -q '[Pp]uget-' /etc/hostname; then
 orderid="${host/[Pp]uget-/$blank}"
 else
 clear
-echo Could not extract the orderid from the hostname, please enter orderid: 
-read -p orderid
+echo Could not extract the orderid from the hostname, please enter order number: 
+echo
+read -p "Order number: "
 fi
 wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/orderdata
 clear
