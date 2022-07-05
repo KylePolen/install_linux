@@ -9,7 +9,7 @@ else
 clear
 echo Could not extract the orderid from the hostname, please enter order number: 
 echo
-read -p "Order number: "
+read -p "Order number: " orderid
 fi
 wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/orderdata
 clear
