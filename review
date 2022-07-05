@@ -1,7 +1,6 @@
 if test -f ~/install/reviewdata; then
 rm ~/install/reviewdata
 fi
-
 echo =============================================================================== >> ~/install/reviewdata
 echo ================================User/Host Name================================= >> ~/install/reviewdata
 echo =============================================================================== >> ~/install/reviewdata
@@ -43,7 +42,6 @@ fi
 if test -f /usr/bin/vlc; then
 echo "VLC is installed" >> ~/install/reviewdata
 fi
-
 #check to see if this is a Toyoata order
 if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata; then
 echo confirm that 64bit BAR support has been disabled on the NICs as per Toyota request.
@@ -52,5 +50,4 @@ echo ===============================64bit BAR Disabled==========================
 echo =============================================================================== >> ~/install/reviewdata
 sudo ~/install/stuff/bootutil >> ~/install/reviewdata
 fi
-
 less ~/install/reviewdata
