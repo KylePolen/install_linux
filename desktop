@@ -50,14 +50,26 @@ sudo update-grub
 clear
 
 ##################################################
-#############Installing Video Drivers#############
+##################Install Driver##################
 ##################################################
+###################
+######NVIDIA#######
+###################
 if lspci -v | grep -q NVIDIA; then
 sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
 sudo apt update
 sudo DEBIAN_FRONTEND=nointeractive apt install nvidia-driver-510 -y
 fi
-
+###################
+#####Highpoint#####
+###################
+if grep -q '"name":"HighPoint SSD7505 Gen4 M.2 Card"' ~/install/orderdata; then
+cd ~/install/fixes/source
+sudo ./hptnvme_g5_linux_src_v1.3.5_2021_12_22.bin
+sudo ./RAID_Manage_Linux_v3.1.5_22_06_10.bin
+cd ~/install
+clear
+fi
 ##################################################
 #################Install Software#################
 ##################################################
