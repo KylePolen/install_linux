@@ -1,146 +1,116 @@
-##################################################
-#################Define Variables#################
-##################################################
+#Define Variables
 blank=""
 host=$(hostname)
 if grep -q '[Pp]uget-' /etc/hostname; then
-orderid="${host/[Pp]uget-/$blank}"
+	orderid="${host/[Pp]uget-/$blank}"
 else
-clear
-echo Could not extract the orderid from the hostname, please enter order number: 
-echo
-read -p "Order number: " orderid
+	clear
+	echo Could not extract the orderid from the hostname, please enter order number: 
+	echo
+	read -p "Order number: " orderid
 fi
 wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/orderdata
-clear
 
-ln -s ~/install ~/Desktop/install 
-
-##################################################
-###############Ownership & Privilege##############
-##################################################
+###Change ownership
 sudo chmod -R +x ~/install/*
 sudo chown -R $USER ~/install
 sudo chown -R $USER ~/install/.git
 sudo chown -R $USER ~/install/.gitattributes
 
-##################################################
-##################Puget Branding##################
-##################################################
-clear
+###OS Puget Branding
+sudo cp ~/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+sudo chown user /usr/share/backgrounds/Puget_Systems.png
+sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Puget_Systems.png
 gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/Puget_Systems.png
-if grep -q 20.04 /etc/os-release; then
-gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
-fi
 gsettings set org.gnome.shell.extensions.ding show-home false
+if grep -q 20.04 /etc/os-release; then
+	gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
+fi
+
+###Firefox Puget Branding
 firefox --headless > /dev/null 2>&1 &
 sleep 5
 pkill -f firefox
 wait
-
-sudo cp ~/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
-sudo chown user /usr/share/backgrounds/Puget_Systems.png
-sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
 sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default-release/prefs.js
 sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default/prefs.js
 sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/snap/firefox/common/.mozilla/firefox/*.default/prefs.js
-sudo sed -i 's/splash//g' /etc/default/grub
-sudo update-grub
-clear
 
-##################################################
-##################Install Driver##################
-##################################################
-###################
-######NVIDIA#######
-###################
+###Driver Installation
+#NVIDIA
 if lspci -v | grep -q NVIDIA; then
-sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
-sudo apt update
-sudo DEBIAN_FRONTEND=nointeractive apt install nvidia-driver-510 -y
-fi
-###################
-#####Highpoint#####
-###################
-if grep -q '"name":"HighPoint SSD7505 Gen4 M.2 Card"' ~/install/orderdata; then
-cd ~/install/fixes/source
-sudo ./hptnvme_g5_linux_src_v1.3.5_2021_12_22.bin
-sudo ./RAID_Manage_Linux_v3.1.5_22_06_10.bin
-cd ~/install
-clear
-fi
-##################################################
-#################Install Software#################
-##################################################
-###Oracle VirtualBox###
-#######################
-if grep -q '"name":"VirtualBox"' ~/install/orderdata; then
-sudo apt install virtualbox -y
-clear
-fi
-###################
-###Google Chrome###
-###################
-if grep -q '"name":"Chrome"' ~/install/orderdata; then
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
-sudo rm -r google-chrome-stable*
-google-chrome > /dev/null 2>&1 &
-sleep 3
-pkill -f chrome
-wait
-sleep 2
-google-chrome > /dev/null 2>&1 &
-sleep 2
-pkill -f chrome
-clear
-fi
-###################
-###Adober Reader###
-###################
-if grep -q '"name":"Acrobat Reader"' ~/install/orderdata; then
-sudo dpkg --add-architecture i386
-sudo apt install libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 libgdk-pixbuf-xlib-2.0-0:i386 -y
-wget -P ~/Desktop/install ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
-sudo dpkg -i ~/Desktop/install/AdbeRdr9.5.5-1_i386linux_enu.deb
-sudo rm -r ~/Desktop/install/AdbeRdr9.5.5-1_i386linux_enu.deb
-clear
-fi
-#########
-###VLC###
-#########
-if grep -q '"name":"VLC"' ~/install/orderdata; then
-sudo apt install vlc -y
-clear
+	sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
+	sudo apt update
+	sudo DEBIAN_FRONTEND=nointeractive apt install nvidia-driver-510 -y
 fi
 
-##################################################
-#################Running Updates##################
-##################################################
-clear
-echo "Updating Operating System"
-sudo DEBIAN_FRONTEND=nointeractive apt install ubuntu-restricted-extras -y	
+#HighPoint
+if grep -q '"name":"HighPoint SSD7505 Gen4 M.2 Card"' ~/install/orderdata; then
+	cd ~/install/fixes/source
+	sudo ./hptnvme_g5_linux_src_v1.3.5_2021_12_22.bin
+	sudo ./RAID_Manage_Linux_v3.1.5_22_06_10.bin
+	cd ~/install
+fi
+
+####Software
+#Oracle VirtualBox
+if grep -q '"name":"VirtualBox"' ~/install/orderdata; then
+	sudo apt install virtualbox -y
+fi
+
+#Google Chrome
+if grep -q '"name":"Chrome"' ~/install/orderdata; then
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	sudo apt install ./google-chrome-stable_current_amd64.deb
+	sudo rm -r google-chrome-stable*
+	google-chrome > /dev/null 2>&1 &
+	sleep 3
+	pkill -f chrome
+	wait
+	sleep 2
+	google-chrome > /dev/null 2>&1 &
+	sleep 2
+	pkill -f chrome
+fi
+
+#Adobe Reader
+if grep -q '"name":"Acrobat Reader"' ~/install/orderdata; then
+	sudo dpkg --add-architecture i386
+	sudo apt install libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 libgdk-pixbuf-xlib-2.0-0:i386 -y
+	wget -P ~/Desktop/install ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
+	sudo dpkg -i ~/Desktop/install/AdbeRdr9.5.5-1_i386linux_enu.deb
+	sudo rm -r ~/Desktop/install/AdbeRdr9.5.5-1_i386linux_enu.deb
+fi
+
+#VLC
+if grep -q '"name":"VLC"' ~/install/orderdata; then
+	sudo apt install vlc -y
+fi
+
+###Updating
 sudo apt update
+sudo DEBIAN_FRONTEND=nointeractive apt install ubuntu-restricted-extras -y	
 sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y
 sudo DEBIAN_FRONTEND=nointeractive apt install mdadm net-tools finger dkms build-essential apt-utils ssh gparted bolt gedit gdebi mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
-sudo apt update
 sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y
+
+###Motherboard Fixes
+if grep -q '"name":"AMD Threadripper PRO WRX80 EATX"' ~/install/orderdata; then
+	sudo cp ~/install/fixes/source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
+	sudo cp ~/install/fixes/source/asus-wrx80-usb-audio.conf /usr/share/pulseaudio/alsa-mixer/profile-sets/asus-wrx80-usb-audio.conf
+fi
+if grep -q '"name":"Gigabyte TRX40 AORUS PRO WIFI (Rev. 1.1)"' ~/install/orderdata; then
+	sudo cp ~/install/fixes/source/Realtek-ALC1220-VB-Desktop.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop.conf
+	sudo cp ~/install/fixes/source/Realtek-ALC1220-VB-Desktop-HiFi.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop-HiFi.conf
+fi
+
+#Other
+ln -s ~/install ~/Desktop/install
 cd ~/install/fixes/source/realtek_lan
 sudo sh ./autorun.sh
 sudo apt autoremove -y
-
-##################################################
-################Motherboard Fixes#################
-##################################################
-if grep -q '"name":"AMD Threadripper PRO WRX80 EATX"' ~/install/orderdata; then
-sudo cp ~/install/fixes/source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
-sudo cp ~/install/fixes/source/asus-wrx80-usb-audio.conf /usr/share/pulseaudio/alsa-mixer/profile-sets/asus-wrx80-usb-audio.conf
-fi
-if grep -q '"name":"Gigabyte TRX40 AORUS PRO WIFI (Rev. 1.1)"' ~/install/orderdata; then
-sudo cp ~/install/fixes/source/Realtek-ALC1220-VB-Desktop.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop.conf
-sudo cp ~/install/fixes/source/Realtek-ALC1220-VB-Desktop-HiFi.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop-HiFi.conf
-fi
-
+sudo sed -i 's/splash//g' /etc/default/grub
+sudo update-grub
 sudo shutdown -r now
 
