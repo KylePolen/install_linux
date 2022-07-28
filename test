@@ -1,0 +1,200 @@
+#Define Variables
+blank=""
+host=$(hostname)
+if grep -q '[Pp]uget-' /etc/hostname; then
+	orderid="${host/[Pp]uget-/$blank}"
+else
+	clear
+	echo 'Could not extract the orderid from the hostname, please enter order number.'
+	echo
+	read -p "Order number: " orderid
+fi
+clear
+wget -q -O - "https://www.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >> ~/install/orderdata
+
+if lspci -v | grep -q SSD7505; then
+	clear
+	read -p 'Highpoint RAID controller detected. Would you like to configure and mount the array now? ' -n 1 -r
+	echo 
+	if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+		runcheck="no"
+	else
+		runcheck="yes"
+		_arrayselect
+		_mount
+	fi
+fi
+
+###Change ownership
+sudo chmod -R +x ~/install/*
+sudo chown -R $USER ~/install
+sudo chown -R $USER ~/install/.git
+sudo chown -R $USER ~/install/.gitattributes
+
+###OS Puget Branding
+sudo cp ~/install/stuff/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+sudo chown user /usr/share/backgrounds/Puget_Systems.png
+sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/Puget_Systems.png
+gsettings set org.gnome.shell.extensions.ding show-home false
+if grep -q 20.04 /etc/os-release; then
+	gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
+fi
+
+###Firefox Puget Branding
+firefox --headless > /dev/null 2>&1 &
+sleep 5
+pkill -f firefox
+wait
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default-release/prefs.js > /dev/null 2>&1
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default/prefs.js > /dev/null 2>&1
+sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome.php?oid='$orderid'");' ~/snap/firefox/common/.mozilla/firefox/*.default/prefs.js > /dev/null 2>&1
+
+###Driver Installation
+#NVIDIA
+if lspci -v | grep -q NVIDIA; then
+	sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
+	sudo apt update
+	sudo DEBIAN_FRONTEND=nointeractive apt install nvidia-driver-510 -y
+fi
+
+#HighPoint	
+if lspci -v | grep -q SSD7505; then
+	sudo ~/install/fixes/source/hptnvme_g5_linux_src_v1.3.5_2021_12_22.bin
+	sudo ~/install/fixes/source/RAID_Manage_Linux_v3.1.5_22_06_10.bin
+	if $runcheck = "yes"; then
+		sudo hptraidconf -u RAID -p hpt delete 1
+		sudo hptraidconf -u RAID -p hpt create RAID$arrayselect disks='*' name="'RAID_$arrayselect'"
+		sudo echo "label: gpt" | sudo sfdisk /dev/hptblock0n0p
+		sudo mkfs -t ext4 /dev/hptblock0n0p1
+		sudo echo "/dev/hptblock0n0p1	$mount	ext4	defaults	0	0" >> /etc/fstab
+	fi	
+fi
+
+####Software
+#Oracle VirtualBox
+if grep -q '"name":"VirtualBox"' ~/install/orderdata; then
+	sudo apt install virtualbox -y
+fi
+
+#Google Chrome
+if grep -q '"name":"Chrome"' ~/install/orderdata; then
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	sudo apt install ./google-chrome-stable_current_amd64.deb
+	sudo rm -r google-chrome-stable*
+	google-chrome > /dev/null 2>&1 &
+	sleep 3
+	pkill -f chrome
+	wait
+	sleep 2
+	google-chrome > /dev/null 2>&1 &
+	sleep 2
+	pkill -f chrome
+fi
+
+#Adobe Reader
+if grep -q '"name":"Acrobat Reader"' ~/install/orderdata; then
+	sudo dpkg --add-architecture i386
+	sudo apt install libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 libgdk-pixbuf-xlib-2.0-0:i386 -y
+	wget -P ~/Desktop/install ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
+	sudo dpkg -i ~/Desktop/install/AdbeRdr9.5.5-1_i386linux_enu.deb
+	sudo rm -r ~/Desktop/install/AdbeRdr9.5.5-1_i386linux_enu.deb
+fi
+
+#VLC
+if grep -q '"name":"VLC"' ~/install/orderdata; then
+	sudo apt install vlc -y
+fi
+
+###Updating
+sudo apt update
+sudo DEBIAN_FRONTEND=nointeractive apt install ubuntu-restricted-extras -y	
+sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y
+sudo DEBIAN_FRONTEND=nointeractive apt install mdadm net-tools finger xfsprogs dkms build-essential apt-utils ssh -y
+sudo DEBIAN_FRONTEND=nointeractive apt install gparted bolt gedit gdebi mesa-utils git libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 -y
+sudo DEBIAN_FRONTEND=nointeractive apt dist-upgrade -y
+
+###Motherboard Fixes
+if grep -q '"name":"AMD Threadripper PRO WRX80 EATX"' ~/install/orderdata; then
+	sudo cp ~/install/fixes/source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
+	sudo cp ~/install/fixes/source/asus-wrx80-usb-audio.conf /usr/share/pulseaudio/alsa-mixer/profile-sets/asus-wrx80-usb-audio.conf
+fi
+if grep -q '"name":"Gigabyte TRX40 AORUS PRO WIFI (Rev. 1.1)"' ~/install/orderdata; then
+	sudo cp ~/install/fixes/source/Realtek-ALC1220-VB-Desktop.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop.conf
+	sudo cp ~/install/fixes/source/Realtek-ALC1220-VB-Desktop-HiFi.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop-HiFi.conf
+fi
+
+#Other
+ln -s ~/install ~/Desktop/install
+cd ~/install/fixes/source/realtek_lan
+sudo sh ./autorun.sh
+sudo apt autoremove -y
+sudo sed -i 's/splash//g' /etc/default/grub
+sudo update-grub
+sudo shutdown -r now
+
+###Functions
+_arrayselect()
+{
+		clear
+		echo 'This tool is designed to use all detected drives on the highpoint controller. For more control, please configure the array manually.'
+		echo -e '\e]8;;http://localhost:7402\HighPoint Web RAID Management Software\e]8;;\a'
+		echo
+		echo 'Please select the array type you would like to build. 0, 1, 10'
+		read -p "Array Type: " arrayselect
+		case $arrayselect in
+			0) arraytype="0";;
+			1) arraytype="1";;
+			10) arraytype="10";;
+			*) echo 'Invalid selection, try again.';;
+		esac
+		clear
+		echo 'Selected array type: ' $arrayselect
+		echo
+	fi
+fi	
+}		
+
+_mount()
+{
+	echo 'Please specify the absolute path you would like to use as a mount point.'
+	echo 'If the path is left blank, a default path of "/raid" will be used.'
+	echo
+	mount="?????"
+	until [ -d $mount ]
+	do
+		read -p "Mount path: " mount
+		#Checks for illegal characters
+		if [[ $mount == *['!'@#\$%^\&*()_+]* ]]; then
+			read -p $mount ' contains invalid characters. Press any key to try again.'
+			clear
+			_mount
+		fi
+		#Checks and corrects mount path
+		if [ "${mount:0:1}" != "/" ]; then
+			mount="/""$mount"
+		fi
+		#Default
+		if mount=""; then
+			mount="/raid"
+			sudo mkdir $mount
+			break
+		fi
+		#Mount point already exists
+		if [ -d $mount ]; then
+			echo $mount ' already exists, continue or retry? Enter "contine" to keep going (not recommended) or any key to retry.'
+			read -p "Selection: " retry
+			echo
+			case $retry in
+				[Cc]ontinue) break;;
+				*) clear
+				_mount;;							 
+			esac
+		fi	
+	done
+		if [ ! -d $mount ]; then		
+			sudo mkdir $mount	
+		fi
+}
+
