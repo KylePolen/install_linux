@@ -12,6 +12,7 @@ source ~/install/functions/fixes.sh
 ~/install/functions/software.sh
 ~/install/functions/updates.sh
 ~/install/scripts/mount.sh
+~/install/functions/fixes.sh
 
 #Stop autorun
 _os_check
