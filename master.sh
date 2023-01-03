@@ -9,6 +9,7 @@ source ~/install/functions/fixes.sh
 ~/install/scripts/intel_display.sh
 ~/install/scripts/highpoint.sh
 ~/install/functions/drivers.sh
+read -p ""
 ~/install/functions/software.sh
 ~/install/functions/updates.sh
 ~/install/scripts/mount.sh
