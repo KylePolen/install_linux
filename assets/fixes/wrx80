@@ -1,0 +1,3 @@
+sudo cp ./source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
+sudo cp ./source/asus-wrx80-usb-audio.conf /usr/share/pulseaudio/alsa-mixer/profile-sets/asus-wrx80-usb-audio.conf
+sudo reboot
