@@ -42,9 +42,9 @@ _update_server
 if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 	_viz_check
 	exit
-	#if [ -f ~/install/scripts/vizgen.sh ]; then
-		#~/install/scripts/vizgen.sh
-	#fi
+	if [ -f ~/install/scripts/vizgen.sh ]; then
+		~/install/scripts/vizgen.sh
+	fi
 fi
 
 ###GRUB and network fixes
