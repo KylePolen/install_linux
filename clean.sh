@@ -21,3 +21,4 @@ history -w
 history -cw
 >~/.bash_history
 rm ~/.bash_history >/dev/null 2>&1
+history -cw

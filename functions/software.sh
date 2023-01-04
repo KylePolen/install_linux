@@ -2,29 +2,6 @@
 scriptname="software.sh"
 clear
 
-if [ -f ~/install/flags/$scriptname ]; then
-	exit
-fi
-
-source ~/install/functions/global.sh
-_os_check
-_orderdata
-
-if ! grep -q '"Software: Courtesy Install"' ~/install/orderdata; then
-	touch ~/install/flags/$scriptname
-	exit
-fi
-
-
-if [ $ostype == "Server" ]; then
-	echo 'Software is only intended to be installed on Desktop OS platforms.'
-	echo 'Press any key to continue.'
-	read -p ""
-	touch ~/install/flags/$scriptname
-	clear
-	exit
-fi
-
 #Oracle VirtualBox
 _soft_virtualbox() {
 	if grep -q '"name":"VirtualBox"' ~/install/orderdata; then
@@ -59,10 +36,3 @@ _soft_vlc() {
 	fi
 }
 
-_soft_virtualbox
-_soft_chrome
-_soft_reader
-_soft_vlc
-
-#Writing Completion Flag
-touch ~/install/flags/$scriptname

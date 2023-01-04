@@ -6,7 +6,7 @@ if [ -f ~/install/flags/$scriptname ]; then
 	exit
 fi
 
-source ~/install/functions/base_functions.sh
+source ~/install/functions/disk_functions.sh
 source ~/install/functions/global.sh
 
 _hostdata

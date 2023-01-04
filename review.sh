@@ -2,10 +2,10 @@
 clear
 
 scriptname="review.sh"
-source ~/install/functions/base_functions.sh
+source ~/install/functions/global.sh
 _os_check
 
-if test -f ~/install/reviewdata; then
+if [ -f ~/install/reviewdata ]; then
 	rm ~/install/reviewdata
 fi
 echo =============================================================================== >>~/install/reviewdata

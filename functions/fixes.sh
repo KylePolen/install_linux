@@ -2,17 +2,9 @@
 scriptname="fixes.sh"
 clear
 
-if [ -f ~/install/flags/$scriptname ]; then
-	exit
-fi
-
-source ~/install/functions/global.sh
-
 ###Motherboard Fixes
 #Audio drivers and GRUB fixes
 _mobofix() {
-	_hostdata
-	_os_check
 	if [ "$motherboard" == "Pro WS WRX80E-SAGE SE WIFI" ]; then
 		if [ $ostype == "Desktop" ]; then
 			sudo cp ~/install/assets/fixes/source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
@@ -54,8 +46,7 @@ _toyota() {
 ###Network Fixes
 #Install, configure and enable Network Manager
 _netman() {
-	_os_check
-	#if ! grep -q 'Vizgen, Inc.' ~/install/orderdata; then
+	if ! grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 		if [ $ostype == "Server" ]; then
 			sudo DEBIAN_FRONTEND=nointeractive apt install network-manager net-tools -y
 			sleep 2
@@ -68,12 +59,5 @@ EOF'
 			sudo netplan generate && sudo netplan apply
 			sleep 2
 		fi
-	#fi
+	fi
 }
-
-_mobofix
-_toyota
-_netman
-
-#Writing Completion Flag
-touch ~/install/flags/$scriptname

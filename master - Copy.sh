@@ -2,12 +2,8 @@
 scriptname=master.sh
 clear
 
-###Source all functions
-for i in ~/install/functions/*;
-  do source $i
-done
-
 ###Needed for all systems
+source ~/install/functions/global.sh
 _os_check #Server vs. Desktop, 20.04 vs. 22.04
 _hostdata #Hostname and DMI
 _permissions #Ownership and execution
@@ -20,11 +16,13 @@ _branding #Puget Systems branding
 #~/install/scripts/highpoint.sh
 
 ###Display Drivers
+source ~/install/functions/drivers.sh
 _nvidia
 _amdigpu
 
 ###Courtesy Software
 if [ $ostype == "Desktop" ]; then
+	source ~/install/functions/software.sh
 	_soft_virtualbox
 	_soft_chrome
 	_soft_reader
@@ -32,6 +30,7 @@ if [ $ostype == "Desktop" ]; then
 fi
 
 ###Install additional packages and updates
+source ~/install/functions/updates.sh
 _update_desktop
 _update_server
 
@@ -44,6 +43,7 @@ if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 fi
 
 ###GRUB and network fixes
+source ~/install/functions/fixes.sh
 _mobofix
 _toyota
 _netman
