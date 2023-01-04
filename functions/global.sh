@@ -117,8 +117,8 @@ _viz_check() {
 		sudo chmod 777 ~/install/scripts/vizgen.sh
 		sudo chmod 777 ~/install/assets/vizgen/analysis_configuration/*
 		sudo chmod +x ~/install/scripts/vizgen.sh
-		sudo umount /mnt/ntserver
-		sudo rm -R /mnt/ntserver
+		#sudo umount /mnt/ntserver
+		#sudo rm -R /mnt/ntserver
 	else
 		while true; do
 			clear
