@@ -112,6 +112,7 @@ _viz_check() {
 	sudo mount -t cifs //192.168.0.10/production/Vizgen -o username=$username,password=$password /mnt/ntserver
 	if [ -f /mnt/ntserver/vizgen.sh ]; then
 		sudo cp /mnt/ntserver/vizgen.sh ~/install/scripts/vizgen.sh
+		mkdir -p ~/install/assets/vizgen/analysis_configuration
 		sudo cp -R /mnt/ntserver/vizgen/analysis_configuration/* ~/install/assets/vizgen/analysis_configuration
 		sudo chown -R $USER ~/install/assets/vizgen/analysis_configuration
 		sudo chmod 777 ~/install/scripts/vizgen.sh
