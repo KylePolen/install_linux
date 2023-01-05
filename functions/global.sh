@@ -107,7 +107,7 @@ _viz_check() {
 	read -p "Username: " username
 	clear
 	echo 'Please enter the password for '$username
-	read -p "Password: " password
+	read -s "Password: " password
 	sudo mkdir -p /mnt/ntserver
 	sudo mount -t cifs //192.168.0.10/production/Vizgen -o username=$username,password=$password /mnt/ntserver
 	if [ -f /mnt/ntserver/vizgen.sh ]; then
