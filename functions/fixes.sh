@@ -19,7 +19,12 @@ _mobofix() {
 			
 	fi
 	if [ "$motherboard" == "ProArt X670E-CREATOR WIFI" ]; then
-		sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt"/' /etc/default/grub
+		if [ $ostype == "Desktop" ]; then
+			sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt"/' /etc/default/grub
+		fi
+		if [ $ostype == "Server" ]; then
+			sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="amd-iommu=on iommu=pt"/' /etc/default/grub
+		fi
 	fi
 	if grep -q '"name":"Gigabyte TRX40 AORUS PRO WIFI (Rev. 1.1)"' ~/install/orderdata; then
 		if [ $ostype == "Desktop" ]; then
