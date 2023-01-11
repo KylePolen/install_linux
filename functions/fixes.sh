@@ -10,7 +10,13 @@ _mobofix() {
 			sudo cp ~/install/assets/fixes/source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
 			sudo cp ~/install/assets/fixes/source/asus-wrx80-usb-audio.conf /usr/share/pulseaudio/alsa-mixer/profile-sets/asus-wrx80-usb-audio.conf
 		fi
-		sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt"/' /etc/default/grub
+		if [ $ostype == "Desktop" ]; then
+			sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt"/' /etc/default/grub
+		fi
+		if [ $ostype == "Server" ]; then
+			sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="amd-iommu=on iommu=pt"/' /etc/default/grub
+		fi
+			
 	fi
 	if [ "$motherboard" == "ProArt X670E-CREATOR WIFI" ]; then
 		sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt"/' /etc/default/grub
