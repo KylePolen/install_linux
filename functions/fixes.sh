@@ -57,8 +57,7 @@ _toyota() {
 ###Network Fixes
 #Install, configure and enable Network Manager
 _netman() {
-	#if ! grep -q '"Vizgen, Inc."' ~/install/orderdata; then
-	if ! grep -q '"dfgdfgdgdfg"' ~/install/orderdata; then
+	if ! grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 		if [ $ostype == "Server" ]; then
 			sudo DEBIAN_FRONTEND=nointeractive apt install network-manager net-tools -y
 			sleep 2
