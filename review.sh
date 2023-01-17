@@ -11,23 +11,34 @@ fi
 echo =============================================================================== >>~/install/reviewdata
 echo ================================User/Host Name================================= >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
-finger >>~/install/reviewdata
 hostname >>~/install/reviewdata
+finger >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
 echo ==================================nvidia-smi=================================== >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
-nvidia-smi >>~/install/reviewdata
+if lspci -v | grep -q NVIDIA; then
+	nvidia-smi >>~/install/reviewdata
+else
+	echo "An NVIDIA GPU was not detected in this system." >>~/install/reviewdata
+fi
 echo >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
 echo =====================================lsblk===================================== >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
-lsblk >>~/install/reviewdata
+lsblk --noheadings | awk '$1 !~ "loop" && $1 != "sr0"' >>~/install/reviewdata
 echo >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
-echo ====================================ifconfig=================================== >>~/install/reviewdata
+echo ====================================ip brief=================================== >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
-ifconfig -a >>~/install/reviewdata
+ip --brief address show >>~/install/reviewdata
 echo >>~/install/reviewdata
+if [ $ostype == "Server" ]; then
+	echo =============================================================================== >>~/install/reviewdata
+	echo ====================================netplan=================================== >>~/install/reviewdata
+	echo =============================================================================== >>~/install/reviewdata
+	cat /etc/netplan/01-netcfg.yaml >>~/install/reviewdata
+	echo >>~/install/reviewdata
+fi
 echo =============================================================================== >>~/install/reviewdata
 echo ====================================software=================================== >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
@@ -37,13 +48,7 @@ fi
 if test -f /opt/google/chrome/chrome; then
 	echo "Google Chrome is installed" >>~/install/reviewdata
 fi
-if test -f /etc/libreoffice/soffice.sh; then
-	echo "Libre Office is installed" >>~/install/reviewdata
-fi
-if test -f /snap/bin/firefox; then
-	echo "Mozilla Firefox is installed" >>~/install/reviewdata
-fi
-if test -f /usr/bin/vlc; then
+if test -f /usr/lib/VirtualBox; then
 	echo "Oracle VirtualBox is installed" >>~/install/reviewdata
 fi
 if test -f /usr/bin/vlc; then
@@ -55,9 +60,13 @@ if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata; then
 	echo =============================================================================== >>~/install/reviewdata
 	echo ===============================64bit BAR Disabled============================== >>~/install/reviewdata
 	echo =============================================================================== >>~/install/reviewdata
-	sudo ~/install/stuff/bootutil >>~/install/reviewdata
+	sudo ~/install/assets/bootutil64e >>~/install/reviewdata
 fi
-less ~/install/reviewdata
+if [ $ostype == "Server" ]; then
+	less ~/install/reviewdata
+else
+gedit ~/install/reviewdata
+fi
 
 #Writing Completion Flag
 touch ~/install/flags/$scriptname
