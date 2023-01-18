@@ -108,10 +108,12 @@ _viz_check() {
 	clear
 	echo 'Please enter the password for '$username
 	read -p "Password: " password
+	clear
 	sudo mkdir -p /mnt/ntserver
-	sudo mount -t cifs //192.168.0.10/production/Vizgen -o username=$username,password=$password /mnt/ntserver
+	sudo mount -t cifs //172.17.0.10/production/Vizgen -o username=$username,password=$password /mnt/ntserver
 	if [ -f /mnt/ntserver/vizgen.sh ]; then
 		mkdir -p ~/install/assets/vizgen/analysis_configuration
+		echo "Copying Vizgen assets..."
 		sudo cp /mnt/ntserver/vizgen.sh ~/install/scripts/vizgen.sh
 		sudo cp /mnt/ntserver/vizgen/update-package-231.zip ~/install/assets/vizgen/update-package-231.zip
 		sudo cp -R /mnt/ntserver/vizgen/analysis_configuration/* ~/install/assets/vizgen/analysis_configuration
