@@ -44,7 +44,7 @@ if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 		_viz_check
 	fi
 	if [ -f ~/install/scripts/vizgen.sh ]; then
-		~/install/scripts/vizgen.sh
+		echo '~/install/scripts/vizgen.sh' >>~/.bashrc
 	fi
 fi
 
@@ -54,10 +54,12 @@ _toyota
 _netman
 
 #Stop autorun
-if [ $ostype == "Server" ]; then
-	sudo sed -i '/~\/install/d' ~/.bashrc
-else
-	sudo rm /etc/profile.d/$scriptname
+if [ ! -f ~/install/scripts/vizgen.sh ]; then
+	if [ $ostype == "Server" ]; then
+		sudo sed -i '/~\/install/d' ~/.bashrc
+	else
+		sudo rm /etc/profile.d/$scriptname
+	fi
 fi
 
 sudo shutdown -r now

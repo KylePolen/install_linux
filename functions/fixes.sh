@@ -57,18 +57,17 @@ _toyota() {
 ###Network Fixes
 #Install, configure and enable Network Manager
 _netman() {
-	if ! grep -q '"Vizgen, Inc."' ~/install/orderdata; then
-		if [ $ostype == "Server" ]; then
-			sudo DEBIAN_FRONTEND=nointeractive apt install network-manager net-tools -y
-			sleep 2
-			sudo touch /etc/cloud/cloud-init.disabled
-			sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
+	if [ $ostype == "Server" ]; then
+		sudo DEBIAN_FRONTEND=nointeractive apt install network-manager net-tools -y
+		sleep 2
+		sudo touch /etc/cloud/cloud-init.disabled
+		sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
 network:
   version: 2
   renderer: NetworkManager
 EOF'
-			sudo netplan generate && sudo netplan apply
-			sleep 2
-		fi
+		sudo netplan generate && sudo netplan apply
+		sleep 2
 	fi
+	
 }
