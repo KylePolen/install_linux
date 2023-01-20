@@ -63,6 +63,9 @@ if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata; then
 	sudo ~/install/assets/bootutil64e >>~/install/reviewdata
 fi
 if [ $ostype == "Server" ]; then
+	echo >>~/install/reviewdata
+	echo >>~/install/reviewdata
+	echo 'Press "q" to exit back to prompt' >>~/install/reviewdata
 	less ~/install/reviewdata
 else
 gedit ~/install/reviewdata
