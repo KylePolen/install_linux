@@ -22,6 +22,7 @@ _branding #Puget Systems branding
 ###Display Drivers
 _nvidia
 _amdigpu
+_aspeed
 
 ###Courtesy Software
 if [ $ostype == "Desktop" ]; then
