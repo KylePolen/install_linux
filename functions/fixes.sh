@@ -11,19 +11,19 @@ _mobofix() {
 			sudo cp ~/install/assets/fixes/source/asus-wrx80-usb-audio.conf /usr/share/pulseaudio/alsa-mixer/profile-sets/asus-wrx80-usb-audio.conf
 		fi
 		if [ $ostype == "Desktop" ]; then
-			sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt"/' /etc/default/grub
+			sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
 		fi
 		if [ $ostype == "Server" ]; then
-			sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="amd-iommu=on iommu=pt"/' /etc/default/grub
+			sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
 		fi
 			
 	fi
 	if [ "$motherboard" == "ProArt X670E-CREATOR WIFI" ]; then
 		if [ $ostype == "Desktop" ]; then
-			sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt"/' /etc/default/grub
+			sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
 		fi
 		if [ $ostype == "Server" ]; then
-			sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="amd-iommu=on iommu=pt"/' /etc/default/grub
+			sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
 		fi
 	fi
 	if grep -q '"name":"Gigabyte TRX40 AORUS PRO WIFI (Rev. 1.1)"' ~/install/orderdata; then

@@ -33,7 +33,7 @@ _amdigpu() {
 
 #ASPEED
 _aspeed() {
-	#if lspci -v | grep -q ASPEED; then
+	if lspci -v | grep -q ASPEED; then
 		sudo dpkg -i ~/assets/drivers/ast-drm-linux5.15.deb
-	#fi
+	fi
 }
