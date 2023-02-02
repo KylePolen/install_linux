@@ -44,9 +44,9 @@ if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 	if [ ! -f ~/install/scripts/vizgen.sh ]; then
 		_viz_check
 	fi
-	#if [ -f ~/install/scripts/vizgen.sh ]; then
-		#echo '~/install/scripts/vizgen.sh' >>~/.bashrc
-	#fi
+	if [ -f ~/install/scripts/vizgen.sh ]; then
+		echo '~/install/scripts/vizgen.sh' >>~/.bashrc
+	fi
 fi
 
 ###GRUB and network fixes
