@@ -8,18 +8,10 @@ _nvidia() {
 		sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
 		sudo apt update
 		if [ "$ostype" == "Desktop" ]; then
-			if [ "$osversion" == "22.04" ]; then
-				sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-525
-			else
-				sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-520
-			fi	
+			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-525
 		else
-			if [ "$osversion" == "22.04" ]; then
-				sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-525 --no-install-recommends
-			else
-				sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-520 --no-install-recommends
-			fi
-		fi		
+			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-525 --no-install-recommends
+		fi	
 	fi
 }
 
