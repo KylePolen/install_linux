@@ -45,6 +45,7 @@ if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 		_viz_check
 	fi
 	if [ -f ~/install/scripts/vizgen.sh ]; then
+		sudo sed -i '/~\/install/d' ~/.bashrc
 		echo '~/install/scripts/vizgen.sh' >>~/.bashrc
 	fi
 fi
