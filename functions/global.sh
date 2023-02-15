@@ -134,6 +134,7 @@ _viz_check() {
 				sudo umount /mnt/ntserver
 				sudo rm -R /mnt/ntserver
 				_viz_check
+				break
 				;;
 			[Nn]*)
 				clear
