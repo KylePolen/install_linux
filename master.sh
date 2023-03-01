@@ -40,14 +40,16 @@ _update_server
 ~/install/scripts/mount.sh
 
 #VizCheck
-if grep -q '"Vizgxen, Inc."' ~/install/orderdata; then
-	if [ ! -f ~/install/scripts/vizgen.sh ]; then
-		_viz_check
-	fi
-	if [ -f ~/install/scripts/vizgen.sh ]; then
-		sudo sed -i '/~\/install/d' ~/.bashrc
-		echo '~/install/scripts/vizgen.sh' >>~/.bashrc
-	fi
+if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
+	if grep -q 'Ferrite Core Assembly' ~/install/orderdata; then
+		if [ ! -f ~/install/scripts/vizgen.sh ]; then
+			_viz_check
+		fi
+		if [ -f ~/install/scripts/vizgen.sh ]; then
+			sudo sed -i '/~\/install/d' ~/.bashrc
+			echo '~/install/scripts/vizgen.sh' >>~/.bashrc
+		fi
+	fi	
 fi
 
 ###GRUB and network fixes
