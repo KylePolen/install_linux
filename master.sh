@@ -16,7 +16,7 @@ _orderdata #Get order JSON
 _sleep #Disables sleep until cleanup is ran
 _branding #Puget Systems branding
 
-#~/install/scripts/intel_display.sh
+~/install/scripts/intel_display.sh
 #~/install/scripts/highpoint.sh
 
 ###Display Drivers

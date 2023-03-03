@@ -11,7 +11,7 @@ if [ -f ~/install/flags/$scriptname ]; then
 fi
 
 if [ "$motherboard" != "NUC13SB" ]; then
-	touch ~/install/flags/$scriptdir
+	touch ~/install/flags/$scriptname
 	exit
 fi
 
@@ -81,6 +81,6 @@ if [ -f ~/install/flags/intel_flag ]; then
 	sudo rm /etc/profile.d/$scriptname
 	echo "sleep 5" | sudo tee -a /etc/profile.d/$scriptname
 	echo 'gnome-terminal -- ~/install/master.sh' | sudo tee -a /etc/profile.d/master.sh
-	touch ~/install/flags/$scriptdir
+	touch ~/install/flags/$scriptname
 	sudo reboot
 fi
