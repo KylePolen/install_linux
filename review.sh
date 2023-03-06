@@ -62,6 +62,12 @@ if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata; then
 	echo =============================================================================== >>~/install/reviewdata
 	sudo ~/install/assets/bootutil64e >>~/install/reviewdata
 fi
+if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
+echo =============================================================================== >>~/install/reviewdata
+echo ==================================Merlin Check================================= >>~/install/reviewdata
+echo =============================================================================== >>~/install/reviewdata
+merlin --version . >>~install/reviewdata
+fi
 if [ $ostype == "Server" ]; then
 	echo >>~/install/reviewdata
 	echo >>~/install/reviewdata
