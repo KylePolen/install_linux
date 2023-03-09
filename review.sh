@@ -66,7 +66,7 @@ if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 echo =============================================================================== >>~/install/reviewdata
 echo ==================================Merlin Check================================= >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
-merlin --version . >>~install/reviewdata
+~/merlin_env/bin/merlin --version . >>~install/reviewdata
 fi
 if [ $ostype == "Server" ]; then
 	echo >>~/install/reviewdata
