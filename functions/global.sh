@@ -115,7 +115,7 @@ _viz_check() {
 		mkdir -p ~/install/assets/vizgen/analysis_configuration
 		echo "Copying Vizgen assets..."
 		sudo cp /mnt/ntserver/vizgen.sh ~/install/scripts/vizgen.sh
-		sudo cp /mnt/ntserver/vizgen/update-package-232.zip ~/install/assets/vizgen/update-package-232.zip
+		sudo cp /mnt/ntserver/vizgen/update-package-231.zip ~/install/assets/vizgen/update-package-231.zip
 		sudo cp -R /mnt/ntserver/vizgen/analysis_configuration/* ~/install/assets/vizgen/analysis_configuration
 		sudo chown -R $USER ~/install/assets/vizgen/analysis_configuration
 		sudo chmod 777 ~/install/scripts/vizgen.sh
