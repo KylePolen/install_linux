@@ -39,20 +39,22 @@ if [ $ostype == "Server" ]; then
 	cat /etc/netplan/01-netcfg.yaml >>~/install/reviewdata
 	echo >>~/install/reviewdata
 fi
-echo =============================================================================== >>~/install/reviewdata
-echo ====================================software=================================== >>~/install/reviewdata
-echo =============================================================================== >>~/install/reviewdata
-if test -f /opt/Adobe/Reader9/bin/acroread; then
-	echo "Adobe Reader is installed" >>~/install/reviewdata
-fi
-if test -f /opt/google/chrome/chrome; then
-	echo "Google Chrome is installed" >>~/install/reviewdata
-fi
-if test -f /usr/lib/VirtualBox; then
-	echo "Oracle VirtualBox is installed" >>~/install/reviewdata
-fi
-if test -f /usr/bin/vlc; then
-	echo "VLC is installed" >>~/install/reviewdata
+if [ $ostype == "Desktop" ]; then
+	echo =============================================================================== >>~/install/reviewdata
+	echo ====================================software=================================== >>~/install/reviewdata
+	echo =============================================================================== >>~/install/reviewdata
+	if test -f /opt/Adobe/Reader9/bin/acroread; then
+		echo "Adobe Reader is installed" >>~/install/reviewdata
+	fi
+	if test -f /opt/google/chrome/chrome; then
+		echo "Google Chrome is installed" >>~/install/reviewdata
+	fi
+	if test -f /usr/lib/VirtualBox; then
+		echo "Oracle VirtualBox is installed" >>~/install/reviewdata
+	fi
+	if test -f /usr/bin/vlc; then
+		echo "VLC is installed" >>~/install/reviewdata
+	fi
 fi
 #check to see if this is a Toyoata order
 if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata; then
@@ -66,7 +68,7 @@ if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
 echo =============================================================================== >>~/install/reviewdata
 echo ==================================Merlin Check================================= >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
-~/merlin_env/bin/merlin --version . >>~install/reviewdata
+~/merlin_env/bin/merlin --version . >>~/install/reviewdata
 fi
 if [ $ostype == "Server" ]; then
 	echo >>~/install/reviewdata
