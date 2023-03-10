@@ -26,16 +26,16 @@ _hostdata() {
 
 ###Change ownership
 _permissions() {
-	if [ ! -f ~/install/orderdata ]; then
-		sudo chmod -R +x ~/install/*
-		sudo chown -R $USER ~/install
-		sudo chown -R $USER ~/install/.git*
+	if [ ! -f /home/$USER/install/orderdata ]; then
+		sudo chmod -R +x /home/$USER/install/*
+		sudo chown -R $USER /home/$USER/install
+		sudo chown -R $USER /home/$USER/install/.git*
 	fi
 }
 
 ###Get Order ID
 _orderid() {
-	if [ ! -f ~/install/flags/orderid ]; then
+	if [ ! -f /home/$USER/install/flags/orderid ]; then
 		if grep -q '[Pp]uget-' /etc/hostname; then
 			orderid=${host/[Pp]uget-/} && orderid=${orderid:0:6}
 		elif echo $serial | grep -q '[Pp]uget-'; then
@@ -46,29 +46,29 @@ _orderid() {
 				'If the system is part of a quantity please exclude the system number at the end.' | fold -s
 			echo
 			read -p "Order number: " orderid
-			echo $orderid | sudo tee -a ~/install/flags/orderid
+			echo $orderid | sudo tee -a /home/$USER/install/flags/orderid
 		fi
 	else
-		orderid=$(<~/install/flags/orderid)
+		orderid=$(</home/$USER/install/flags/orderid)
 	fi
 }
 
 ###Get Order Data
 _orderdata() {
-	if [ -f ~/install/orderdata ]; then
-		sudo rm ~/install/orderdata
+	if [ -f /home/$USER/install/orderdata ]; then
+		sudo rm /home/$USER/install/orderdata
 	fi
-	wget -q -O - "https://admin.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >>~/install/orderdata
+	wget -q -O - "https://admin.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >>/home/$USER/install/orderdata
 }
 
 ###Delay Sleep Temporarily
 _sleep() {
-	if [ ! -f ~/install/flags/sleep ]; then
+	if [ ! -f /home/$USER/install/flags/sleep ]; then
 		if [ $ostype == "Desktop" ]; then
 			sudo apt install dbus-x11 -y
 			gsettings set org.gnome.desktop.session idle-delay 7200
 			gsettings set org.gnome.desktop.screensaver lock-delay 7200
-			touch ~/install/flags/sleep
+			touch /home/$USER/install/flags/sleep
 		fi
 	fi
 }
@@ -76,8 +76,8 @@ _sleep() {
 ###Puget Systems Branding
 _branding() {
 	if [ $ostype == "Desktop" ]; then
-		ln -s ~/install ~/Desktop/install
-		sudo cp ~/install/assets/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
+		ln -s /home/$USER/install /home/$USER/Desktop/install
+		sudo cp /home/$USER/install/assets/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
 		sudo chown user /usr/share/backgrounds/Puget_Systems.png
 		sudo chmod 777 /usr/share/backgrounds/Puget_Systems.png
 		gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Puget_Systems.png
@@ -93,9 +93,9 @@ _branding() {
 		sleep 5
 		pkill -f firefox
 		wait
-		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
-		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' ~/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
-		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' ~/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
+		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
+		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
+		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
 	fi
 }
 
@@ -112,16 +112,17 @@ _viz_check() {
 	sudo mkdir -p /mnt/ntserver
 	sudo mount -t cifs //172.17.0.10/production/Vizgen -o username=$username,password=$password /mnt/ntserver
 	if [ -f /mnt/ntserver/vizgen.sh ]; then
-		mkdir -p ~/install/assets/vizgen/analysis_configuration
+		mkdir -p /home/$USER/install/assets/vizgen/analysis_configuration
 		clear
 		echo "Copying Vizgen assets..."
+		echo
 		sudo rsync -ah --progress /mnt/ntserver/vizgen.sh /home/$USER/install/scripts/vizgen.sh
 		sudo rsync -ah --progress /mnt/ntserver/vizgen/update-package-232.zip /home/$USER/install/assets/vizgen/update-package-232.zip
-		sudo rsync -ah --progress /mnt/ntserver/vizgen/analysis_configuration/* ~/install/assets/vizgen/analysis_configuration
-		sudo chown -R $USER ~/install/assets/vizgen/analysis_configuration
-		sudo chmod 777 ~/install/scripts/vizgen.sh
-		sudo chmod 777 ~/install/assets/vizgen/analysis_configuration/*
-		sudo chmod +x ~/install/scripts/vizgen.sh
+		sudo rsync -ah --progress /mnt/ntserver/vizgen/analysis_configuration/* /home/$USER/install/assets/vizgen/analysis_configuration
+		sudo chown -R $USER /home/$USER/install/assets/vizgen/analysis_configuration
+		sudo chmod 777 /home/$USER/install/scripts/vizgen.sh
+		sudo chmod 777 /home/$USER/install/assets/vizgen/analysis_configuration/*
+		sudo chmod +x /home/$USER/install/scripts/vizgen.sh
 		sudo umount /mnt/ntserver
 		sudo rm -R /mnt/ntserver
 	else
