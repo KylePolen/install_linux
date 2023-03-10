@@ -119,6 +119,7 @@ _viz_check() {
 		sudo rsync -ah --progress /mnt/ntserver/vizgen.sh /home/$USER/install/scripts/vizgen.sh
 		sudo rsync -ah --progress /mnt/ntserver/vizgen/update-package-232.zip /home/$USER/install/assets/vizgen/update-package-232.zip
 		sudo rsync -ah --progress /mnt/ntserver/vizgen/analysis_configuration/* /home/$USER/install/assets/vizgen/analysis_configuration
+		clear
 		sudo chown -R $USER /home/$USER/install/assets/vizgen/analysis_configuration
 		sudo chmod 777 /home/$USER/install/scripts/vizgen.sh
 		sudo chmod 777 /home/$USER/install/assets/vizgen/analysis_configuration/*
