@@ -113,12 +113,11 @@ _viz_check() {
 	sudo mount -t cifs //172.17.0.10/production/Vizgen -o username=$username,password=$password /mnt/ntserver
 	if [ -f /mnt/ntserver/vizgen.sh ]; then
 		mkdir -p ~/install/assets/vizgen/analysis_configuration
+		clear
 		echo "Copying Vizgen assets..."
-		sudo pv /mnt/ntserver/vizgen.sh > /home/$USER/install/scripts/vizgen.sh
-		clear
-		sudo pv -pte /mnt/ntserver/vizgen/update-package-232.zip > /home/$USER/install/assets/vizgen/update-package-232.zip
-		clear
-		sudo pv -pte /mnt/ntserver/vizgen/analysis_configuration/* ~/install/assets/vizgen/analysis_configuration
+		sudo rsync -ah --progress /mnt/ntserver/vizgen.sh > /home/$USER/install/scripts/vizgen.sh
+		sudo rsync -ah --progress /mnt/ntserver/vizgen/update-package-232.zip > /home/$USER/install/assets/vizgen/update-package-232.zip
+		sudo rsync -ah --progress /mnt/ntserver/vizgen/analysis_configuration/* ~/install/assets/vizgen/analysis_configuration
 		sudo chown -R $USER ~/install/assets/vizgen/analysis_configuration
 		sudo chmod 777 ~/install/scripts/vizgen.sh
 		sudo chmod 777 ~/install/assets/vizgen/analysis_configuration/*
