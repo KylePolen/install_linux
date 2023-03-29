@@ -56,19 +56,16 @@ _orderid() {
 ###Get Order Data
 _orderdata() {
 	if [ -f /home/$USER/install/orderdata/orderdata ]; then
-		sudo rm /home/$USER/install/orderdata/orderdata
+		sudo rm /home/$USER/install/orderdata/*
 	fi
-	wget -q -O - "https://admin.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >>/home/$USER/install/orderdata/parent
-	if ! grep -q '"child_orders":null' ~/install/orderdata/parent; then
+	wget -q -O - "https://admin.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >>/home/$USER/install/orderdata/orderdata
+	if ! grep -q '"child_orders":null' ~/install/orderdata/orderdata; then
 		sudo DEBIAN_FRONTEND=nointeractive apt install jq -y
-		children=$(jq '.child_orders' ~/install/orderdata/parent | tr -d '"[],')
+		children=$(jq '.child_orders' ~/install/orderdata/orderdata | tr -d '"[],')
 		childarray=($children)
 		for i in "${childarray[@]}"; do
 			wget -q -O - "https://admin.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$i" >>/home/$USER/install/orderdata/$i
-		done
-		for v in ~/install/orderdata/*;
-			cat $v >> orderdata
-			echo " " >> orderdata
+			cat ~/install/orderdata/$i >> ~/install/orderdata/orderdata
 		done
 	fi
 }
