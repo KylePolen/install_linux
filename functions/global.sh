@@ -26,7 +26,7 @@ _hostdata() {
 
 ###Change ownership
 _permissions() {
-	if [ ! -f /home/$USER/install/orderdata ]; then
+	if [ ! -f /home/$USER/install/orderdata/orderdata ]; then
 		sudo chmod -R +x /home/$USER/install/*
 		sudo chown -R $USER /home/$USER/install
 		sudo chown -R $USER /home/$USER/install/.git*
@@ -55,10 +55,22 @@ _orderid() {
 
 ###Get Order Data
 _orderdata() {
-	if [ -f /home/$USER/install/orderdata ]; then
-		sudo rm /home/$USER/install/orderdata
+	if [ -f /home/$USER/install/orderdata/orderdata ]; then
+		sudo rm /home/$USER/install/orderdata/orderdata
 	fi
-	wget -q -O - "https://admin.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >>/home/$USER/install/orderdata
+	wget -q -O - "https://admin.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$orderid" >>/home/$USER/install/orderdata/parent
+	if ! grep -q '"child_orders":null' ~/install/orderdata/parent; then
+		sudo DEBIAN_FRONTEND=nointeractive apt install jq -y
+		children=$(jq '.child_orders' ~/install/orderdata/parent | tr -d '"[],')
+		childarray=($children)
+		for i in "${childarray[@]}"; do
+			wget -q -O - "https://admin.pugetsystems.com/admin/autoinstall/api.php?action=get_order_data&orderid=$i" >>/home/$USER/install/orderdata/$i
+		done
+		for v in ~/install/orderdata/*;
+			cat $v >> orderdata
+			echo " " >> orderdata
+		done
+	fi
 }
 
 ###Delay Sleep Temporarily

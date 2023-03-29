@@ -40,8 +40,8 @@ _update_server
 ~/install/scripts/mount.sh
 
 #VizCheck
-if grep -q '"Vizgen, Inc."' ~/install/orderdata; then
-	if grep -q 'Ferrite Core Assembly' ~/install/orderdata; then
+if grep -q '"Vizgen, Inc."' ~/install/orderdata/orderdata; then
+	if grep -q 'MA - Turn Key Solution' ~/install/orderdata/orderdata; then
 		if [ ! -f ~/install/scripts/vizgen.sh ]; then
 			_viz_check
 		fi

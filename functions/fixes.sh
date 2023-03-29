@@ -26,7 +26,7 @@ _mobofix() {
 			sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
 		fi
 	fi
-	if grep -q '"name":"Gigabyte TRX40 AORUS PRO WIFI (Rev. 1.1)"' ~/install/orderdata; then
+	if grep -q '"name":"Gigabyte TRX40 AORUS PRO WIFI (Rev. 1.1)"' ~/install/orderdata/orderdata; then
 		if [ $ostype == "Desktop" ]; then
 			sudo cp ~/install/assets/fixes/source/Realtek-ALC1220-VB-Desktop.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop.conf
 			sudo cp ~/install/assets/fixes/source/Realtek-ALC1220-VB-Desktop-HiFi.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop-HiFi.conf
@@ -38,7 +38,7 @@ _mobofix() {
 ###Master Accounts
 #Toyota Disable 64bit BAR
 _toyota() {
-	if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata; then
+	if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata/orderdata; then
 		clear
 		echo "Disabling 64bit BAR Support"
 		echo
