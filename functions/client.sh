@@ -53,7 +53,7 @@ _viz_assets() {
 				clear
 				sudo umount /mnt/ntserver
 				sudo rm -R /mnt/ntserver
-				_viz_check
+				_viz_assets
 				break
 				;;
 			[Nn]*)
