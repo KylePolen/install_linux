@@ -48,7 +48,7 @@ _update_server
 ~/install/scripts/mount.sh
 
 #Clients
-_vizcheck
+_viz_check
 
 ###GRUB and network fixes
 _mobofix
