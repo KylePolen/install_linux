@@ -3,6 +3,7 @@ clear
 
 ###Get OS Type
 _os_check() {
+	kernelver=$(uname -r)
 	if grep -q 22.04 /etc/os-release; then
 		osversion="22.04"
 		codename="jammy"
@@ -15,6 +16,7 @@ _os_check() {
 	else
 		ostype="Desktop"
 	fi
+
 }
 
 ###Define Variables

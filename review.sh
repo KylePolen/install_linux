@@ -14,6 +14,11 @@ echo ===========================================================================
 hostname >>~/install/reviewdata
 finger >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
+echo ================================OS Information================================= >>~/install/reviewdata
+echo =============================================================================== >>~/install/reviewdata
+echo "Distro:" $osversion $ostype >>~/install/reviewdata
+echo "Kernel:" $kernelver >>~/install/reviewdata
+echo =============================================================================== >>~/install/reviewdata
 echo ==================================nvidia-smi=================================== >>~/install/reviewdata
 echo =============================================================================== >>~/install/reviewdata
 if lspci -v | grep -q NVIDIA; then
