@@ -11,7 +11,7 @@ source ~/install/functions/disk_functions.sh
 #Main array
 sudo DEBIAN_FRONTEND=nointeractive apt install smartmontools -y
 clear
-drive="$(lsblk --noheadings -d -o NAME,TYPE,STATE,VENDOR | awk '$2 == "disk" && $4 !~ "ASR8" { print $1 }')"
+drive="$(lsblk --noheadings -d -o NAME,TYPE,STATE,VENDOR | awk '$2 == "disk" { print $1 }')"
 array=($drive)
 
 #Make sure root drive is removed from array
