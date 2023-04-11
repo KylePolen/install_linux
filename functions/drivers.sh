@@ -35,7 +35,8 @@ _hp7505() {
 if lspci -v | grep -q '7505\|SSD7505'; then
 	if [ ! -f /etc/init.d/hptdrv-monitor ]; then
 		clear
-		echo 'Highpoint 7505 detected. The system will reboot after installing drivers. The script will automatically restart once you log back in.'
+		echo 'Highpoint 7505 detected. The system will reboot after installing drivers.'
+		echo 'The script will automatically restart once you log back in.'
 		echo 'Press any key to continue.'
 		read -p ""
 		cd ~/install/assets
@@ -68,8 +69,8 @@ _hp640L() {
 if lspci -v | grep -q '640L 4 Port'; then
 	if [ ! -f /etc/init.d/hptdrv-monitor ]; then
 		clear
-		echo 'Highpoint 640L detected. The system will reboot after installing drivers. The script will automatically restart once you log back in.'
-		echo 'Press any key to continue.'
+		echo 'Highpoint 640L detected. The system will reboot after installing drivers.'
+		echo 'The script will automatically restart once you log back in.'
 		read -p ""
 		cd ~/install/assets
 		wget -c https://github.com/KylePolen/install_linux/raw/main/assets/drivers/hp640L/rr64xl-linux_x86_64_src_v1.6.7_22_11_28.bin
