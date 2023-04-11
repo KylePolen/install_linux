@@ -64,7 +64,7 @@ if [ ! -f ~/install/scripts/vizgen.sh ]; then
 	if [ $ostype == "Server" ]; then
 		sudo sed -i '/~\/install/d' ~/.bashrc
 	else
-		sudo rm /etc/profile.d/$scriptname
+		sudo rm /etc/profile.d/master.sh
 	fi
 fi
 
