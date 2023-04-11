@@ -27,6 +27,10 @@ _orderdata
 _sleep
 _branding
 
+###Drivers requiring reboot
+_hp7505
+_hp640L
+
 ###Display Drivers
 _nvidia
 _amdigpu

@@ -29,3 +29,69 @@ _aspeed() {
 		sudo dpkg -i ~/assets/drivers/ast-drm-linux5.15.deb
 	fi
 }
+
+#Highpoint 7505
+_hp7505() {
+if lspci -v | grep -q '7505\|SSD7505'; then
+	if [ ! -f /etc/init.d/hptdrv-monitor ]; then
+		clear
+		echo 'Highpoint 7505 detected. The system will reboot after installing drivers. The script will automatically restart once you log back in.'
+		echo 'Press any key to continue.'
+		read -p ""
+		cd ~/install/assets
+		wget -c https://github.com/KylePolen/install_linux/raw/main/assets/drivers/hp7505/hptnvme_g5_linux_src_v1.4.1_2022_03_04.bin
+		wget -c https://github.com/KylePolen/install_linux/raw/main/assets/drivers/hp7505/RAID_Manage_Linux_v3.1.5_22_06_10.bin
+		sudo chmod +x *.bin
+		sudo ./hptnvme_g5_linux_src_v1.4.1_2022_03_04.bin
+		sudo ./RAID_Manage_Linux_v3.1.5_22_06_10.bin
+		sleep 5
+		if [ "$motherboard" == "X299 AORUS Gaming 7" ]; then
+			sudo sed -i 's/ iommu=off//' /etc/default/grub
+			sudo update-grub
+		fi
+		if [ $ostype == "Server" ]; then
+			sudo sed -i '/~\/install/d' ~/.bashrc
+			echo '~/install/master.sh' >>~/.bashrc
+		else
+			sudo rm /etc/profile/.d/master.sh
+			echo "sleep 5" | sudo tee -a /etc/profile.d/master.sh
+			echo 'gnome-terminal -- ~/install/master.sh' | sudo tee -a /etc/profile.d/master.sh
+		fi
+		sudo reboot
+		exit
+	fi
+fi
+}
+
+#Highpoint 640L
+_hp640L() {
+if lspci -v | grep -q '640L 4 Port'; then
+	if [ ! -f /etc/init.d/hptdrv-monitor ]; then
+		clear
+		echo 'Highpoint 640L detected. The system will reboot after installing drivers. The script will automatically restart once you log back in.'
+		echo 'Press any key to continue.'
+		read -p ""
+		cd ~/install/assets
+		wget -c https://github.com/KylePolen/install_linux/raw/main/assets/drivers/hp640L/rr64xl-linux_x86_64_src_v1.6.7_22_11_28.bin
+		wget -c https://github.com/KylePolen/install_linux/raw/main/assets/drivers/hp640L/RAID_Manage_Linux_v3.1.5_22_06_10.bin
+		sudo chmod +x *.bin
+		sudo ./rr64xl-linux_x86_64_src_v1.6.7_22_11_28.bin
+		sudo ./RAID_Manage_Linux_v3.1.5_22_06_10.bin
+		sleep 5
+		if [ "$motherboard" == "X299 AORUS Gaming 7" ]; then
+			sudo sed -i 's/ iommu=off//' /etc/default/grub
+			sudo update-grub
+		fi
+		if [ $ostype == "Server" ]; then
+			sudo sed -i '/~\/install/d' ~/.bashrc
+			echo '~/install/master.sh' >>~/.bashrc
+		else
+			sudo rm /etc/profile/.d/master.sh
+			echo "sleep 5" | sudo tee -a /etc/profile.d/master.sh
+			echo 'gnome-terminal -- ~/install/master.sh' | sudo tee -a /etc/profile.d/master.sh
+		fi
+		sudo reboot
+		exit
+	fi
+fi
+}
