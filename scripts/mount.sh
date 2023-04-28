@@ -56,27 +56,27 @@ if [ "${#array[@]}" -gt "0" ]; then
 	done
 fi
 
-if [ "s" -gt "1" ]; then
+if [ "$s" -gt "1" ]; then
 	s="0"
 else
 	s=""
 fi
-if [ "h" -gt "1" ]; then
+if [ "$h" -gt "1" ]; then
 	h="0"
 else
 	h=""
 fi
-if [ "n" -gt "1" ]; then
+if [ "$n" -gt "1" ]; then
 	n="0"
 else
 	n=""
 fi
-if [ "r" -gt "1" ]; then
+if [ "$r" -gt "1" ]; then
 	r="0"
 else
 	r=""
 fi
-if [ "hp" -gt "1" ]; then
+if [ "$hp" -gt "1" ]; then
 	hp="0"
 else
 	hp=""
