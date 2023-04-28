@@ -107,6 +107,12 @@ if [ "${#array[@]}" -gt "0" ]; then
 			n=$(($n + 1))
 			;;
 		esac
+		case "$drive" in 'hpt'*)
+			drivemount="raid"$n
+			partition="$drive""1"
+			n=$(($n + 1))
+			;;
+		esac
 		while true; do
 			sudo clear
 			drivename="$(sudo smartctl -a /dev/$drive | awk -F':' '/Device Model/ { print $2 }' | xargs)"
