@@ -59,6 +59,13 @@ if lspci -v | grep -q '7505\|SSD7505'; then
 				sudo rm /etc/profile/.d/master.sh
 				echo "sleep 5" | sudo tee -a /etc/profile.d/master.sh
 				echo 'gnome-terminal -- ~/install/master.sh' | sudo tee -a /etc/profile.d/master.sh
+				bash -c 'cat << EOF > ~/Dekstop/Highpoint_Manager
+<html>
+<head>
+<meta http-equiv="refresh" content="0"; url=http://localhost:7402" />
+</head>
+</html>
+EOF'
 			fi
 			sudo reboot
 			exit
