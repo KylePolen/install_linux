@@ -22,12 +22,68 @@ for drive in "${array[@]}"; do
 	fi
 done
 
-#Start main run
+#Count drive types
 if [ "${#array[@]}" -gt "0" ]; then
 	s=""
 	h=""
 	n=""
 	r=""
+	hp=""
+	for drive in "${array[@]}"; do
+		case "$drive" in 'sd'*)
+			drivecheck="$(sudo smartctl -a /dev/$drive | awk -F':' '/rpm/ { print $2 }' | xargs)"
+			raidcheck="$(sudo smartctl -a /dev/$drive | awk -F':' '/AVAGO/ { print $2 }' | xargs)"
+			adapteccheck="$(sudo smartctl -a /dev/$drive | awk -F':' '/ASR8405/ { print $2 }' | xargs)"
+			if [ -z "$drivecheck" ]; then
+				if [ "$raidcheck" == "AVAGO" -o "$adapteccheck" == "ASR8405" ]; then
+					r=$(($r + 1))
+				else
+					s=$(($s + 1))
+				fi
+			else
+				h=$(($h + 1))
+			fi
+			;;
+		esac
+		case "$drive" in 'nvme'*)
+			n=$(($n + 1))
+			;;
+		esac
+		case "$drive" in 'hpt'*)
+			hp=$(($hp + 1))
+			;;
+		esac
+	done
+fi
+
+if [ "s" -gt "1" ]; then
+	s="0"
+else
+	s=""
+fi
+if [ "h" -gt "1" ]; then
+	h="0"
+else
+	h=""
+fi
+if [ "n" -gt "1" ]; then
+	n="0"
+else
+	n=""
+fi
+if [ "r" -gt "1" ]; then
+	r="0"
+else
+	r=""
+fi
+if [ "hp" -gt "1" ]; then
+	hp="0"
+else
+	hp=""
+fi
+
+#Start main run
+if [ "${#array[@]}" -gt "0" ]; then
 	for drive in "${array[@]}"; do
 		case "$drive" in 'sd'*)
 			drivecheck="$(sudo smartctl -a /dev/$drive | awk -F':' '/rpm/ { print $2 }' | xargs)"

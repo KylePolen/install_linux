@@ -49,6 +49,7 @@ if lspci -v | grep -q '7505\|SSD7505'; then
 			sleep 5
 			if [ "$motherboard" == "X299 AORUS Gaming 7" ]; then
 				sudo sed -i 's/ iommu=off//' /etc/default/grub
+				sudo sed -i 's/GRUB_CMDLINE_LINUX="iommu=off /GRUB_CMDLINE_LINUX="/' /etc/default/grub
 				sudo update-grub
 			fi
 			if [ $ostype == "Server" ]; then
