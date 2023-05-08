@@ -62,7 +62,7 @@ if [ $ostype == "Desktop" ]; then
 	fi
 fi
 #check to see if this is a Toyoata order
-if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata/orderdata; then
+if grep -q '"company":"Toyota Research' ~/install/orderdata/orderdata; then
 	echo confirm that 64bit BAR support has been disabled on the NICs as per Toyota request.
 	echo =============================================================================== >>~/install/reviewdata
 	echo ===============================64bit BAR Disabled============================== >>~/install/reviewdata

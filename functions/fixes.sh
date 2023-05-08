@@ -38,7 +38,7 @@ _mobofix() {
 ###Master Accounts
 #Toyota Disable 64bit BAR
 _toyota() {
-	if grep -q '"company":"Toyota Research Institute"' ~/install/orderdata/orderdata; then
+	if grep -q '"company":"Toyota Research' ~/install/orderdata/orderdata; then
 		clear
 		echo "Disabling 64bit BAR Support"
 		echo
