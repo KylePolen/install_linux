@@ -88,9 +88,10 @@ if [ "${#array[@]}" -gt "0" ]; then
 		case "$drive" in 'sd'*)
 			drivecheck="$(sudo smartctl -a /dev/$drive | awk -F':' '/rpm/ { print $2 }' | xargs)"
 			raidcheck="$(sudo smartctl -a /dev/$drive | awk -F':' '/AVAGO/ { print $2 }' | xargs)"
+			hpraidcheck="$(sudo smartctl -a /dev/$drive | awk -F':' '/HPT/ { print $2 }' | xargs)"
 			adapteccheck="$(sudo smartctl -a /dev/$drive | awk -F':' '/ASR8405/ { print $2 }' | xargs)"
 			if [ -z "$drivecheck" ]; then
-				if [ "$raidcheck" == "AVAGO" -o "$adapteccheck" == "ASR8405" ]; then
+				if [ "$raidcheck" == "AVAGO" -o "$adapteccheck" == "ASR8405" -o "$hpraidcheck" == "HPT" ]; then
 					drivemount="raid"$r
 					partition="$drive""1"
 					r=$(($r + 1))
