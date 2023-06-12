@@ -1,0 +1,296 @@
+RocketRAID 3720/3722/3740/3742/3744/ 820/822/840/842/844/ 2820/2822/2840/2842/2844 
+Controller/ RS643XTS/ R710/R720/ RS661xV Linux Open Source Driver package
+installation guide
+Copyright (C) 2023 HighPoint Technologies, Inc. All rights reserved.
+
+1. Overview
+2. File list
+3. Installation
+4. Uninstallation
+5. Revision history
+6. Technical support and service
+
+#############################################################################
+1. Overview
+#############################################################################
+
+  This package contains Linux driver code for HighPoint RocketRAID 3740A/840A
+  controller. You can use it to build the driver module for custom
+  Linux kernels.
+
+  NO WARRANTY
+
+  THE DRIVER SOURCE CODE HIGHPOINT PROVIDED IS FREE OF CHARGE, AND THERE IS
+  NO WARRANTY FOR THE PROGRAM. THERE ARE NO RESTRICTIONS ON THE USE OF THIS
+  FREE SOURCE CODE. HIGHPOINT DOES NOT PROVIDE ANY TECHNICAL SUPPORT IF THE
+  CODE HAS BEEN CHANGED FROM ORIGINAL SOURCE CODE.
+
+  LIMITATION OF LIABILITY
+
+  IN NO EVENT WILL HIGHPOINT BE LIABLE FOR DIRECT, INDIRECT, SPECIAL,
+  INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OF OR
+  INABILITY TO USE THIS PRODUCT OR DOCUMENTATION, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGES. IN PARTICULAR, HIGHPOINT SHALL NOT HAVE
+  LIABILITY FOR ANY HARDWARE, SOFTWARE, OR DATA STORED USED WITH THE
+  PRODUCT, INCLUDING THE COSTS OF REPAIRING, REPLACING, OR RECOVERING
+  SUCH HARDWARE, OR DATA.
+
+#############################################################################
+2. File list
+#############################################################################
+
+  |- README                                        : this file
+  `- rr37xx_8xx_28xx_linux_src_vx.x.x_xx_xx_xx.bin : driver for RocketRAID controller
+
+#############################################################################
+3. Installation
+#############################################################################
+
+  1)  Extract the source package to a temporary directory.
+
+  2)  Change to the temporary directory.
+
+  3)  Run the .bin file to install the driver package, 
+      then the driver will be loaded automatically after reboot.
+
+    # sh rr37xx_8xx_28xx_linux_src_vx.x.x_xx_xx_xx.bin
+
+  NOTES:
+
+    The installer requires super user's permission to run the installation.
+  So if you are not logged in as root, please supply the password of root to
+  start the installation.
+
+    The installer will check and install build tools if some of them is missing.
+  A network connection is required to install the build tools. And on debian
+  system, the original installation medium may be required if the packages not
+  configured to be installed from Internet. The following tools are checked by the
+  installer:
+
+    gcc
+    make
+    perl
+
+    They are installed automatically when you select "Software Development
+  Workstation" group in the installation of RHEL/CentOS 6.
+
+    When packages are installed from network, it may take too long to complete
+  the installation as it depends on the network speed. The packages could be
+  installed first to omit the network issue by following command:
+
+    # yum install gcc make perl
+
+    If the installer failed to find or install the required build tools, the
+  installation will be terminated without any change to the system.
+
+    The installer will install folders and files to /usr/share/hptdrv/rr3740a.
+
+    At the end of the installation, the installer will build driver module
+  rr3740a for all kernels in the system.
+
+    And the auto build script will be invoked to build driver module for
+  kernels added automatically when system reboot or shutdown.
+
+  Notice:
+
+    The instructions above are all about installing the driver automatically. If you want to
+  compile and load driver manually, the following instructions are ready for you.	 
+
+    Decompress .bin file to get an open source code directory by following command:
+
+    # ./rr37xx_8xx_28xx_linux_src_vx.x.x_xx_xx_xx.bin --noexec --target rr3740a
+					 
+    Enter to directory rr272x and compile source code to get a module by following commands:
+
+    # cd rr3740a/product/rr3740a/linux/
+
+    # make
+
+    Load the rr3740a.ko by executing the following command:
+
+    # insmod rr3740a.ko
+    
+    Remove the rr3740a.ko by executing the following command:
+
+    # rmmod rr3740a.ko
+
+#############################################################################
+4. Uninstallation
+#############################################################################
+
+    Run hptuninrr3740a as root to uninstall driver for RocketRAID controller.
+
+#############################################################################
+5. Revision history
+#############################################################################
+  v1.23.13 01/16/2023
+     * Support getting binary driver from server when driver compilation fails.
+     * Add new installation message.
+
+  v1.23.12 12/06/2022
+     * Support Ubuntu16.04
+  
+  v1.23.11 11/29/2022
+     * Support Centos-stream-9 and Redhat9.
+     
+  v1.23.10 11/23/2022
+     * Support disk drop indicator.
+
+  v1.23.9 10/18/2022
+     * Support display SSD labels when connecting SSDs.
+     * Support Trim(Discard) on SSDs' legacy and all SSDs' RAID0/RAID1/RAID10/JBOD.
+
+  v1.23.8 09/23/2022
+     * Support Block Device Characteristics VPD page for legacy SATA disk.
+     * Fix a bug that the driver may get wrong number of channels when using 16 channel.
+     * Provide instructions for compiling and loading driver in README.
+     * Fix a bug that the kernel may crash due to running intr on qid above queue number when probing disks.
+
+  v1.23.7 09/14/2022
+     * Support kernel 5.19.
+     * Support OEM.
+     * Support get port info.
+     
+  v1.23.6 09/02/2022
+     * Support RS6614V/RS6618V.
+     * Support R710/R720.
+
+  v1.23.5 08/25/2022
+     * Support NAA designation format for legacy disk.
+	 
+  v1.23.4 08/22/2022
+     * Improve random 4K I/O performance.
+
+  v1.22.7 07/24/2022
+   * Support SAS expander.
+
+  v1.22.6 07/26/2022
+   * Support RAID Control.
+
+  v1.22.5 07/15/2022
+   * Support RS6614V/RS6618V.
+
+  v1.22.4 06/20/2022
+   * Support PM1663a SAS drive.
+   * Support new BLF format file.
+  
+  v1.22.3 06/10/2022
+     * Add US Linux background Server address.
+
+  v1.22.2 05/27/2022
+     * Support WWN.
+     * Adjust SGPIO clock frequency.
+     * Export more product information.
+     * Fix a bug that total channel count of RR3720 was displayed incorrectly via CLI.
+
+  v1.22.1 05/12/2022
+     * Support RS6430 Series.
+     * Fix a bug that unsupported commands return incorrect status from kernel 5.14.0.
+     * Fix a bug that the driver cannot return to last good kernel if the driver does not work in the new kernel.
+
+  v1.22.0 03/17/2022
+     * Thunderbolt support for RS6434 and RS6438.
+     * Fixed the bug that some disks connected to RR3720C could not be recognized during cold boot.
+
+  v1.21.3 03/04/2022
+     * Update Linux background Server address.
+
+  v1.21.2 02/25/2022
+     * Support kernel 5.16.
+
+  v1.21.1 02/08/2022
+     * Save load modified information of RAID 1/5 to speed up rebuild.
+
+  v1.21.0 12/22/2021
+     * Support Quick Rebuild on RAID 1/5 in system.
+
+  v1.20.5 10/14/2021
+     * Support kernel 5.14.
+  
+  v1.20.4 07/19/2021
+     * Support kernel 5.13.
+
+  v1.20.3 07/15/2021
+     * Support PUIS(Power Up In Standby) for some large capacity HDDs.
+
+  v1.20.2 02/20/2021
+     * Fix a bug that failed to create RAID when disks need to be refreshed on linux kernel 5.10.0.
+     * Fix a bug that when repeatedly install and uninstall, 'pcie_aspm=off' may appear repeatedly.
+
+  v1.20.1 01/27/2021
+     * Fixup compilation issue on linux kernel 5.10.0.
+       
+  v1.20.0 01/20/2021
+     * Fixup compilation issue on linux kernel 5.8.0.
+
+  v1.19.9 08/20/2020
+     * Support background update driver.
+	 
+  v1.19.8 06/23/2020
+     * Support RR3740C.
+	 
+  v1.19.8 06/23/2020
+     * Support RR3740C.
+	 
+  v1.19.7 06/18/2020
+     * Support CentOS 8.1.
+	 
+  v1.19.6 01/17/2020
+     * Fix a bug that failed to format RAID5.
+
+  v1.19.0 04/04/2019
+     * Support kernel 5.0.
+
+  v1.18.0 11/20/2018
+     * Support RR3720/3722/3742/3744/820/822/842/844/2820/2822/2842/2844.
+     * Disable interrupt coalescing. 
+     * Add hptuninrr3740a to to uninstall driver for RocketRAID controller.
+
+  v1.17.0 06/15/2018
+     * Thunderbolt support for RS6628T.
+     * Support kernel 4.17.
+
+  v1.16.0 02/28/2018
+     * Support kernel 4.15.
+
+  v1.15.0 10/16/2017
+     * Fix a bug that returns the same VPD inquiry page.
+     * Support RR2840A.
+
+  v1.14.0 11/11/2016
+     * Fix a raid6 IO checksum error under degraded condition.
+
+  v1.13.0 10/31/2016
+     * Support kernel 4.8.
+
+  v1.12.1 09/30/2016
+     * Support kernel 4.7.
+     
+  v1.12.0 08/11/2016
+     * Support RR840A.
+	 
+  v1.11.0 07/27/2016
+     * First Linux RAID driver release.
+
+        
+#############################################################################
+6. Technical support and service
+#############################################################################
+
+  If you have questions about installing or using your HighPoint product,
+  check the user's guide or readme file first, and you will find answers to
+  most of your questions here. If you need further assistance, please
+  contact us. We offer the following support and information services:
+
+  1)  The HighPoint Web Site provides information on software upgrades,
+      answers to common questions, and other topics. The Web Site is
+      available from Internet 24 hours a day, 7 days a week, at
+      http://www.highpoint-tech.com.
+
+  2)  For technical support, send e-mail to support@highpoint-tech.com and
+      attach file /var/log/hptdrv.log if possible.
+
+  NOTE: Before you send an e-mail, please visit our Web Site
+        (http://www.highpoint-tech.com) to check if there is a new or 
+        updated device driver for your system.
+

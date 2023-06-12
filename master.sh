@@ -30,6 +30,7 @@ _branding
 ###Drivers requiring reboot
 _hp7505
 _hp640L
+_hp3720c
 
 ###Display Drivers
 _nvidia
