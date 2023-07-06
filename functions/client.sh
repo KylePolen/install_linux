@@ -4,7 +4,7 @@ clear
 
 _viz_check() {
 	if grep -q '"Vizgen, Inc."' ~/install/orderdata/orderdata; then
-		if grep -q 'MA - Turn Key Solution' ~/install/orderdata/orderdata; then
+		if grep -q 'MA - TurnKey Solution' ~/install/orderdata/orderdata; then
 			if [ ! -f ~/install/scripts/vizgen.sh ]; then
 				_viz_assets
 			fi
