@@ -34,7 +34,7 @@ _hp3720c
 
 ###Display Drivers
 _nvidia
-_amdigpu
+#_amdigpu
 _aspeed
 
 ###Courtesy Software
