@@ -11,6 +11,7 @@ rm ~/.bash_history >/dev/null 2>&1
 rm -rf ~/.local/share/Trash/info/* >/dev/null 2>&1
 rm -rf ~/.local/share/Trash/files/* >/dev/null 2>&1
 rm -rf ~/Downloads/* >/dev/null 2>&1
+rm -rf ~/Desktop/* >/dev/null 2>&1
 rm ~/Desktop/install >/dev/null 2>&1
 sudo chown -R $USER ~/install
 rm -rf ~/install >/dev/null 2>&1
