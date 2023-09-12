@@ -33,8 +33,8 @@ _hp640L
 _hp3720c
 
 ###Display Drivers
-#_nvidia
-#_amdigpu
+_nvidia
+_amdigpu
 _aspeed
 
 ###Courtesy Software
