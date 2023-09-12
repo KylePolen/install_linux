@@ -55,6 +55,9 @@ _update_server
 #Clients
 _viz_check
 
+#Benchmarks
+_ai_assets
+
 ###GRUB and network fixes
 _mobofix
 _toyota
