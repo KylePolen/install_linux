@@ -22,9 +22,9 @@ _ai_assets() {
 			sudo rsync -ah --progress /mnt/ntserver/TGI-bench-0.2.tar /home/$USER/install/assets/ai/TGI-bench-0.2.tar
 			clear
 			sudo apt install -y unzip
-			7z x /home/$USER/install/assets/ai/TGI-bench-0.2.tar -o/home/$USER/install/assets/ai
-			chmod a+x /home/$USER/install/assets/ai/TGI-bench/*.sh
-			ln -s /home/$USER/install/assets/ai/TGI-bench /home/$USER/Desktop/TGI-bench
+			7z x /home/$USER/install/assets/ai/TGI-bench-0.2.tar -o/home/$USER/install/assets/ai/TGI-bench-0.2
+			#chmod a+x /home/$USER/install/assets/ai/TGI-bench/*.sh NVIDIA
+			ln -s /home/$USER/install/assets/ai/TGI-bench-0.2/TGI-bench /home/$USER/Desktop/TGI-bench
 			sudo umount /mnt/ntserver
 			sudo rm -R /mnt/ntserver
 		else
