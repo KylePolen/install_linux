@@ -21,14 +21,10 @@ _ai_assets() {
 			echo
 			sudo rsync -ah --progress /mnt/ntserver/TGI-bench-0.2.tar /home/$USER/install/assets/ai/TGI-bench-0.2.tar
 			clear
-			sudo chown -R $USER /home/$USER/install/assets/ai
 			sudo apt install -y unzip
 			7z x /home/$USER/install/assets/ai/TGI-bench-0.2.tar -o/home/$USER/install/assets/ai
-			chmod a+x /home/$USER/install/assets/ai/*.sh
-			chmod a+x /home/$USER/install/assets/ai/TGI-bench-0.2/*.sh
-			chmod a+x /home/$USER/install/assets/ai/TGI-bench-0.2/TGI-bench/*.sh
-			sudo chown -R $USER /home/$USER/install/assets/ai
-			ln -s /home/$USER/install/assets/ai/TGI-bench-0.2/TGI-bench/RUN-ME-tgi-bench.sh /home/$USER/Desktop/RUN-ME-tgi-bench.sh
+			chmod a+x /home/$USER/install/assets/ai/TGI-bench/*.sh
+			ln -s /home/$USER/install/assets/ai/TGI-bench /home/$USER/Desktop/TGI-bench
 			sudo umount /mnt/ntserver
 			sudo rm -R /mnt/ntserver
 		else
