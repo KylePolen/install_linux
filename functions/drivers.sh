@@ -5,7 +5,6 @@ clear
 #NVIDIA
 _nvidia() {
 	if lspci -v | grep -q NVIDIA; then
-		sudo apt remove -y nvidia*
 		sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
 		sudo apt update
 		if [ "$ostype" == "Desktop" ]; then
