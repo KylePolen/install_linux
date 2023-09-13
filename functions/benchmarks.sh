@@ -25,8 +25,8 @@ _ai_assets() {
 			clear
 			echo "Extracting AI Benchmark..."
 			echo
-			pv /home/$USER/install/assets/ai/TGI-bench-0.2.tar | tar -x
-			ln -s /home/$USER/install/assets/ai/TGI-bench-0.2/TGI-bench /home/$USER/Desktop/TGI-bench
+			pv /home/$USER/install/assets/ai/TGI-bench-0.2.tar | tar -xC /home/$USER/install/assets/ai
+			ln -s /home/$USER/install/assets/ai/TGI-bench /home/$USER/Desktop/TGI-bench
 			sudo umount /mnt/ntserver
 			sudo rm -R /mnt/ntserver
 		else
