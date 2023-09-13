@@ -19,12 +19,13 @@ _ai_assets() {
 			clear
 			echo "Copying AI Benchmark..."
 			echo
-			sudo rsync -ah --progress /mnt/ntserver/TGI-bench-0.2.tar /home/$USER/install/assets/ai/TGI-bench-0.2.tar
+			rsync -ah --progress /mnt/ntserver/TGI-bench-0.2.tar /home/$USER/install/assets/ai/TGI-bench-0.2.tar
 			clear
-			#sudo apt install -y unzip
-			tar xf /home/$USER/install/assets/ai/TGI-bench-0.2.tar -C /home/$USER/install/assets/ai/TGI-bench-0.2
-			#7z x /home/$USER/install/assets/ai/TGI-bench-0.2.tar -o/home/$USER/install/assets/ai/TGI-bench-0.2
-			#chmod a+x /home/$USER/install/assets/ai/TGI-bench/*.sh
+			sudo apt install -y pv
+			clear
+			echo "Extracting AI Benchmark..."
+			echo
+			pv /home/$USER/install/assets/ai/TGI-bench-0.2.tar | tar -x
 			ln -s /home/$USER/install/assets/ai/TGI-bench-0.2/TGI-bench /home/$USER/Desktop/TGI-bench
 			sudo umount /mnt/ntserver
 			sudo rm -R /mnt/ntserver
