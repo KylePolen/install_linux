@@ -10,7 +10,7 @@ _nvidia() {
 		if [ "$ostype" == "Desktop" ]; then
 			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-535
 		else
-			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-535 --no-install-recommends
+			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-525 --no-install-recommends
 		fi	
 	fi
 }
