@@ -29,6 +29,7 @@ _ai_assets() {
 			pv /home/$USER/install/assets/ai/TGI-bench-small.tar | tar -xC /home/$USER/install/assets/ai
 			pv /home/$USER/install/assets/ai/TGI-bench-0.2.tar | tar -xC /home/$USER/install/assets/ai
 			ln -s /home/$USER/install/assets/ai/TGI-bench /home/$USER/Desktop/TGI-bench
+			ln -s /home/$USER/install/assets/ai/TGI-bench-small /home/$USER/Desktop/TGI-bench-small
 			sudo umount /mnt/ntserver
 			sudo rm -R /mnt/ntserver
 		else
