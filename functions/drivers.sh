@@ -8,7 +8,7 @@ _nvidia() {
 		sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
 		sudo apt update
 		if [ "$ostype" == "Desktop" ]; then
-			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-535
+			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-525
 		else
 			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-525 --no-install-recommends
 		fi	
