@@ -15,6 +15,15 @@ _ai_assets() {
 		sudo mkdir -p /mnt/ntserver
 		sudo mount -t cifs //172.17.0.10/labs/Don -o username=$username,password=$password /mnt/ntserver
 		if [ -f /mnt/ntserver/TGI-bench-0.3.tar ]; then
+			DIST=$(
+				. /etc/os-release
+				echo $ID$VERSION_ID
+			)
+			curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey |  apt-key add -
+			curl -s -L https://nvidia.github.io/libnvidia-container/$DIST/libnvidia-container.list |
+			tee /etc/apt/sources.list.d/libnvidia-container.list
+			apt-get update
+			apt-get install --yes libnvidia-container-tools
 			mkdir -p /home/$USER/install/assets/ai
 			clear
 			echo "Copying AI Benchmark..."
