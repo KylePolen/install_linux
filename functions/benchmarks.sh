@@ -15,13 +15,12 @@ _ai_assets() {
 		sudo mkdir -p /mnt/ntserver
 		sudo mount -t cifs //172.17.0.10/labs/Don -o username=$username,password=$password /mnt/ntserver
 		if [ -f /mnt/ntserver/TGI-bench-0.3.tar ]; then
-			curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list \
-  && \
-    sudo apt-get update
-sudo apt-get install -y nvidia-container-toolkit	
+			curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg &&
+				curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list |
+				sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' |
+					sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list &&
+				sudo apt-get update
+			sudo apt-get install -y nvidia-container-toolkit
 			mkdir -p /home/$USER/install/assets/ai
 			clear
 			echo "Copying AI Benchmark..."
@@ -42,20 +41,20 @@ sudo apt-get install -y nvidia-container-toolkit
 				ln -s /home/$USER/install/assets/ai/TGI-bench /home/$USER/Desktop/TGI-bench
 				ln -s /home/$USER/install/assets/ai/TGI-bench-small /home/$USER/Desktop/TGI-bench-small
 			fi
-			echo '#!/bin/bash' >> /home/$USER/install/AI_RUN.sh
-			echo 'clear' >> /home/$USER/install/AI_RUN.sh
-			echo 'cd /home/$USER/install/assets/ai/TGI-bench' >> /home/$USER/install/AI_RUN.sh
-			echo './RUN-ME-4x6000Ada 30' >> /home/$USER/install/AI_RUN.sh
-			echo 'clear' >> /home/$USER/install/AI_RUN.sh
-			echo 'sudo mkdir -p /mnt/ntserver' >> /home/$USER/install/AI_RUN.sh
-			echo "sudo mount -t cifs //172.17.0.10/scratch/AI -o username=$username,password=$password /mnt/ntserver" >> /home/$USER/install/AI_RUN.sh
-			echo 'until [ -f /home/$USER/install/assets/ai/TGI-bench/summary.out ]' >> /home/$USER/install/AI_RUN.sh
-			echo 'do' >> /home/$USER/install/AI_RUN.sh
-			echo '	sleep 5' >> /home/$USER/install/AI_RUN.sh
-			echo 'done' >> /home/$USER/install/AI_RUN.sh
-			echo "sudo cp -f /home/$USER/install/assets/ai/TGI-bench/summary.out /mnt/ntserver/$(hostname).txt" >> /home/$USER/install/AI_RUN.sh
-			echo 'sudo umount /mnt/ntserver' >> /home/$USER/install/AI_RUN.sh
-			echo 'sudo rm -R /mnt/ntserver' >> /home/$USER/install/AI_RUN.sh
+			echo '#!/bin/bash' >>/home/$USER/install/AI_RUN.sh
+			echo 'clear' >>/home/$USER/install/AI_RUN.sh
+			echo 'cd /home/$USER/install/assets/ai/TGI-bench' >>/home/$USER/install/AI_RUN.sh
+			echo './RUN-ME-4x6000Ada 30' >>/home/$USER/install/AI_RUN.sh
+			echo 'clear' >>/home/$USER/install/AI_RUN.sh
+			echo 'sudo mkdir -p /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
+			echo "sudo mount -t cifs //172.17.0.10/scratch/AI -o username=$username,password=$password /mnt/ntserver" >>/home/$USER/install/AI_RUN.sh
+			echo 'until [ -f /home/$USER/install/assets/ai/TGI-bench/summary.out ]' >>/home/$USER/install/AI_RUN.sh
+			echo 'do' >>/home/$USER/install/AI_RUN.sh
+			echo '	sleep 5' >>/home/$USER/install/AI_RUN.sh
+			echo 'done' >>/home/$USER/install/AI_RUN.sh
+			echo "sudo cp -f /home/$USER/install/assets/ai/TGI-bench/summary.out /mnt/ntserver/$(hostname).txt" >>/home/$USER/install/AI_RUN.sh
+			echo 'sudo umount /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
+			echo 'sudo rm -R /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 			sudo chmod +x /home/$USER/install/AI_RUN.sh
 			sudo umount /mnt/ntserver
 			sudo rm -R /mnt/ntserver
