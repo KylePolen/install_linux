@@ -21,6 +21,7 @@ _ai_assets() {
 					sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list &&
 				sudo apt-get update
 			sudo apt-get install -y nvidia-container-toolkit
+			sudo apt-get install -y unzip
 			mkdir -p /home/$USER/install/assets/ai
 			clear
 			echo "Copying AI Benchmark..."
