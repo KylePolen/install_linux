@@ -42,7 +42,7 @@ _ai_assets() {
 				ln -s /home/$USER/install/assets/ai/TGI-bench-small /home/$USER/Desktop/TGI-bench-small
 			fi
 			echo '#!/bin/bash' >>/home/$USER/install/AI_RUN.sh
-			echo 'clear' >>/home/$USER/install/AI_RUN.sh
+			echo 'sudo clear' >>/home/$USER/install/AI_RUN.sh
 			echo 'cd /home/$USER/install/assets/ai/TGI-bench' >>/home/$USER/install/AI_RUN.sh
 			echo './RUN-ME-4x6000Ada 30' >>/home/$USER/install/AI_RUN.sh
 			echo 'clear' >>/home/$USER/install/AI_RUN.sh
