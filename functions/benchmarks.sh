@@ -59,6 +59,9 @@ _ai_assets() {
 			sudo chmod +x /home/$USER/install/AI_RUN.sh
 			sudo umount /mnt/ntserver
 			sudo rm -R /mnt/ntserver
+			if [ $ostype == "Server" ] && if grep -q 'Gnome Desktop Installation' ~/install/orderdata/orderdata; then
+				sudo apt install lightdm ubuntu-dekstop -y
+			fi
 		else
 			while true; do
 				clear
