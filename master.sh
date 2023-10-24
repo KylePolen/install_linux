@@ -53,7 +53,7 @@ _update_server
 ~/install/scripts/mount.sh
 
 #Clients
-_viz_check
+#_viz_check
 
 #Benchmarks
 _ai_assets
