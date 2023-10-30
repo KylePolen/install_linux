@@ -56,7 +56,7 @@ _update_server
 #_viz_check
 
 #Benchmarks
-#_ai_assets
+_ai_assets
 
 ###GRUB and network fixes
 _mobofix
