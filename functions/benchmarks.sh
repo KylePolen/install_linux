@@ -61,6 +61,8 @@ _ai_assets_full() {
 					if [ $ostype == "Server" ]; then
 						if grep -q 'Gnome Desktop Installation' ~/install/orderdata/orderdata; then
 							sudo apt install lightdm ubuntu-dekstop -y
+							ostype="Desktop"
+							_branding
 						fi
 					fi
 				else
@@ -145,6 +147,8 @@ _ai_assets_small() {
 					if [ $ostype == "Server" ]; then
 						if grep -q 'Gnome Desktop Installation' ~/install/orderdata/orderdata; then
 							sudo apt install lightdm ubuntu-dekstop -y
+							ostype="Desktop"
+							_branding
 						fi
 					fi
 				else
