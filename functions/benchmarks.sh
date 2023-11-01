@@ -30,6 +30,8 @@ _ai_assets_full() {
 					echo
 					rsync -ah --progress /mnt/ntserver/TGI-bench-0.3.tar /home/$USER/install/assets/ai/TGI-bench-0.3.tar
 					wget -O ~/install/assets/ai/TGI-bench-main.zip https://github.com/dbkinghorn/TGI-bench/archive/refs/heads/main.zip
+					sudo umount /mnt/ntserver
+					sudo rm -R /mnt/ntserver
 					clear
 					sudo apt install -y pv
 					clear
@@ -56,8 +58,6 @@ _ai_assets_full() {
 					echo 'sudo umount /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo rm -R /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					sudo chmod +x /home/$USER/install/AI_RUN.sh
-					sudo umount /mnt/ntserver
-					sudo rm -R /mnt/ntserver
 					if [ $ostype == "Server" ]; then
 						if grep -q 'Gnome Desktop Installation' ~/install/orderdata/orderdata; then
 							sudo apt install lightdm ubuntu-dekstop -y
@@ -118,6 +118,8 @@ _ai_assets_small() {
 					echo "Copying AI Benchmark..."
 					echo
 					rsync -ah --progress /mnt/ntserver/TGI-bench-small-0.3.tar /home/$USER/install/assets/ai/TGI-bench-small-0.3.tar
+					sudo umount /mnt/ntserver
+					sudo rm -R /mnt/ntserver
 					clear
 					sudo apt install -y pv
 					clear
@@ -142,8 +144,6 @@ _ai_assets_small() {
 					echo 'sudo umount /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo rm -R /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					sudo chmod +x /home/$USER/install/AI_RUN.sh
-					sudo umount /mnt/ntserver
-					sudo rm -R /mnt/ntserver
 					if [ $ostype == "Server" ]; then
 						if grep -q 'Gnome Desktop Installation' ~/install/orderdata/orderdata; then
 							sudo apt install lightdm ubuntu-dekstop -y
