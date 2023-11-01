@@ -115,13 +115,13 @@ _ai_assets_small() {
 					clear
 					echo "Copying AI Benchmark..."
 					echo
-					rsync -ah --progress /mnt/ntserver/TGI-bench-small.tar /home/$USER/install/assets/ai/TGI-bench-small.tar
+					rsync -ah --progress /mnt/ntserver/TGI-bench-small-0.3.tar /home/$USER/install/assets/ai/TGI-bench-small-0.3.tar
 					clear
 					sudo apt install -y pv
 					clear
 					echo "Extracting AI Benchmark..."
 					echo
-					pv /home/$USER/install/assets/ai/TGI-bench-small.tar | tar -xC /home/$USER/install/assets/ai
+					pv /home/$USER/install/assets/ai/TGI-bench-small-0.3.tar | tar -xC /home/$USER/install/assets/ai
 					if [ "$ostype" == "Desktop" ]; then
 						ln -s /home/$USER/install/assets/ai/TGI-bench-small /home/$USER/Desktop/TGI-bench-small
 					fi
