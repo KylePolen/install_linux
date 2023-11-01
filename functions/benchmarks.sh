@@ -48,12 +48,12 @@ _ai_assets_full() {
 					echo 'cd /home/$USER/install/assets/ai/TGI-bench' >>/home/$USER/install/AI_RUN.sh
 					echo './RUN-ME-4x6000Ada 30' >>/home/$USER/install/AI_RUN.sh
 					echo 'clear' >>/home/$USER/install/AI_RUN.sh
-					echo 'sudo mkdir -p /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
-					echo "sudo mount -t cifs //172.17.0.10/scratch/AI -o username=$username,password=$password /mnt/ntserver" >>/home/$USER/install/AI_RUN.sh
 					echo 'until [ -f /home/$USER/install/assets/ai/TGI-bench/summary.out ]' >>/home/$USER/install/AI_RUN.sh
 					echo 'do' >>/home/$USER/install/AI_RUN.sh
 					echo '	sleep 5' >>/home/$USER/install/AI_RUN.sh
 					echo 'done' >>/home/$USER/install/AI_RUN.sh
+					echo 'sudo mkdir -p /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
+					echo "sudo mount -t cifs //172.17.0.10/scratch/AI -o username=$username,password=$password /mnt/ntserver" >>/home/$USER/install/AI_RUN.sh
 					echo "sudo cp -f /home/$USER/install/assets/ai/TGI-bench/summary.out /mnt/ntserver/$(hostname).txt" >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo umount /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo rm -R /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
@@ -134,12 +134,12 @@ _ai_assets_small() {
 					echo 'cd /home/$USER/install/assets/ai/TGI-bench-small' >>/home/$USER/install/AI_RUN.sh
 					echo './RUN-ME-1x16GB-GPU 30' >>/home/$USER/install/AI_RUN.sh
 					echo 'clear' >>/home/$USER/install/AI_RUN.sh
-					echo 'sudo mkdir -p /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
-					echo "sudo mount -t cifs //172.17.0.10/scratch/AI -o username=$username,password=$password /mnt/ntserver" >>/home/$USER/install/AI_RUN.sh
 					echo 'until [ -f /home/$USER/install/assets/ai/TGI-bench-small/summary.out ]' >>/home/$USER/install/AI_RUN.sh
 					echo 'do' >>/home/$USER/install/AI_RUN.sh
 					echo '	sleep 5' >>/home/$USER/install/AI_RUN.sh
 					echo 'done' >>/home/$USER/install/AI_RUN.sh
+					echo 'sudo mkdir -p /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
+					echo "sudo mount -t cifs //172.17.0.10/scratch/AI -o username=$username,password=$password /mnt/ntserver" >>/home/$USER/install/AI_RUN.sh
 					echo "sudo cp -f /home/$USER/install/assets/ai/TGI-bench-small/summary.out /mnt/ntserver/$(hostname).txt" >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo umount /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo rm -R /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
