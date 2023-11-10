@@ -5,7 +5,7 @@ scriptname="benchmarks.sh"
 _ai_assets_full() {
 	if grep -q '"comments": "Accelerator"' ~/install/orderdata/orderdata; then
 		if grep -q 'Intel Xeon W790 5U' ~/install/orderdata/orderdata; then
-			if grep -q '"ai server"' ~/install/orderdata/orderdata; then
+			if grep -q '"ai server"\|"machine learning"' ~/install/orderdata/orderdata; then
 				clear
 				echo 'AI platform detected. Credentials required to continue...'
 				echo 'Please enter the username for the NAS'
