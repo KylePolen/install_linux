@@ -29,7 +29,7 @@ _ai_assets_full() {
 					echo "Copying AI Benchmark..."
 					echo
 					rsync -ah --progress /mnt/ntserver/TGI-bench-0.3.tar /home/$USER/install/assets/ai/TGI-bench-0.3.tar
-					wget -O ~/install/assets/ai/TGI-bench-main.zip https://github.com/dbkinghorn/TGI-bench/archive/refs/heads/main.zip
+					#wget -O ~/install/assets/ai/TGI-bench-main.zip https://github.com/dbkinghorn/TGI-bench/archive/refs/heads/main.zip
 					sudo umount /mnt/ntserver
 					sudo rm -R /mnt/ntserver
 					clear
@@ -38,8 +38,8 @@ _ai_assets_full() {
 					echo "Extracting AI Benchmark..."
 					echo
 					pv /home/$USER/install/assets/ai/TGI-bench-0.3.tar | tar -xC /home/$USER/install/assets/ai
-					unzip -o /home/$USER/install/assets/ai/TGI-bench-main.zip -d /home/$USER/install/assets/ai
-					cp -R -f /home/$USER/install/assets/ai/TGI-bench-main/* -t /home/$USER/install/assets/ai/TGI-bench
+					#unzip -o /home/$USER/install/assets/ai/TGI-bench-main.zip -d /home/$USER/install/assets/ai
+					#cp -R -f /home/$USER/install/assets/ai/TGI-bench-main/* -t /home/$USER/install/assets/ai/TGI-bench
 					if [ "$ostype" == "Desktop" ]; then
 						ln -s /home/$USER/install/assets/ai/TGI-bench /home/$USER/Desktop/TGI-bench
 					fi
@@ -48,13 +48,13 @@ _ai_assets_full() {
 					echo 'cd /home/$USER/install/assets/ai/TGI-bench' >>/home/$USER/install/AI_RUN.sh
 					echo './RUN-ME-4x6000Ada 30' >>/home/$USER/install/AI_RUN.sh
 					echo 'clear' >>/home/$USER/install/AI_RUN.sh
-					echo 'until [ -f /home/$USER/install/assets/ai/TGI-bench/summary.out ]' >>/home/$USER/install/AI_RUN.sh
+					echo 'until [ -f /home/$USER/install/assets/ai/TGI-bench/summary1d.out ]' >>/home/$USER/install/AI_RUN.sh
 					echo 'do' >>/home/$USER/install/AI_RUN.sh
 					echo '	sleep 5' >>/home/$USER/install/AI_RUN.sh
 					echo 'done' >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo mkdir -p /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					echo "sudo mount -t cifs //172.17.0.10/scratch/AI -o username=$username,password=$password /mnt/ntserver" >>/home/$USER/install/AI_RUN.sh
-					echo "sudo cp -f /home/$USER/install/assets/ai/TGI-bench/summary.out /mnt/ntserver/$(hostname).txt" >>/home/$USER/install/AI_RUN.sh
+					echo "sudo cp -f /home/$USER/install/assets/ai/TGI-bench/summary1d.out /mnt/ntserver/$(hostname).txt" >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo umount /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo rm -R /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					sudo chmod +x /home/$USER/install/AI_RUN.sh
@@ -134,13 +134,13 @@ _ai_assets_small() {
 					echo 'cd /home/$USER/install/assets/ai/TGI-bench-small' >>/home/$USER/install/AI_RUN.sh
 					echo './RUN-ME-1x16GB-GPU 30' >>/home/$USER/install/AI_RUN.sh
 					echo 'clear' >>/home/$USER/install/AI_RUN.sh
-					echo 'until [ -f /home/$USER/install/assets/ai/TGI-bench-small/summary.out ]' >>/home/$USER/install/AI_RUN.sh
+					echo 'until [ -f /home/$USER/install/assets/ai/TGI-bench-small/summary1d.out ]' >>/home/$USER/install/AI_RUN.sh
 					echo 'do' >>/home/$USER/install/AI_RUN.sh
 					echo '	sleep 5' >>/home/$USER/install/AI_RUN.sh
 					echo 'done' >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo mkdir -p /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					echo "sudo mount -t cifs //172.17.0.10/scratch/AI -o username=$username,password=$password /mnt/ntserver" >>/home/$USER/install/AI_RUN.sh
-					echo "sudo cp -f /home/$USER/install/assets/ai/TGI-bench-small/summary.out /mnt/ntserver/$(hostname).txt" >>/home/$USER/install/AI_RUN.sh
+					echo "sudo cp -f /home/$USER/install/assets/ai/TGI-bench-small/summary1d.out /mnt/ntserver/$(hostname).txt" >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo umount /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					echo 'sudo rm -R /mnt/ntserver' >>/home/$USER/install/AI_RUN.sh
 					sudo chmod +x /home/$USER/install/AI_RUN.sh
@@ -161,7 +161,7 @@ _ai_assets_small() {
 							clear
 							sudo umount /mnt/ntserver
 							sudo rm -R /mnt/ntserver
-							_ai_assets
+							_ai_assets_small
 							break
 							;;
 						[Nn]*)
