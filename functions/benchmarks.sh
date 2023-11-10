@@ -3,7 +3,7 @@ scriptname="benchmarks.sh"
 
 ###AI Benchmarks
 _ai_assets_full() {
-	if grep -q '"comments": "Accelerator"' ~/install/orderdata/orderdata; then
+	if [ "${#GPUarray[@]}" -ge "4" ]; then
 		if grep -q 'Intel Xeon W790 5U' ~/install/orderdata/orderdata; then
 			if grep -q '"ai server"\|"machine learning"' ~/install/orderdata/orderdata; then
 				clear
@@ -29,7 +29,7 @@ _ai_assets_full() {
 					echo "Copying AI Benchmark..."
 					echo
 					rsync -ah --progress /mnt/ntserver/TGI-bench-0.3.tar /home/$USER/install/assets/ai/TGI-bench-0.3.tar
-					#wget -O ~/install/assets/ai/TGI-bench-main.zip https://github.com/dbkinghorn/TGI-bench/archive/refs/heads/main.zip
+					wget -O ~/install/assets/ai/TGI-bench-main.zip https://github.com/dbkinghorn/TGI-bench/archive/refs/heads/main.zip
 					sudo umount /mnt/ntserver
 					sudo rm -R /mnt/ntserver
 					clear
@@ -38,8 +38,8 @@ _ai_assets_full() {
 					echo "Extracting AI Benchmark..."
 					echo
 					pv /home/$USER/install/assets/ai/TGI-bench-0.3.tar | tar -xC /home/$USER/install/assets/ai
-					#unzip -o /home/$USER/install/assets/ai/TGI-bench-main.zip -d /home/$USER/install/assets/ai
-					#cp -R -f /home/$USER/install/assets/ai/TGI-bench-main/* -t /home/$USER/install/assets/ai/TGI-bench
+					unzip -o /home/$USER/install/assets/ai/TGI-bench-main.zip -d /home/$USER/install/assets/ai
+					cp -R -f /home/$USER/install/assets/ai/TGI-bench-main/* -t /home/$USER/install/assets/ai/TGI-bench
 					if [ "$ostype" == "Desktop" ]; then
 						ln -s /home/$USER/install/assets/ai/TGI-bench /home/$USER/Desktop/TGI-bench
 					fi
@@ -92,7 +92,7 @@ _ai_assets_full() {
 }
 
 _ai_assets_small() {
-	if ! grep -q '"comments": "Accelerator"' ~/install/orderdata/orderdata; then
+	if [ "${#GPUarray[@]}" -lt "4" ]; then
 		if grep -q 'Intel Xeon W790 5U' ~/install/orderdata/orderdata; then
 			if grep -q '"ai server"' ~/install/orderdata/orderdata; then
 				clear

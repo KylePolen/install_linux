@@ -26,6 +26,10 @@ _hostdata() {
 	motherboard=$(sudo dmidecode -t 2 | grep -i 'Product Name: ') && motherboard=${motherboard:15}
 }
 
+###Count GPUs
+GPUcount="$(lspci | awk '$2 == "VGA" { print $2 }')"
+GPUarray=($GPUcount)
+
 ###Change ownership
 _permissions() {
 	if [ ! -f /home/$USER/install/orderdata/orderdata ]; then
