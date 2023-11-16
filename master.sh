@@ -62,7 +62,7 @@ _ai_assets_full
 ###GRUB and network fixes
 _mobofix
 _toyota
-_netman2
+_netman
 _grubfix
 
 #Stop autorun
