@@ -71,9 +71,34 @@ EOF'
 	fi	
 }
 
+#Install, configure and enable Network Manager
+_netman2() {
+	if [ $ostype == "Server" ]; then
+		sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
+		sleep 2
+		sudo touch /etc/cloud/cloud-init.disabled
+		sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
+network:
+  ethernets:
+    eno2:
+      dhcp4: true
+	  optional: true
+    eno3:
+      dhcp4: true
+      optional: true
+	enx1a2ac6e622b5:
+	  dhcp4: true
+      optional: true	
+  version: 2
+EOF'
+		sudo netplan generate && sudo netplan apply
+		sleep 2
+	fi	
+}
+
 ###Display GRUB
 _grubfix() {
-	sudo sed -i 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=3/g' /etc/default/grub
+	sudo sed -i 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/g' /etc/default/grub
 	sudo sed -i 's/GRUB_TIMEOUT_STYLE=hidden/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub
 	sudo update-grub
 }
