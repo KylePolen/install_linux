@@ -68,6 +68,12 @@ network:
 EOF'
 		sudo netplan generate && sudo netplan apply
 		sleep 2
-	fi
-	
+	fi	
+}
+
+###Display GRUB
+_grubfix() {
+	sudo sed -i 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=3/g' /etc/default/grub
+	sudo sed -i 's/GRUB_TIMEOUT_STYLE=hidden/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub
+	sudo update-grub
 }
