@@ -5,6 +5,16 @@ clear
 ###Motherboard Fixes
 #Audio drivers and GRUB fixes
 _mobofix() {
+	if [ "$motherboard" == "MS73-HB0-000" ]; then
+		if lspci -v | grep -q ASPEED; then
+			if [ $ostype == "Desktop" ]; then
+				sudo sed -i 's/splash"/splash nomodeset"/' /etc/default/grub
+			fi
+			if [ $ostype == "Server" ]; then
+				sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="nomodeset"/' /etc/default/grub
+			fi
+		fi
+	fi	
 	if [ "$motherboard" == "Pro WS WRX80E-SAGE SE WIFI" ]; then
 		if [ $ostype == "Desktop" ]; then
 			sudo cp ~/install/assets/fixes/source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
@@ -56,7 +66,7 @@ _toyota() {
 
 ###Network Fixes
 #Install, configure and enable Network Manager
-_netman() {
+_netmanold() {
 	if [ $ostype == "Server" ]; then
 		sudo DEBIAN_FRONTEND=nointeractive apt install network-manager net-tools -y
 		sleep 2
@@ -72,7 +82,7 @@ EOF'
 }
 
 #Install, configure and enable Network Manager
-_netmanx() {
+_netman() {
 	if [ $ostype == "Server" ]; then
 		sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
 		nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')"
