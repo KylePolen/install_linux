@@ -91,8 +91,13 @@ _netman() {
 		echo '  ethernets:' | sudo tee -a /etc/netplan/01-netcfg.yaml
 
 		for nicnum in "${nics_array[@]}"; do
+			length=${#nicnum}
 			echo '    '$nicnum | sudo tee -a /etc/netplan/01-netcfg.yaml
-			echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
+			if [ $length -lt 7 ]; then
+				echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
+			else
+				echo '      dhcp4: false' | sudo tee -a /etc/netplan/01-netcfg.yaml
+			fi	
 			echo '      optional: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
 		done
 		sudo netplan generate && sudo netplan apply
