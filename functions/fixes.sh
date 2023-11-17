@@ -93,7 +93,7 @@ _netman() {
 		for nicnum in "${nics_array[@]}"; do
 			length=${#nicnum}
 			echo '    '$nicnum | sudo tee -a /etc/netplan/01-netcfg.yaml
-			if [ $length -lt 7 ]; then
+			if [ $length -le 8 ]; then
 				echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
 			else
 				echo '      dhcp4: false' | sudo tee -a /etc/netplan/01-netcfg.yaml
@@ -106,6 +106,7 @@ _netman() {
 
 ###Display GRUB
 _grubfix() {
+	sudo sed -i 's/GRUB_TIMEOUT=10/GRUB_TIMEOUT=5/g' /etc/default/grub
 	sudo sed -i 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/g' /etc/default/grub
 	sudo sed -i 's/GRUB_TIMEOUT_STYLE=hidden/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub
 	sudo update-grub
