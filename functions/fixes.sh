@@ -16,7 +16,7 @@ _mobofix() {
 		if [ $ostype == "Server" ]; then
 			sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
 		fi
-			
+
 	fi
 	if [ "$motherboard" == "ProArt X670E-CREATOR WIFI" ]; then
 		if [ $ostype == "Desktop" ]; then
@@ -68,35 +68,35 @@ network:
 EOF'
 		sudo netplan generate && sudo netplan apply
 		sleep 2
-	fi	
+	fi
 }
 
 #Install, configure and enable Network Manager
 _netman() {
-if [ $ostype == "Server" ]; then
-	sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
-	nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')":
-	nics_array=($nics)
+	if [ $ostype == "Server" ]; then
+		sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
+		nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')":
+		nics_array=($nics)
 
-	if [ ! -f /etc/cloud/cloud-init.disabled ]; then
-		sudo touch /etc/cloud/cloud-init.disabled
+		if [ ! -f /etc/cloud/cloud-init.disabled ]; then
+			sudo touch /etc/cloud/cloud-init.disabled
+		fi
+		if [ -f /etc/netplan/01-netcfg.yaml ]; then
+			sudo rm /etc/netplan/01-netcfg.yaml
+			sudo touch /etc/netplan/01-netcfg.yaml
+		fi
+
+		echo 'network:' | sudo tee -a /etc/netplan/01-netcfg.yaml
+		echo '  version: 2' | sudo tee -a /etc/netplan/01-netcfg.yaml
+		echo '  ethernets:' | sudo tee -a /etc/netplan/01-netcfg.yaml
+
+		for nicnum in "${nics_array[@]}"; do
+			echo '    '$nicnum | sudo tee -a /etc/netplan/01-netcfg.yaml
+			echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
+			echo '      optional: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
+		done
+		sudo netplan generate && sudo netplan apply
 	fi
-	if [ -f /etc/netplan/01-netcfg.yaml ]; then
-		sudo rm /etc/netplan/01-netcfg.yaml
-		sudo touch /etc/netplan/01-netcfg.yaml
-	fi
-
-	echo 'network:' | sudo tee -a /etc/netplan/01-netcfg.yaml
-	echo '  version: 2' | sudo tee -a /etc/netplan/01-netcfg.yaml
-	echo '  ethernets:' | sudo tee -a /etc/netplan/01-netcfg.yaml
-
-	for nicnum in "${nics_array[@]}"; do
-		echo '    '$nicnum | sudo tee -a /etc/netplan/01-netcfg.yaml
-		echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
-		echo '      optional: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
-	done
-	sudo netplan generate && sudo netplan apply
-fi
 }
 
 ###Display GRUB
