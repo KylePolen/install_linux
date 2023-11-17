@@ -56,7 +56,7 @@ _toyota() {
 
 ###Network Fixes
 #Install, configure and enable Network Manager
-_netman() {
+_netmanold() {
 	if [ $ostype == "Server" ]; then
 		sudo DEBIAN_FRONTEND=nointeractive apt install network-manager net-tools -y
 		sleep 2
@@ -72,28 +72,31 @@ EOF'
 }
 
 #Install, configure and enable Network Manager
-_netman2() {
-	if [ $ostype == "Server" ]; then
-		sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
-		sleep 2
+_netman() {
+if [ $ostype == "Server" ]; then
+	sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
+	nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')":
+	nics_array=($nics)
+
+	if [ ! -f /etc/cloud/cloud-init.disabled ]; then
 		sudo touch /etc/cloud/cloud-init.disabled
-		sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
-network:
-  ethernets:
-    eno2:
-      dhcp4: true
-	  optional: true
-    eno3:
-      dhcp4: true
-      optional: true
-	enx1a2ac6e622b5:
-	  dhcp4: true
-      optional: true	
-  version: 2
-EOF'
-		sudo netplan generate && sudo netplan apply
-		sleep 2
-	fi	
+	fi
+	if [ -f /etc/netplan/01-netcfg.yaml ]; then
+		sudo rm /etc/netplan/01-netcfg.yaml
+		sudo touch /etc/netplan/01-netcfg.yaml
+	fi
+
+	echo 'network:' | sudo tee -a /etc/netplan/01-netcfg.yaml
+	echo '  version: 2' | sudo tee -a /etc/netplan/01-netcfg.yaml
+	echo '  ethernets:' | sudo tee -a /etc/netplan/01-netcfg.yaml
+
+	for nicnum in "${nics_array[@]}"; do
+		echo '    '$nicnum | sudo tee -a /etc/netplan/01-netcfg.yaml
+		echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
+		echo '      optional: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
+	done
+	sudo netplan generate && sudo netplan apply
+fi
 }
 
 ###Display GRUB
