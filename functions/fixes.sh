@@ -56,7 +56,7 @@ _toyota() {
 
 ###Network Fixes
 #Install, configure and enable Network Manager
-_netmanold() {
+_netman() {
 	if [ $ostype == "Server" ]; then
 		sudo DEBIAN_FRONTEND=nointeractive apt install network-manager net-tools -y
 		sleep 2
@@ -72,7 +72,7 @@ EOF'
 }
 
 #Install, configure and enable Network Manager
-_netman() {
+_netmanx() {
 	if [ $ostype == "Server" ]; then
 		sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
 		nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')":
