@@ -75,7 +75,7 @@ EOF'
 _netmanx() {
 	if [ $ostype == "Server" ]; then
 		sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
-		nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')":
+		nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')"
 		nics_array=($nics)
 
 		if [ ! -f /etc/cloud/cloud-init.disabled ]; then
@@ -92,7 +92,7 @@ _netmanx() {
 
 		for nicnum in "${nics_array[@]}"; do
 			length=${#nicnum}
-			echo '    '$nicnum | sudo tee -a /etc/netplan/01-netcfg.yaml
+			echo '    '$nicnum':' | sudo tee -a /etc/netplan/01-netcfg.yaml
 			if [ $length -le 8 ]; then
 				echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
 			else
