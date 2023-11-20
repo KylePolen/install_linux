@@ -63,7 +63,7 @@ _ai_assets_full
 _mobofix
 _toyota
 _netman
-_grubfix
+_grubtime
 
 #Stop autorun
 if [ ! -f ~/install/scripts/vizgen.sh ]; then

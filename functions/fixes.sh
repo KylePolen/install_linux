@@ -115,7 +115,7 @@ _netman() {
 }
 
 ###Display GRUB
-_grubfix() {
+_grubtime() {
 	sudo sed -i 's/GRUB_TIMEOUT=10/GRUB_TIMEOUT=5/g' /etc/default/grub
 	sudo sed -i 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/g' /etc/default/grub
 	sudo sed -i 's/GRUB_TIMEOUT_STYLE=hidden/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub
