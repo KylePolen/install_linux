@@ -111,7 +111,7 @@ _netman() {
 		for nicnum in "${nics_array[@]}"; do
 			length=${#nicnum}
 			echo '    '$nicnum':' | sudo tee -a /etc/netplan/01-netcfg.yaml
-			if [ $length -le 8 ]; then
+			if [ $length -le 10 ]; then
 				echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
 			else
 				echo '      dhcp4: false' | sudo tee -a /etc/netplan/01-netcfg.yaml
