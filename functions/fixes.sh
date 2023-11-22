@@ -2,6 +2,14 @@
 scriptname="fixes.sh"
 clear
 
+###Imaging fixes
+#Host name fix
+_hostfix() {
+	serial=$(sudo dmidecode -t 1 | grep -i 'Serial Number: ') && serial=${serial:15} && serial=${serial,,}
+	sudo hostnamectl set-hostname $serial
+	sudo sed -i "2s/.*/127.0.0.1	${serial}/" /etc/hosts
+}
+
 ###Motherboard Fixes
 #Audio drivers and GRUB fixes
 _mobofix() {
