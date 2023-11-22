@@ -3,7 +3,7 @@ scriptname="viz.sh"
 clear
 
 echo "Resetting machine ID and acquiring unique IP"
-sudo rm /etc/machine-id
+#sudo rm /etc/machine-id
 sudo dbus-uuidgen --ensure=/etc/machine-id
 sudo netplan generate
 sudo netplan apply
