@@ -16,6 +16,16 @@ _viz_check() {
 	fi
 }
 
+_viz_os_check() {
+	if grep -q '"Vizgen, Inc."' ~/install/orderdata/orderdata; then
+		if [ $osversion == "22.04" ]; then
+			clear
+			echo "You've installed Ubuntu 22.04 when Ubuntu 20.04 was expected. Please start over."
+			exit
+		fi	
+	fi
+}
+
 ###Vizgen Turn-Key
 _viz_assets() {
 	clear
