@@ -8,7 +8,9 @@ gsettings set org.gnome.desktop.session idle-delay 180
 gsettings set org.gnome.desktop.screensaver lock-delay 300
 >~/.bash_history
 rm ~/.bash_history >/dev/null 2>&1
-rm ~/viz.sh
+if [ -f ~/viz.sh ]; then
+	rm ~/viz.sh
+fi
 rm -rf ~/.local/share/Trash/info/* >/dev/null 2>&1
 rm -rf ~/.local/share/Trash/files/* >/dev/null 2>&1
 rm -rf ~/Downloads/* >/dev/null 2>&1

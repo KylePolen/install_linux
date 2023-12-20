@@ -4,13 +4,17 @@ clear
 
 #NVIDIA
 _nvidia() {
+	revision="545"
+	if lspci -v | grep -q "GT 710"; then
+		revision="470"
+	fi
 	if lspci -v | grep -q NVIDIA; then
 		sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
 		sudo apt update
 		if [ "$ostype" == "Desktop" ]; then
-			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-545
+			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-$revision
 		else
-			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-545 --no-install-recommends
+			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-$revision --no-install-recommends
 		fi	
 	fi
 }
