@@ -24,7 +24,7 @@ _hostdata
 _permissions
 _orderid
 _orderdata
-_viz_os_heck
+_viz_os_check
 _sleep
 _branding
 
