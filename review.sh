@@ -5,6 +5,15 @@ scriptname="review.sh"
 source ~/install/functions/global.sh
 _os_check
 
+if [ "$ostype" == "Desktop" ]; then
+	ostype="Desktop"
+	gnome-terminal -- firefox
+	sleep 3
+	pkill -2 firefox
+	sleep 2
+	gnome-ternminal -- firefox
+fi
+
 if [ -f ~/install/reviewdata ]; then
 	rm ~/install/reviewdata
 fi
