@@ -23,6 +23,8 @@ _os_check() {
 _hostdata() {
 	host=$(hostname)
 	serial=$(sudo dmidecode -t 1 | grep -i 'Serial Number: ') && serial=${serial:15}
+	dmiid=${serial:6:6}
+	dmilength=${#dmiid}
 	motherboard=$(sudo dmidecode -t 2 | grep -i 'Product Name: ') && motherboard=${motherboard:15}
 }
 
@@ -51,6 +53,8 @@ _orderid() {
 			echo 'Could not extract the orderid from the hostname, please enter order number.' \
 				'If the system is part of a quantity please exclude the system number at the end.' | fold -s
 			echo
+			#if [ $dmilength == 6 ]; then
+			#echo ''
 			read -p "Order number: " orderid
 			echo $orderid | sudo tee -a /home/$USER/install/flags/orderid
 		fi

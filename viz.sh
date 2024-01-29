@@ -2,34 +2,34 @@
 scriptname="viz.sh"
 clear
 
-if [ $ostype == "Server" ]; then
-	sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
-	nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')"
-	nics_array=($nics)
+sudo DEBIAN_FRONTEND=nointeractive apt install net-tools -y
+nics="$(ip --brief address show | awk '$1 != "lo" { print $1 }')"
+nics_array=($nics)
 
-	if [ ! -f /etc/cloud/cloud-init.disabled ]; then
-		sudo touch /etc/cloud/cloud-init.disabled
-	fi
-	if [ -f /etc/netplan/01-netcfg.yaml ]; then
-		sudo rm /etc/netplan/01-netcfg.yaml
-		sudo touch /etc/netplan/01-netcfg.yaml
-	fi
-
-	echo 'network:' | sudo tee -a /etc/netplan/01-netcfg.yaml
-	echo '  version: 2' | sudo tee -a /etc/netplan/01-netcfg.yaml
-	echo '  ethernets:' | sudo tee -a /etc/netplan/01-netcfg.yaml
-
-	for nicnum in "${nics_array[@]}"; do
-		length=${#nicnum}
-		echo '    '$nicnum':' | sudo tee -a /etc/netplan/01-netcfg.yaml
-		if [ $length -le 10 ]; then
-			echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
-		else
-			echo '      dhcp4: false' | sudo tee -a /etc/netplan/01-netcfg.yaml
-		fi	
-		echo '      optional: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
-	done
+if [ ! -f /etc/cloud/cloud-init.disabled ]; then
+	sudo touch /etc/cloud/cloud-init.disabled
 fi
+if [ -f /etc/netplan/01-netcfg.yaml ]; then
+	sudo rm /etc/netplan/01-netcfg.yaml
+	sudo touch /etc/netplan/01-netcfg.yaml
+fi
+
+echo 'network:' | sudo tee -a /etc/netplan/01-netcfg.yaml
+echo '  version: 2' | sudo tee -a /etc/netplan/01-netcfg.yaml
+echo '  ethernets:' | sudo tee -a /etc/netplan/01-netcfg.yaml
+
+for nicnum in "${nics_array[@]}"; do
+	length=${#nicnum}
+	echo '    '$nicnum':' | sudo tee -a /etc/netplan/01-netcfg.yaml
+	if [ $length -le 10 ]; then
+		echo '      dhcp4: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
+	else
+		echo '      dhcp4: false' | sudo tee -a /etc/netplan/01-netcfg.yaml
+	fi	
+	echo '      optional: true' | sudo tee -a /etc/netplan/01-netcfg.yaml
+done
+
+sudo netplan generate && sudo netplan apply
 
 clear
 echo "Resetting machine ID and acquiring unique IP"

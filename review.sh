@@ -8,10 +8,9 @@ _os_check
 if [ "$ostype" == "Desktop" ]; then
 	ostype="Desktop"
 	gnome-terminal -- firefox
-	sleep 3
+	sleep 5
 	pkill -2 firefox
 	sleep 2
-	gnome-ternminal -- firefox
 fi
 
 if [ -f ~/install/reviewdata ]; then

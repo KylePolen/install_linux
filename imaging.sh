@@ -1,5 +1,5 @@
 #!/bin/bash
-scriptname=master.sh
+scriptname=imaging.sh
 clear
 
 ###Source all functions
