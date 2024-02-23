@@ -4,7 +4,7 @@ clear
 
 #NVIDIA
 _nvidia() {
-	revision="535"
+	revision="550"
 	if lspci -v | grep -q "GT 710"; then
 		revision="470"
 	fi
@@ -13,8 +13,8 @@ _nvidia() {
 		sudo apt update
 		if [ "$ostype" == "Desktop" ]; then
 			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-$revision
-		#else
-			#sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-$revision --no-install-recommends
+		else
+			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-525 --no-install-recommends
 		fi	
 	fi
 }
