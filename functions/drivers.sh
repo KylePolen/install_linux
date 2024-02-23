@@ -9,7 +9,7 @@ _nvidia() {
 		revision="470"
 	fi
 	if lspci -v | grep -q NVIDIA; then
-		sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
+		#sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
 		sudo apt update
 		if [ "$ostype" == "Desktop" ]; then
 			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-$revision
