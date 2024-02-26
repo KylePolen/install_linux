@@ -13,7 +13,7 @@ _nvidia() {
 		sudo apt update
 		if [ "$ostype" == "Desktop" ]; then
 			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-$revision
-		#else
+		else
 			sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-$revision --no-install-recommends
 		fi	
 	fi
