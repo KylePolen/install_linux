@@ -112,8 +112,11 @@ _branding() {
 		sleep 5
 		pkill -f firefox
 		wait
-		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
-		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
-		sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
+		#sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
+		#sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
+		#sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
+		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
+		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
+		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
 	fi
 }
