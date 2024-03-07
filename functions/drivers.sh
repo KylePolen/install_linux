@@ -30,7 +30,7 @@ _amdigpu() {
 #ASPEED
 _aspeed() {
 	if lspci -v | grep -q ASPEED; then
-		sudo dpkg -i ~/assets/drivers/ast-drm-linux6.2.deb
+		sudo dpkg -i /home/$USER/assets/drivers/ast-drm-linux6.2.deb
 	fi
 }
 
