@@ -70,13 +70,13 @@ if [ $ostype == "Desktop" ]; then
 	fi
 fi
 #check to see if this is a Toyoata order
-if grep -q '"company":"Toyota Research' ~/install/orderdata/orderdata; then
-	echo confirm that 64bit BAR support has been disabled on the NICs as per Toyota request.
-	echo =============================================================================== >>~/install/reviewdata
-	echo ===============================64bit BAR Disabled============================== >>~/install/reviewdata
-	echo =============================================================================== >>~/install/reviewdata
-	sudo ~/install/assets/bootutil64e >>~/install/reviewdata
-fi
+#if grep -q '"company":"Toyota Research' ~/install/orderdata/orderdata; then
+#	echo confirm that 64bit BAR support has been disabled on the NICs as per Toyota request.
+#	echo =============================================================================== >>~/install/reviewdata
+#	echo ===============================64bit BAR Disabled============================== >>~/install/reviewdata
+#	echo =============================================================================== >>~/install/reviewdata
+#	sudo ~/install/assets/bootutil64e >>~/install/reviewdata
+#fi
 if grep -q '"Vizgen, Inc."' ~/install/orderdata/orderdata; then
 echo =============================================================================== >>~/install/reviewdata
 echo ==================================Merlin Check================================= >>~/install/reviewdata

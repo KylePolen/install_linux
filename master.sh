@@ -62,7 +62,7 @@ _update_server
 
 ###GRUB and network fixes
 _mobofix
-_toyota
+#_toyota
 _netman
 _grubtime
 
