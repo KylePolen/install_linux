@@ -18,7 +18,7 @@ rm -rf ~/Desktop/* >/dev/null 2>&1
 rm ~/Desktop/install >/dev/null 2>&1
 
 ###Create password readme on desktop
-cp ~/install/assets/Puget_Readme.pdf ~/Desktop/Puget_Readme.pdf
+cp ~/install/assets/Puget_Systems_Readme.pdf ~/Desktop/Puget_Systems_Readme.pdf
 
 ###Continue clean
 sudo chown -R $USER ~/install
