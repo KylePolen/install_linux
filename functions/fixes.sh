@@ -23,7 +23,7 @@ _mobofix() {
 			fi
 		fi
 	fi	
-	if [ "$motherboard" == "Pro WS WRX80E-SAGE SE WIFI" ]; then
+	if [ "$motherboard" == "Pro WS WRX80E-SAGE SE WIFI" -o "$motherboard" == "WRX90 WS EVO" ]; then
 		if [ $ostype == "Desktop" ]; then
 			sudo cp ~/install/assets/fixes/source/90-pulseaudio.rules /lib/udev/rules.d/90-pulseaudio.rules
 			sudo cp ~/install/assets/fixes/source/asus-wrx80-usb-audio.conf /usr/share/pulseaudio/alsa-mixer/profile-sets/asus-wrx80-usb-audio.conf
