@@ -23,6 +23,7 @@ _nvidia() {
 _amdigpu() {
 	if [ "$motherboard" == "TUF GAMING B650M-PLUS WIFI" -o "$motherboard" == "ProArt X670E-CREATOR WIFI" -o "$motherboard" == "MAG B650M MORTAR WIFI (MS-7D76)" ]; then
 		sudo DEBIAN_FRONTEND=nointeractive apt install ~/install/assets/drivers/amdgpu-install_5.3.50300-1_all.deb -y
+		sudo DEBIAN_FRONTEND=nointeractive apt install ~/install/assets/drivers/amdgpu-install_6.0.60002-1_all.deb -y
 		sudo amdgpu-install -y
 	fi
 }
