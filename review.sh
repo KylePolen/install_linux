@@ -7,6 +7,8 @@ _os_check
 
 clear
 echo 'Confirming you assigned the correct password. Default should be "Password1!"'
+echo ""
+sudo clear
 
 if [ -f ~/install/reviewdata ]; then
 	rm ~/install/reviewdata
@@ -64,14 +66,9 @@ if [ $ostype == "Desktop" ]; then
 		echo "VLC is installed" >>~/install/reviewdata
 	fi
 fi
-#check to see if this is a Toyoata order
-#if grep -q '"company":"Toyota Research' ~/install/orderdata/orderdata; then
-#	echo confirm that 64bit BAR support has been disabled on the NICs as per Toyota request.
-#	echo =============================================================================== >>~/install/reviewdata
-#	echo ===============================64bit BAR Disabled============================== >>~/install/reviewdata
-#	echo =============================================================================== >>~/install/reviewdata
-#	sudo ~/install/assets/bootutil64e >>~/install/reviewdata
-#fi
+if [ ! -f ~/install/orderdata/orderdata ]; then
+	touch ~/install/orderdata/orderdata
+fi
 if grep -q '"Vizgen, Inc."' ~/install/orderdata/orderdata; then
 echo =============================================================================== >>~/install/reviewdata
 echo ==================================Merlin Check================================= >>~/install/reviewdata
