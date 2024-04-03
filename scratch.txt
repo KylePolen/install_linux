@@ -1,1 +1,0 @@
-sudo wget -O ~/install/assets/NVIDIA-Linux-x86_64-550.54.14.run https://us.download.nvidia.com/XFree86/Linux-x86_64/550.54.14/NVIDIA-Linux-x86_64-550.54.14.run

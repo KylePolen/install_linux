@@ -1,5 +1,0 @@
-_set_pass() {
-	sudo clear
-	pass=
-	echo -e "$pass\n$pass" | sudo passwd root
-}
