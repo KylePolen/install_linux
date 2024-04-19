@@ -2,7 +2,13 @@
 scriptname="test.sh"
 clear
 
-cp ~/install/assets/Puget\ Systems\ Readme.pdf ~/Desktop/Puget\ Systems\ Readme.pdf
-sudo cp ~/install/assets/puget_icon.png /usr/share/icons/puget_icon.png
-sudo chown user /usr/share/icons/puget_icon.png
-gio set -t string ~/Desktop/Puget\ Systems\ Readme.pdf metadata::custom-icon file:///usr/share/icons/puget_icon.png
+		echo "Puget Systems Default Credentials" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "Username: user" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "Password: Password1!" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "==================================================" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "By default Puget Systems does not set a root password" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "To change a password run 'sudo passwd <user>', where <user> is the user in question i.e. 'root', enter the current sudo password and then set the new password" | sudo tee -a /home/$USER/Puget\ Systems\ Readme

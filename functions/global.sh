@@ -116,11 +116,20 @@ _branding() {
 		sleep 5
 		pkill -f firefox
 		wait
-		#sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
-		#sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
-		#sudo sed -i '$a user_pref("browser.startup.homepage", "https://account.pugetsystems.com/welcome.php?oid='$orderid'");' /home/$USER/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
+	else
+		echo "Puget Systems Default Credentials" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "Username: user" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "Password: Password1!" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "==================================================" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "By default Puget Systems does not set a root password" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		echo "To change a password run 'sudo passwd <user>', where <user> is the user in question i.e. 'root', enter the current sudo password and then set the new password" | sudo tee -a /home/$USER/Puget\ Systems\ Readme
+		
 	fi
 }
