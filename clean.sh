@@ -19,7 +19,7 @@ rm ~/Desktop/install >/dev/null 2>&1
 
 ###Create password readme on desktop
 if ! grep -q Server /var/log/installer/media-info; then
-	cp ~/install/assets/Puget_Systems_Readme.pdf ~/Desktop/Puget_Systems_Readme.pdf
+	cp ~/install/assets/Puget\ Systems\ Readme.pdf ~/Desktop/Puget\ Systems\ Readme.pdf
 fi
 
 ###Continue clean
