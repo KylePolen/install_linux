@@ -17,11 +17,6 @@ rm -rf ~/Downloads/* >/dev/null 2>&1
 rm -rf ~/Desktop/* >/dev/null 2>&1
 rm ~/Desktop/install >/dev/null 2>&1
 
-###Create password readme on desktop
-if ! grep -q Server /var/log/installer/media-info; then
-	cp ~/install/assets/Puget\ Systems\ Readme.pdf ~/Desktop/Puget\ Systems\ Readme.pdf
-fi
-
 ###Continue clean
 sudo chown -R $USER ~/install
 rm -rf ~/install >/dev/null 2>&1

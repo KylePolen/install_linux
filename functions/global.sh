@@ -95,6 +95,10 @@ _sleep() {
 ###Puget Systems Branding
 _branding() {
 	if [ $ostype == "Desktop" ]; then
+		cp ~/install/assets/Puget\ Systems\ Readme.pdf ~/Desktop/Puget\ Systems\ Readme.pdf
+		sudo cp ~/install/assets/puget_icon.png /usr/share/icons
+		sudo chown user /usr/share/icons/puget_icon.png
+		gio set -t string ~/Desktop/Puget\ Systems\ Readme.pdf metadata::custom-icon file:///usr/share/icons/puget_icon.png
 		ln -s /home/$USER/install /home/$USER/Desktop/install
 		sudo cp /home/$USER/install/assets/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
 		sudo chown user /usr/share/backgrounds/Puget_Systems.png
