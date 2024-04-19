@@ -96,7 +96,7 @@ _sleep() {
 _branding() {
 	if [ $ostype == "Desktop" ]; then
 		cp ~/install/assets/Puget\ Systems\ Readme.pdf ~/Desktop/Puget\ Systems\ Readme.pdf
-		sudo cp ~/install/assets/puget_icon.png /usr/share/icons
+		sudo cp ~/install/assets/puget_icon.png /usr/share/icons/puget_icon.png
 		sudo chown user /usr/share/icons/puget_icon.png
 		gio set -t string ~/Desktop/Puget\ Systems\ Readme.pdf metadata::custom-icon file:///usr/share/icons/puget_icon.png
 		ln -s /home/$USER/install /home/$USER/Desktop/install
