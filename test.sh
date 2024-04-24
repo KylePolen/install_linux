@@ -4,6 +4,7 @@ clear
 scriptname="review.sh"
 source ~/install/functions/global.sh
 _os_check
+_orderid
 
 clear
 echo 'Confirming you assigned the correct password. Default should be "Password1!"'
@@ -73,7 +74,7 @@ if grep -q '"Vizgen, Inc."' ~/install/orderdata/orderdata; then
 	echo =============================================================================== >>~/install/reviewdata
 	echo ==================================Merlin Check================================= >>~/install/reviewdata
 	echo =============================================================================== >>~/install/reviewdata
-~/merlin_env/bin/merlin --version . >>~/install/reviewdata
+	~/merlin_env/bin/merlin --version . >>~/install/reviewdata
 fi
 if [ $ostype == "Server" ]; then
 	echo >>~/install/reviewdata
@@ -83,6 +84,20 @@ if [ $ostype == "Server" ]; then
 else
 gedit ~/install/reviewdata
 fi
+
+clear
+echo 'Uploading results to the NAS...'
+echo 'Please enter the username for the NAS'
+read -p "Username: " username
+clear
+echo 'Please enter the password for '$username
+read -p "Password: " password
+clear
+sudo mkdir -p /mnt/ntserver
+sudo mount -t cifs //172.17.0.10/scratch -o username=$username,password=$password /mnt/ntserver
+cp ~/install/reviewdata /mnt/ntserver/linux_review/$orderid
+sudo umount /mnt/ntserver
+sudo rm -R /mnt/ntserver
 
 #Writing Completion Flag
 touch ~/install/flags/$scriptname
