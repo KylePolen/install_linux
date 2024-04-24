@@ -4,6 +4,7 @@ clear
 scriptname="review.sh"
 source ~/install/functions/global.sh
 _os_check
+_hostdata
 _orderid
 
 clear
@@ -70,19 +71,23 @@ fi
 if [ ! -f ~/install/orderdata/orderdata ]; then
 	touch ~/install/orderdata/orderdata
 fi
-if grep -q '"Vizgen, Inc."' ~/install/orderdata/orderdata; then
-	echo =============================================================================== >>~/install/reviewdata
-	echo ==================================Merlin Check================================= >>~/install/reviewdata
-	echo =============================================================================== >>~/install/reviewdata
-	~/merlin_env/bin/merlin --version . >>~/install/reviewdata
-fi
+#if grep -q '"Vizgen, Inc."' ~/install/orderdata/orderdata; then
+#	echo =============================================================================== >>~/install/reviewdata
+#	echo ==================================Merlin Check================================= >>~/install/reviewdata
+#	echo =============================================================================== >>~/install/reviewdata
+#	~/merlin_env/bin/merlin --version . >>~/install/reviewdata
+#fi
+
+
+
+
 if [ $ostype == "Server" ]; then
 	echo >>~/install/reviewdata
 	echo >>~/install/reviewdata
 	echo 'Press "q" to exit back to prompt' >>~/install/reviewdata
 	less ~/install/reviewdata
 else
-gedit ~/install/reviewdata
+	gedit ~/install/reviewdata
 fi
 
 clear
@@ -95,7 +100,8 @@ read -p "Password: " password
 clear
 sudo mkdir -p /mnt/ntserver
 sudo mount -t cifs //172.17.0.10/scratch -o username=$username,password=$password /mnt/ntserver
-cp ~/install/reviewdata /mnt/ntserver/linux_review/$orderid
+sudo chown $USER /mnt/ntserver
+sudo cp ~/install/reviewdata /mnt/ntserver/linux_review/$orderid.txt
 sudo umount /mnt/ntserver
 sudo rm -R /mnt/ntserver
 
