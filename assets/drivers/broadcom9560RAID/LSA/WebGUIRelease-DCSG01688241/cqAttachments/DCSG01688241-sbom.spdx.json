@@ -1,0 +1,419 @@
+{
+   "spdxVersion" : "SPDX-2.2",
+   "documentDescribes" : [
+      "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266"
+   ],
+   "documentNamespace" : "https://blackducksoftware.github.io/spdx/DCSG-SAS4-Web_Apps-842706e1-587d-413e-81e3-1f945d48ef42",
+   "SPDXID" : "SPDXRef-DOCUMENT",
+   "packages" : [
+      {
+         "licenseDeclared" : "BSD-2-Clause",
+         "SPDXID" : "SPDXRef-package-6d2030ba-dd3d-4270-8fcb-cb9ab60fe50d",
+         "versionInfo" : "1.24.0",
+         "filesAnalyzed" : false,
+         "copyrightText" : "NOASSERTION",
+         "licenseConcluded" : "BSD-2-Clause",
+         "externalRefs" : [
+            {
+               "referenceType" : "BlackDuck-Component",
+               "referenceLocator" : "bd056036-3a7c-4ae7-b085-5fc87784e0ae",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceType" : "BlackDuck-ComponentVersion",
+               "referenceLocator" : "6d2030ba-dd3d-4270-8fcb-cb9ab60fe50d"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceType" : "BlackDuck-ComponentOrigin",
+               "referenceLocator" : "472098f8-80e6-4386-a58e-6184b2027cf4"
+            },
+            {
+               "referenceType" : "purl",
+               "referenceLocator" : "pkg:apk/alpine/nginx@1.24.0-r4?arch=x86",
+               "referenceCategory" : "PACKAGE-MANAGER"
+            }
+         ],
+         "supplier" : "Organization: alpine",
+         "homepage" : "NOASSERTION",
+         "downloadLocation" : "NOASSERTION",
+         "originator" : "Organization: alpine",
+         "name" : "nginx"
+      },
+      {
+         "versionInfo" : "WebGUIRelease_8_9_DCSG01688241",
+         "filesAnalyzed" : false,
+         "licenseDeclared" : "NOASSERTION",
+         "SPDXID" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266",
+         "downloadLocation" : "NOASSERTION",
+         "originator" : "NOASSERTION",
+         "name" : "DCSG-SAS4-Web_Apps",
+         "supplier" : "NOASSERTION",
+         "homepage" : "NOASSERTION",
+         "externalRefs" : [
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "ad28afec-8332-4ea6-b45e-387565bce266",
+               "referenceType" : "BlackDuck-Version"
+            }
+         ],
+         "copyrightText" : "NOASSERTION",
+         "licenseConcluded" : "NOASSERTION"
+      },
+      {
+         "externalRefs" : [
+            {
+               "referenceLocator" : "897032fa-c8ed-4b19-9e3a-d42a61295629",
+               "referenceType" : "BlackDuck-Component",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "53e06d04-2ea5-4e0a-a969-b1b3e37e5e43",
+               "referenceType" : "BlackDuck-ComponentVersion"
+            }
+         ],
+         "supplier" : "NOASSERTION",
+         "homepage" : "NOASSERTION",
+         "name" : "FastCGI Development Kit",
+         "originator" : "NOASSERTION",
+         "downloadLocation" : "NOASSERTION",
+         "licenseConcluded" : "LicenseRef-2192056c-fcfc-4acb-9559-2c68e81de950",
+         "copyrightText" : "NOASSERTION",
+         "SPDXID" : "SPDXRef-package-53e06d04-2ea5-4e0a-a969-b1b3e37e5e43",
+         "licenseDeclared" : "LicenseRef-2192056c-fcfc-4acb-9559-2c68e81de950",
+         "filesAnalyzed" : false,
+         "versionInfo" : "2.4.6"
+      },
+      {
+         "licenseDeclared" : "BSD-3-Clause",
+         "SPDXID" : "SPDXRef-package-90a4e6ae-55ec-48cf-8250-e50bbad00acd",
+         "versionInfo" : "8.45",
+         "filesAnalyzed" : false,
+         "copyrightText" : "NOASSERTION",
+         "licenseConcluded" : "BSD-3-Clause",
+         "supplier" : "NOASSERTION",
+         "externalRefs" : [
+            {
+               "referenceType" : "BlackDuck-Component",
+               "referenceLocator" : "8c9723be-a23f-4974-9645-54c471aed433",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceType" : "BlackDuck-ComponentVersion",
+               "referenceLocator" : "90a4e6ae-55ec-48cf-8250-e50bbad00acd",
+               "referenceCategory" : "OTHER"
+            }
+         ],
+         "homepage" : "NOASSERTION",
+         "downloadLocation" : "NOASSERTION",
+         "name" : "PCRE",
+         "originator" : "NOASSERTION"
+      },
+      {
+         "licenseDeclared" : "Apache-2.0",
+         "SPDXID" : "SPDXRef-package-aae59a11-5f1c-4214-990f-ef6cf5df5aeb",
+         "versionInfo" : "3.1.3",
+         "filesAnalyzed" : false,
+         "supplier" : "Organization: github",
+         "homepage" : "NOASSERTION",
+         "externalRefs" : [
+            {
+               "referenceType" : "BlackDuck-Component",
+               "referenceLocator" : "cc8d0e2b-f88f-49c8-b42f-42626640f589",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "aae59a11-5f1c-4214-990f-ef6cf5df5aeb",
+               "referenceType" : "BlackDuck-ComponentVersion"
+            },
+            {
+               "referenceType" : "BlackDuck-ComponentOrigin",
+               "referenceLocator" : "cf0b6480-7a42-4c34-8c5a-c258f17ffd89",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceLocator" : "pkg:github/openssl/openssl@openssl-3.1.3",
+               "referenceType" : "purl",
+               "referenceCategory" : "PACKAGE-MANAGER"
+            }
+         ],
+         "downloadLocation" : "NOASSERTION",
+         "originator" : "Organization: github",
+         "name" : "OpenSSL",
+         "copyrightText" : "NOASSERTION",
+         "licenseConcluded" : "Apache-2.0"
+      },
+      {
+         "licenseConcluded" : "Apache-2.0",
+         "copyrightText" : "NOASSERTION",
+         "originator" : "Organization: maven",
+         "name" : "seeds-reflect",
+         "downloadLocation" : "NOASSERTION",
+         "supplier" : "Organization: maven",
+         "homepage" : "NOASSERTION",
+         "externalRefs" : [
+            {
+               "referenceLocator" : "43250771-8295-441f-ab79-c290ba2a4736",
+               "referenceType" : "BlackDuck-Component",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "8498c0b3-fe0a-4de3-ba0a-c9064bc7a8c4",
+               "referenceType" : "BlackDuck-ComponentVersion"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceType" : "BlackDuck-ComponentOrigin",
+               "referenceLocator" : "765ef13f-cd58-4714-8dbd-8c5177548d67"
+            },
+            {
+               "referenceLocator" : "pkg:maven/net.tribe7.seeds/seeds-reflect@15.0",
+               "referenceType" : "purl",
+               "referenceCategory" : "PACKAGE-MANAGER"
+            }
+         ],
+         "filesAnalyzed" : false,
+         "versionInfo" : "15.0",
+         "SPDXID" : "SPDXRef-package-8498c0b3-fe0a-4de3-ba0a-c9064bc7a8c4",
+         "licenseDeclared" : "Apache-2.0"
+      },
+      {
+         "licenseConcluded" : "BSL-1.0",
+         "copyrightText" : "NOASSERTION",
+         "name" : "Boost C++ Libraries - boost",
+         "originator" : "NOASSERTION",
+         "downloadLocation" : "NOASSERTION",
+         "supplier" : "NOASSERTION",
+         "externalRefs" : [
+            {
+               "referenceType" : "BlackDuck-Component",
+               "referenceLocator" : "4eac8f37-d9e5-4344-83d0-be0e9fd42a6a",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "8372bbe9-3bd6-43ba-b7b7-21d646f6945e",
+               "referenceType" : "BlackDuck-ComponentVersion"
+            }
+         ],
+         "homepage" : "NOASSERTION",
+         "filesAnalyzed" : false,
+         "versionInfo" : "1.80.0",
+         "SPDXID" : "SPDXRef-package-8372bbe9-3bd6-43ba-b7b7-21d646f6945e",
+         "licenseDeclared" : "BSL-1.0"
+      },
+      {
+         "copyrightText" : "NOASSERTION",
+         "licenseConcluded" : "Apache-2.0",
+         "supplier" : "Organization: maven",
+         "externalRefs" : [
+            {
+               "referenceType" : "BlackDuck-Component",
+               "referenceLocator" : "3f6f4296-17d5-42d1-9d32-d641cee053ff",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "4e1af8aa-02e6-4da9-825a-af029207408c",
+               "referenceType" : "BlackDuck-ComponentVersion"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "c9602c01-498c-45a4-acdc-cf21fe05aeb6",
+               "referenceType" : "BlackDuck-ComponentOrigin"
+            },
+            {
+               "referenceType" : "purl",
+               "referenceLocator" : "pkg:maven/net.tribe7.seeds/seeds-eventbus@15.0",
+               "referenceCategory" : "PACKAGE-MANAGER"
+            }
+         ],
+         "homepage" : "NOASSERTION",
+         "downloadLocation" : "NOASSERTION",
+         "name" : "seeds-eventbus",
+         "originator" : "Organization: maven",
+         "licenseDeclared" : "Apache-2.0",
+         "SPDXID" : "SPDXRef-package-4e1af8aa-02e6-4da9-825a-af029207408c",
+         "versionInfo" : "15.0",
+         "filesAnalyzed" : false
+      },
+      {
+         "versionInfo" : "8.4.0",
+         "filesAnalyzed" : false,
+         "licenseDeclared" : "curl",
+         "SPDXID" : "SPDXRef-package-e8258f57-f6f8-4447-af26-f00458ae015e",
+         "downloadLocation" : "NOASSERTION",
+         "originator" : "Organization: github",
+         "name" : "curl",
+         "homepage" : "NOASSERTION",
+         "supplier" : "Organization: github",
+         "externalRefs" : [
+            {
+               "referenceLocator" : "5495fd92-f4e5-4099-aa40-bd0f22b2f602",
+               "referenceType" : "BlackDuck-Component",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "e8258f57-f6f8-4447-af26-f00458ae015e",
+               "referenceType" : "BlackDuck-ComponentVersion"
+            },
+            {
+               "referenceLocator" : "5afe968c-4a89-4ef1-a880-284f7c32dbac",
+               "referenceType" : "BlackDuck-ComponentOrigin",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "PACKAGE-MANAGER",
+               "referenceLocator" : "pkg:github/curl/curl@curl-8_4_0",
+               "referenceType" : "purl"
+            }
+         ],
+         "copyrightText" : "NOASSERTION",
+         "licenseConcluded" : "curl"
+      },
+      {
+         "licenseDeclared" : "Apache-2.0",
+         "SPDXID" : "SPDXRef-package-c8a4fcb5-0911-43e5-a291-b8099e11aede",
+         "filesAnalyzed" : false,
+         "versionInfo" : "15.0",
+         "supplier" : "Organization: maven",
+         "homepage" : "NOASSERTION",
+         "externalRefs" : [
+            {
+               "referenceType" : "BlackDuck-Component",
+               "referenceLocator" : "2f0a32a0-f5c6-45d7-858c-b8a5d922633d",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceType" : "BlackDuck-ComponentVersion",
+               "referenceLocator" : "c8a4fcb5-0911-43e5-a291-b8099e11aede",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "OTHER",
+               "referenceLocator" : "408203c8-53a1-427f-93f2-92f7e307c93c",
+               "referenceType" : "BlackDuck-ComponentOrigin"
+            },
+            {
+               "referenceType" : "purl",
+               "referenceLocator" : "pkg:maven/com.google.guava/guava@15.0",
+               "referenceCategory" : "PACKAGE-MANAGER"
+            }
+         ],
+         "name" : "google-guava",
+         "originator" : "Organization: maven",
+         "downloadLocation" : "NOASSERTION",
+         "licenseConcluded" : "Apache-2.0",
+         "copyrightText" : "NOASSERTION"
+      },
+      {
+         "licenseConcluded" : "Apache-2.0",
+         "copyrightText" : "NOASSERTION",
+         "name" : "seeds-hash",
+         "originator" : "Organization: maven",
+         "downloadLocation" : "NOASSERTION",
+         "externalRefs" : [
+            {
+               "referenceLocator" : "3c4d9d17-9981-45df-bef9-f93e2b6820e5",
+               "referenceType" : "BlackDuck-Component",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceLocator" : "256ec904-4be7-45af-b4b4-56743817e5a2",
+               "referenceType" : "BlackDuck-ComponentVersion",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceLocator" : "74eb958e-2e2e-4e74-8d37-6618a24ba694",
+               "referenceType" : "BlackDuck-ComponentOrigin",
+               "referenceCategory" : "OTHER"
+            },
+            {
+               "referenceCategory" : "PACKAGE-MANAGER",
+               "referenceType" : "purl",
+               "referenceLocator" : "pkg:maven/net.tribe7.seeds/seeds-hash@15.0"
+            }
+         ],
+         "supplier" : "Organization: maven",
+         "homepage" : "NOASSERTION",
+         "filesAnalyzed" : false,
+         "versionInfo" : "15.0",
+         "licenseDeclared" : "Apache-2.0",
+         "SPDXID" : "SPDXRef-package-256ec904-4be7-45af-b4b4-56743817e5a2"
+      }
+   ],
+   "hasExtractedLicensingInfos" : [
+      {
+         "extractedText" : "Open Market License\n===================\n\nThis FastCGI application library source and object code (the \"Software\") and its\ndocumentation (the \"Documentation\") are copyrighted by Open Market, Inc (\"Open\nMarket\"). The following terms apply to all files associated with the Software and\nDocumentation unless explicitly disclaimed in individual files.\n\nOpen Market permits you to use, copy, modify, distribute, and license this\nSoftware and the Documentation solely for the purpose of implementing the FastCGI\nspecification defined by Open Market or derivative specifications publicly\nendorsed by Open Market and promulgated by an open standards organization and for\nno other purpose, provided that existing copyright notices are retained in all\ncopies and that this notice is included verbatim in any distributions.\n\nNo written agreement, license, or royalty fee is required for any of the\nauthorized uses. Modifications to this Software and Documentation may be\ncopyrighted by their authors and need not follow the licensing terms described\nhere, but the modified Software and Documentation must be used for the sole\npurpose of implementing the FastCGI specification defined by Open Market or\nderivative specifications publicly endorsed by Open Market and promulgated by an\nopen standards organization and for no other purpose. If modifications to this\nSoftware and Documentation have new licensing terms, the new terms must protect\nOpen Market's proprietary rights in the Software and Documentation to the same\nextent as these licensing terms and must be clearly indicated on the first page\nof each file where they apply.\n\nOpen Market shall retain all right, title and interest in and to the Software and\nDocumentation, including without limitation all patent, copyright, trade secret\nand other proprietary rights.\n\nOPEN MARKET MAKES NO EXPRESS OR IMPLIED WARRANTY WITH RESPECT TO THE SOFTWARE OR\nTHE DOCUMENTATION, INCLUDING WITHOUT LIMITATION ANY WARRANTY OF MERCHANTABILITY\nOR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL OPEN MARKET BE LIABLE TO\nYOU OR ANY THIRD PARTY FOR ANY DAMAGES ARISING FROM OR RELATING TO THIS SOFTWARE\nOR THE DOCUMENTATION, INCLUDING, WITHOUT LIMITATION, ANY INDIRECT, SPECIAL OR\nCONSEQUENTIAL DAMAGES OR SIMILAR DAMAGES, INCLUDING LOST PROFITS OR LOST DATA,\nEVEN IF OPEN MARKET HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE\nSOFTWARE AND DOCUMENTATION ARE PROVIDED \"AS IS\". OPEN MARKET HAS NO LIABILITY IN\nCONTRACT, TORT, NEGLIGENCE OR OTHERWISE ARISING OUT OF THIS SOFTWARE OR THE\nDOCUMENTATION.",
+         "name" : "Open Market License Fast CGI",
+         "licenseId" : "LicenseRef-2192056c-fcfc-4acb-9559-2c68e81de950"
+      }
+   ],
+   "relationships" : [
+      {
+         "relationshipType" : "DEPENDS_ON",
+         "relatedSpdxElement" : "SPDXRef-package-8372bbe9-3bd6-43ba-b7b7-21d646f6945e",
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266"
+      },
+      {
+         "relationshipType" : "DEPENDS_ON",
+         "relatedSpdxElement" : "SPDXRef-package-e8258f57-f6f8-4447-af26-f00458ae015e",
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266"
+      },
+      {
+         "relatedSpdxElement" : "SPDXRef-package-53e06d04-2ea5-4e0a-a969-b1b3e37e5e43",
+         "relationshipType" : "DEPENDS_ON",
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266"
+      },
+      {
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266",
+         "relatedSpdxElement" : "SPDXRef-package-c8a4fcb5-0911-43e5-a291-b8099e11aede",
+         "relationshipType" : "DEPENDS_ON"
+      },
+      {
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266",
+         "relationshipType" : "DEPENDS_ON",
+         "relatedSpdxElement" : "SPDXRef-package-6d2030ba-dd3d-4270-8fcb-cb9ab60fe50d"
+      },
+      {
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266",
+         "relationshipType" : "DEPENDS_ON",
+         "relatedSpdxElement" : "SPDXRef-package-aae59a11-5f1c-4214-990f-ef6cf5df5aeb"
+      },
+      {
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266",
+         "relatedSpdxElement" : "SPDXRef-package-90a4e6ae-55ec-48cf-8250-e50bbad00acd",
+         "relationshipType" : "DEPENDS_ON"
+      },
+      {
+         "relationshipType" : "DEPENDS_ON",
+         "relatedSpdxElement" : "SPDXRef-package-4e1af8aa-02e6-4da9-825a-af029207408c",
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266"
+      },
+      {
+         "relatedSpdxElement" : "SPDXRef-package-256ec904-4be7-45af-b4b4-56743817e5a2",
+         "relationshipType" : "DEPENDS_ON",
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266"
+      },
+      {
+         "spdxElementId" : "SPDXRef-package-ad28afec-8332-4ea6-b45e-387565bce266",
+         "relationshipType" : "DEPENDS_ON",
+         "relatedSpdxElement" : "SPDXRef-package-8498c0b3-fe0a-4de3-ba0a-c9064bc7a8c4"
+      }
+   ],
+   "name" : "DCSG-SAS4-Web_Apps",
+   "dataLicense" : "CC0-1.0",
+   "creationInfo" : {
+      "creators" : [
+         "Organization: Broadcom",
+         "Tool: Black Duck Hub-2023.10.0"
+      ],
+      "created" : "2024-04-02T13:21:54Z",
+      "licenseListVersion" : "3.13"
+   }
+}

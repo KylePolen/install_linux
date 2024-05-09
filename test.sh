@@ -45,16 +45,16 @@ echo ===========================================================================
 ip --brief address show >>~/install/reviewdata
 echo >>~/install/reviewdata
 if [ $ostype == "Server" ]; then
-	echo =============================================================================== >>~/install/reviewdata
-	echo ====================================netplan=================================== >>~/install/reviewdata
-	echo =============================================================================== >>~/install/reviewdata
+	echo =========================================================================== >>~/install/reviewdata
+	echo ==================================netplan================================== >>~/install/reviewdata
+	echo =========================================================================== >>~/install/reviewdata
 	cat /etc/netplan/01-netcfg.yaml >>~/install/reviewdata
 	echo >>~/install/reviewdata
 fi
 if [ $ostype == "Desktop" ]; then
-	echo =============================================================================== >>~/install/reviewdata
-	echo ====================================software=================================== >>~/install/reviewdata
-	echo =============================================================================== >>~/install/reviewdata
+	echo =========================================================================== >>~/install/reviewdata
+	echo ==================================software================================= >>~/install/reviewdata
+	echo =========================================================================== >>~/install/reviewdata
 	if test -f /opt/Adobe/Reader9/bin/acroread; then
 		echo "Adobe Reader is installed" >>~/install/reviewdata
 	fi
@@ -78,9 +78,6 @@ fi
 #	~/merlin_env/bin/merlin --version . >>~/install/reviewdata
 #fi
 
-
-
-
 if [ $ostype == "Server" ]; then
 	echo >>~/install/reviewdata
 	echo >>~/install/reviewdata
@@ -101,7 +98,7 @@ clear
 sudo mkdir -p /mnt/ntserver
 sudo mount -t cifs //172.17.0.10/scratch -o username=$username,password=$password /mnt/ntserver
 sudo chown $USER /mnt/ntserver
-sudo cp ~/install/reviewdata /mnt/ntserver/linux_review/$orderid.txt
+sudo cp ~/install/reviewdata /mnt/ntserver/linux_review/$host.txt
 sudo umount /mnt/ntserver
 sudo rm -R /mnt/ntserver
 

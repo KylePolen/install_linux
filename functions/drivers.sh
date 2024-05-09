@@ -112,12 +112,45 @@ if lspci -v | grep -q '640L 4 Port'; then
 fi
 }
 
-#Highpoint 640L
+#Highpoint 3720L
 _hp3720c() {
 if lspci -v | grep -q 'Device 3720'; then
 	if [ ! -f /etc/init.d/hptdrv-monitor ]; then
 		clear
 		echo 'Highpoint 3720C detected. The system will reboot after installing drivers.'
+		echo 'The script will automatically restart once you log back in.'
+		read -p ""
+		cd ~/install/assets
+		wget -c https://github.com/KylePolen/install_linux/raw/main/assets/drivers/hp3720c/rr37xx_8xx_28xx_linux_x86_64_src_v1.23.13_23_01_16.bin
+		wget -c https://github.com/KylePolen/install_linux/raw/main/assets/drivers/hp3720c/RAID_Manage_Linux_v3.1.13_22_12_05.bin
+		sudo chmod +x *.bin
+		sudo ./rr37xx_8xx_28xx_linux_x86_64_src_v1.23.13_23_01_16.bin
+		sudo ./RAID_Manage_Linux_v3.1.13_22_12_05.bin
+		sleep 5
+		if [ "$motherboard" == "X299 AORUS Gaming 7" ]; then
+			sudo sed -i 's/ iommu=off//' /etc/default/grub
+			sudo update-grub
+		fi
+		if [ $ostype == "Server" ]; then
+			sudo sed -i '/~\/install/d' ~/.bashrc
+			echo '~/install/master.sh' >>~/.bashrc
+		else
+			sudo rm /etc/profile/.d/master.sh
+			echo "sleep 5" | sudo tee -a /etc/profile.d/master.sh
+			echo 'gnome-terminal -- ~/install/master.sh' | sudo tee -a /etc/profile.d/master.sh
+		fi
+		sudo reboot
+		exit
+	fi
+fi
+}
+
+#Broadcom 9560
+_BC9560() {
+if lspci -v | grep '9560'; then
+	if [ ! -f /etc/init.d/hptdrv-monitor ]; then
+		clear
+		echo 'Broadcom 9560 detected. The system will reboot after installing drivers.'
 		echo 'The script will automatically restart once you log back in.'
 		read -p ""
 		cd ~/install/assets
