@@ -149,14 +149,16 @@ fi
 _BC9560() {
 if lspci -v | grep '9560'; then
 	cd ~/install/assets/drivers/broadcom9560RAID/Driver
-	sudo DEBIAN_FRONTEND=nointeractive apt install megaraid_sas-07.729.00.00-1dkms.noarch.deb -y
+	sudo DEBIAN_FRONTEND=nointeractive apt install *.deb -y
 	cd ~/install/assets/drivers/broadcom9560RAID/openslp-2.0.0
-	sudo ./configure
-	sudo make
+	./configure
+	make
 	sudo make install
+	sudo mkdir -p /opt/lsi/LSIStorageAuthority/bin/
+	sudo chown -R $USER /opt/lsi
 	sudo ln -sf /usr/local/lib/libslp.so.1.0.0 /opt/lsi/LSIStorageAuthority/bin/libslp.so.1
 	cd ~/install/assets/drivers/broadcom9560RAID/LSA/WebGUIRelease-DCSG01688241/webgui_rel/gcc_11.2.x
-	sudo ./install_deb.sh
+	./install_deb.sh
 	cd ~/install
 fi
 }

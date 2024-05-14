@@ -32,7 +32,7 @@ _branding
 _hp7505
 _hp640L
 _hp3720c
-#_BC9560
+_BC9560
 
 ###Display Drivers
 _nvidia
