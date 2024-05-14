@@ -161,7 +161,7 @@ if lspci -v | grep '9560'; then
 	cd ~/install/assets/drivers/broadcom9560RAID/LSA/WebGUIRelease-DCSG01688241/webgui_rel/LSA_Linux/gcc_11.2.x
 	pass=rootpass
 	echo -e "$pass\n$pass" | sudo passwd root
-	echo -e "$pass\n$pass" | su root -c "./install_deb.sh -g"
+	echo -e "$pass\n$pass" | su root -c "./install_deb.sh -s"
 	sudo passwd -dl root
 	cd ~/install
 fi
