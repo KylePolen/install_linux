@@ -158,7 +158,7 @@ if lspci -v | grep '9560'; then
 	sudo mkdir -p /opt/lsi/LSIStorageAuthority/conf/
 	sudo chown -R $USER /opt/lsi
 	sudo ln -sf /usr/local/lib/libslp.so.1.0.0 /opt/lsi/LSIStorageAuthority/bin/libslp.so.1
-	cd ~/install/assets/drivers/broadcom9560RAID/LSA/WebGUIRelease-DCSG01688241/webgui_rel/gcc_11.2.x
+	cd ~/install/assets/drivers/broadcom9560RAID/LSA/WebGUIRelease-DCSG01688241/webgui_rel/LSA_Linux/gcc_11.2.x
 	pass=rootpass
 	echo -e "$pass\n$pass" | sudo passwd root
 	./install_deb.sh -g
@@ -166,3 +166,5 @@ if lspci -v | grep '9560'; then
 	cd ~/install
 fi
 }
+
+D:\GitHub\install_linux\assets\drivers\broadcom9560RAID\LSA\WebGUIRelease-DCSG01688241\webgui_rel\LSA_Linux\gcc_11.2.x
