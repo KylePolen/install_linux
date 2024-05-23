@@ -129,3 +129,13 @@ _grubtime() {
 	sudo sed -i 's/GRUB_TIMEOUT_STYLE=hidden/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub
 	sudo update-grub
 }
+
+_gnome() {
+	if [ $ostype == "Server" ]; then
+		if grep -q 'Gnome Desktop Installation' ~/install/orderdata/orderdata; then
+			sudo apt install lightdm ubuntu-dekstop -y
+			ostype="Desktop"
+			_branding
+		fi
+	fi
+}

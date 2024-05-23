@@ -50,6 +50,7 @@ fi
 ###Install additional packages and updates
 _update_desktop
 _update_server
+_gnome
 
 ###Script for additional drive mounting
 ~/install/scripts/mount.sh
