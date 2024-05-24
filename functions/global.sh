@@ -119,9 +119,9 @@ _branding() {
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
-	else
-		echo "Puget Systems Default Credentials" | tee -a /home/$USER/Puget_Systems_Readme
-		echo "Username: user" | tee -a /home/$USER/Puget_Systems_Readme
-		echo "Password: Password1!" | tee -a /home/$USER/Puget_Systems_Readme
+	#else
+		#echo "Puget Systems Default Credentials" | tee -a /home/$USER/Puget_Systems_Readme
+		#echo "Username: user" | tee -a /home/$USER/Puget_Systems_Readme
+		#echo "Password: Password1!" | tee -a /home/$USER/Puget_Systems_Readme
 	fi
 }
