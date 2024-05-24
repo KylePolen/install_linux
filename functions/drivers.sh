@@ -150,6 +150,8 @@ _BC9560() {
 if lspci -v | grep '9560'; then
 	cd ~/install/assets/drivers/broadcom9560RAID/Driver
 	sudo dpkg -i *.deb
+	cd ~/install/assets/drivers/broadcom9560RAID/storcli
+	sudo dpkg -i *.deb
 	cd ~/install/assets/drivers/broadcom9560RAID/openslp-2.0.0
 	./configure
 	make
