@@ -36,7 +36,7 @@ _mobofix() {
 		fi
 
 	fi
-	if [ "$motherboard" == "ProArt X670E-CREATOR WIFI" ]; then
+	if [ "$motherboard" == "ProArt X670E-CREATOR WIFI" -o "$motherboard" == "Pro WS TRX50-SAGE WIFI"  ]; then
 		if [ $ostype == "Desktop" ]; then
 			sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
 		fi
