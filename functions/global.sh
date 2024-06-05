@@ -4,12 +4,17 @@ clear
 ###Get OS Type
 _os_check() {
 	kernelver=$(uname -r)
+	if grep -q 20.04 /etc/os-release; then
+		osversion="20.04"
+		codename="focal"
+	fi
 	if grep -q 22.04 /etc/os-release; then
 		osversion="22.04"
 		codename="jammy"
-	else
-		osversion="20.04"
-		codename="focal"
+	fi
+	if grep -q 24.04 /etc/os-release; then
+		osversion="24.04"
+		codename="noble"
 	fi
 	if grep -q Server /var/log/installer/media-info; then
 		ostype="Server"
