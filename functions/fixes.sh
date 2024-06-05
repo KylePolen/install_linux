@@ -36,7 +36,7 @@ _mobofix() {
 		fi
 
 	fi
-	if [ "$motherboard" == "ProArt X670E-CREATOR WIFI" -o "$motherboard" == "Pro WS TRX50-SAGE WIFI"  ]; then
+	if [ "$motherboard" == "ProArt X670E-CREATOR WIFI" ]; then
 		if [ $ostype == "Desktop" ]; then
 			sudo sed -i 's/splash"/splash amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
 		fi
@@ -48,6 +48,11 @@ _mobofix() {
 		if [ $ostype == "Desktop" ]; then
 			sudo cp ~/install/assets/fixes/source/Realtek-ALC1220-VB-Desktop.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop.conf
 			sudo cp ~/install/assets/fixes/source/Realtek-ALC1220-VB-Desktop-HiFi.conf /usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop-HiFi.conf
+		fi
+	fi
+	if [ $osversion == "24.04" ]; then
+		if [ $ostype == "Desktop" ]; then
+			sudo sed -i 's/splash"/splash initcall_blacklist=simpledrm_platform_driver_init"/' /etc/default/grub
 		fi
 	fi
 	sudo update-grub
