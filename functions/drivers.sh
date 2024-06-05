@@ -4,7 +4,7 @@ clear
 
 #NVIDIA
 _nvidia() {
-	revision="550"
+	revision="555"
 	if lspci -v | grep -q "GT 710"; then
 		revision="470"
 	fi
