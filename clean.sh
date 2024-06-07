@@ -17,6 +17,13 @@ rm -rf ~/Downloads/* >/dev/null 2>&1
 rm -rf ~/Desktop/* >/dev/null 2>&1
 rm ~/Desktop/install >/dev/null 2>&1
 
+if ! grep -q Server /var/log/installer/media-info; then
+	cp ~/install/assets/Puget\ Systems\ Readme.pdf ~/Desktop/Puget\ Systems\ Readme.pdf
+	sudo cp ~/install/assets/puget_icon.png /usr/share/icons/puget_icon.png
+	sudo chown user /usr/share/icons/puget_icon.png
+	gio set -t string ~/Desktop/Puget\ Systems\ Readme.pdf metadata::custom-icon file:///usr/share/icons/puget_icon.png
+fi
+
 ###Continue clean
 sudo chown -R $USER ~/install
 rm -rf ~/install >/dev/null 2>&1
