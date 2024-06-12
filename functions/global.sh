@@ -100,10 +100,6 @@ _sleep() {
 ###Puget Systems Branding
 _branding() {
 	if [ $ostype == "Desktop" ]; then
-		#cp ~/install/assets/Puget\ Systems\ Readme.pdf ~/Desktop/Puget\ Systems\ Readme.pdf
-		#sudo cp ~/install/assets/puget_icon.png /usr/share/icons/puget_icon.png
-		#sudo chown user /usr/share/icons/puget_icon.png
-		#gio set -t string ~/Desktop/Puget\ Systems\ Readme.pdf metadata::custom-icon file:///usr/share/icons/puget_icon.png
 		ln -s /home/$USER/install /home/$USER/Desktop/install
 		sudo cp /home/$USER/install/assets/Puget_Systems.png /usr/share/backgrounds/Puget_Systems.png
 		sudo chown user /usr/share/backgrounds/Puget_Systems.png
@@ -124,9 +120,41 @@ _branding() {
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/.mozilla/firefox/*.default-release/prefs.js >/dev/null 2>&1
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
 		sudo sed -i '$a user_pref("browser.startup.homepage", "https://www.pugetsystems.com/welcome/");' /home/$USER/snap/firefox/common/.mozilla/firefox/*.default/prefs.js >/dev/null 2>&1
-	#else
-		#echo "Puget Systems Default Credentials" | tee -a /home/$USER/Puget_Systems_Readme
-		#echo "Username: user" | tee -a /home/$USER/Puget_Systems_Readme
-		#echo "Password: Password1!" | tee -a /home/$USER/Puget_Systems_Readme
 	fi
+}
+
+_topbar() {
+	x=80
+	for i in $(seq 1 $x); do
+		printf '=%.0s' >>~/install/reviewdata
+	done
+	echo "" >>~/install/reviewdata
+}
+
+_bottombar() {
+	x=80
+	for i in $(seq 1 $x); do
+		printf '=%.0s' >>~/install/reviewdata
+	done
+	echo "" >>~/install/reviewdata
+	echo "" >>~/install/reviewdata
+}
+
+_titlebar() {
+	title_len=${#title}
+	x=80
+	x=$((x - title_len))
+	x=$((x / 2))
+	for i in $(seq 1 $x); do
+		printf '=%.0s' >>~/install/reviewdata
+	done
+	test=$(tail -n 1 ~/install/reviewdata)
+	if [ ${#test} == 79 ]; then printf '=' >>~/install/reviewdata; fi
+	printf $title >>~/install/reviewdata
+	for i in $(seq 1 $x); do
+		printf '=%.0s' >>~/install/reviewdata
+	done
+	test=$(tail -n 1 ~/install/reviewdata)
+	if [ ${#test} == 79 ]; then printf '=' >>~/install/reviewdata; fi
+	echo "" >>~/install/reviewdata
 }
