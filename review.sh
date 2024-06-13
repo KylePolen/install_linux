@@ -18,6 +18,7 @@ _topbar
 _titlebar
 _bottombar
 echo "Hostname:" $host >>~/install/reviewdata
+echo " " >>~/install/reviewdata
 finger >>~/install/reviewdata
 
 title="OS Information"
