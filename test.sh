@@ -3,12 +3,13 @@ clear
 
 scriptname="review.sh"
 source ~/install/functions/global.sh
-_os_check && _hostdata && _orderid
 
 clear
 echo 'Confirming you assigned the correct password. Default should be "Password1!"'
 echo ""
 sudo clear
+
+_os_check && _hostdata && _orderid
 
 if [ -f ~/install/reviewdata ]; then rm ~/install/reviewdata; fi
 
@@ -16,7 +17,7 @@ title="User/Host Name"
 _topbar
 _titlebar
 _bottombar
-hostname >>~/install/reviewdata
+echo "Hostname:" $host >>~/install/reviewdata
 finger >>~/install/reviewdata
 
 title="OS Information"
@@ -77,17 +78,15 @@ title="Detected Network Controllers"
 _topbar
 _titlebar
 _bottombar
-#ip --brief address show | awk '$1 != "lo" {print $0}' >>~/install/reviewdata
 lspci -q | grep -i net >>~/install/reviewdata
+#ip --brief address show | awk '$1 != "lo" {print $0}' >>~/install/reviewdata
 
-#if [ $ostype == "Server" ]; then
-	title="Netplan Configuration"
-	_topbar
-	_titlebar
-	_bottombar
-	#cat /etc/netplan/01-netcfg.yaml >>~/install/reviewdata
-	cat /etc/netplan/01-* >>~/install/reviewdata
-#fi
+title="Netplan Configuration"
+_topbar
+_titlebar
+_bottombar
+cat /etc/netplan/01-* >>~/install/reviewdata
+#cat /etc/netplan/01-netcfg.yaml >>~/install/reviewdata
 
 if grep -q '"category": "Software: Courtesy Install",' ~/install/orderdata/orderdata; then
 	title="Courtesy Software"
