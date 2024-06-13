@@ -121,7 +121,7 @@ if [ $ostype == "Server" ]; then
 else
 	gedit ~/install/reviewdata
 fi
-exit
+
 clear
 echo 'Uploading results to the NAS...'
 echo 'Please enter the username for the NAS'
