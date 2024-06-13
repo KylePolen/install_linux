@@ -124,7 +124,8 @@ _branding() {
 }
 
 _topbar() {
-	x=80
+	x=91
+	echo "" >>~/install/reviewdata
 	for i in $(seq 1 $x); do
 		printf '=%.0s' >>~/install/reviewdata
 	done
@@ -132,29 +133,28 @@ _topbar() {
 }
 
 _bottombar() {
-	x=80
+	x=91
 	for i in $(seq 1 $x); do
 		printf '=%.0s' >>~/install/reviewdata
 	done
 	echo "" >>~/install/reviewdata
-	echo "" >>~/install/reviewdata
 }
 
 _titlebar() {
-	title_len=${#title}
-	x=80
+	title_len="${#title}"
+	x=91
 	x=$((x - title_len))
 	x=$((x / 2))
 	for i in $(seq 1 $x); do
 		printf '=%.0s' >>~/install/reviewdata
 	done
 	test=$(tail -n 1 ~/install/reviewdata)
-	if [ ${#test} == 79 ]; then printf '=' >>~/install/reviewdata; fi
-	printf $title >>~/install/reviewdata
+	if [ ${#test} == 90 ]; then printf '=' >>~/install/reviewdata; fi
+	printf "$title" >>~/install/reviewdata
 	for i in $(seq 1 $x); do
 		printf '=%.0s' >>~/install/reviewdata
 	done
 	test=$(tail -n 1 ~/install/reviewdata)
-	if [ ${#test} == 79 ]; then printf '=' >>~/install/reviewdata; fi
+	if [ ${#test} == 90 ]; then printf '=' >>~/install/reviewdata; fi
 	echo "" >>~/install/reviewdata
 }
