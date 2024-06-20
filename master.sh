@@ -55,26 +55,16 @@ _gnome
 ###Script for additional drive mounting
 ~/install/scripts/mount.sh
 
-#Clients
-#_viz_check
-
-#Benchmarks
-#_ai_assets_small
-#_ai_assets_full
-
 ###GRUB and network fixes
 _mobofix
-#_toyota
 _netman
 _grubtime
 
 #Stop autorun
-if [ ! -f ~/install/scripts/vizgen.sh ]; then
-	if [ $ostype == "Server" ]; then
-		sudo sed -i '/~\/install/d' ~/.bashrc
-	else
-		sudo rm /etc/profile.d/master.sh
-	fi
+if [ $ostype == "Server" ]; then
+	sudo sed -i '/~\/install/d' ~/.bashrc
+else
+	sudo rm /etc/profile.d/master.sh
 fi
 
 sudo shutdown -r now
