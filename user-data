@@ -1,0 +1,80 @@
+#cloud-config
+autoinstall:
+  version: 1
+  interactive-sections: # Install groups listed here will wait for user input
+    - storage
+  #   - network
+  # storage: # Setting to direct will use simple non-lvm partitioning of the largest disk
+  #   layout:
+  #     name: direct
+  locale: en_US.UTF-8
+  keyboard:
+    layout: us
+  # use openssl passwd -6 to generate the encrypted password
+  identity:
+    hostname: puget
+    password: $6$Ifj2m/hE/mCB2Xb1$VtLvqm.oXxMXtGW3N5xmVxOdFwhJeilSOudveLnK7fmnMBF4.1P2TsmNBZNhMtF/aO8.imX9FZFOoAMIAUMW8.
+    username: user
+  ssh:
+    allow-pw: true
+    install-server: true
+  packages:
+    - dkms
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - wget
+    - gawk
+    - jq
+	- make
+	- bolt
+	- finger
+	- pv
+	- smartmontools
+	- p7zipfull
+	- smbclient
+	- network-manager
+	- samba
+	- cups
+    - parallel
+    - build-essential
+    - nvidia-driver-550-server
+    - net-tools
+    - lm-sensors
+  package_update: true
+  package_upgrade: true
+  kernel:
+    flavor: hwe
+
+  late-commands:
+    # Fix the unused nic timeout issue on boot
+    # move existing config out of the way
+    - find /target/etc/netplan/ -name "*.yaml" -exec sh -c 'mv "$1" "$1-orig"' _ {} \;
+    # Create a new netplan and enable it
+    - |
+      cat <<EOF | sudo tee /target/etc/netplan/01-netcfg.yaml
+      network:
+        version: 2
+        renderer: networkd
+        ethernets:
+          all-en-interfaces:
+            match:
+              name: [eno*, eth*, enx*, usb*]
+            dhcp4: true
+            optional: true
+      EOF
+    - curtin in-target --target /target netplan generate
+    - curtin in-target --target /target netplan apply
+    - curtin in-target --target /target chmod 600 /etc/netplan/01-netcfg.yaml
+
+	#Edit GRUB for WRX90
+	- - curtin in-target --target /target sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="nomodeset amd-iommu=on iommu=pt pci=nommconf"/' /etc/default/grub
+
+
+  user-data: # Commands here run during first boot (cannot be interactive)
+    runcmd:
+	  # Download and run Puget script
+      - [wget, https://download.pugetsystems.com/automation/vizgen_auto.sh]
+	  - [sudo, chmod, +x, vizgen_auto.sh]
+	  - [./vizgen.sh]
+	  
