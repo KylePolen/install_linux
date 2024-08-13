@@ -23,7 +23,7 @@ sudo DEBIAN_FRONTEND=nointeractive apt --fix-broken install -y
 ###NVIDIA Driver
 sudo DEBIAN_FRONTEND=nointeractive add-apt-repository -y ppa:graphics-drivers/ppa
 sudo apt update
-sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-560 --no-install-recommends
+sudo DEBIAN_FRONTEND=nointeractive apt -y install nvidia-driver-555 --no-install-recommends
 
 #Broadcom 9560
 wget https://download.pugetsystems.com/Broadcom_9560/megaraid_sas-07.729.00.00-1dkms.noarch.deb -P ~
